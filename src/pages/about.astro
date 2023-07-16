@@ -1,18 +1,20 @@
+---
+import Navigation from '../components/Navigation.astro';
+const pageTitle = "About Me";
+---
+
 <html lang="en">
    <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} >
-    <title>justind.kim</title>
+    <title>justind.kim | {pageTitle}</title>
   </head>
   <body>
-    <a href="/">Home</a>
-    <a href="/about/">About</a>
-    <a href="/blog/">Blog</a>
-
+    <Navigation/>
     <h1>My Astro Site</h1>
-    <h1>About Me</h1>
+    <h1>{pageTitle}</h1>
     <h2>... and my new Astro site!</h2>
 
     <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
