@@ -11,4 +11,4 @@
     enable = true
   
   [plugin.inputs]
-    enable = false
+    enable = true
