@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+const allPosts = await Astro.glob('../pages/posts/*.md');
 ---
 
 <html lang="en">
@@ -13,6 +14,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
   <body>
     <BaseLayout>
     <p>This is where I will post about my journey learning Astro.</p>
+    {allPosts.map((post) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}
     </BaseLayout>
   </body>
 </html>
