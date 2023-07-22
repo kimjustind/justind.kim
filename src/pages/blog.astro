@@ -9,10 +9,9 @@ const allPosts = await Astro.glob('../pages/posts/*.md');
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} >
-    <title>justind.kim</title>
   </head>
   <body>
-    <BaseLayout>
+    <BaseLayout title="Blog">
     <p>This is where I will post about my journey learning Astro.</p>
     {allPosts.map((post) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}
     </BaseLayout>

@@ -1,0 +1,18 @@
+---
+const { link } = Astro.props;
+
+function linkAddress() {
+    switch (link) {
+        case 'Home':
+            return "/";
+        case 'About':
+            return "/about/"
+        case 'Blog':
+            return "/blog/"
+        case 'Tags':
+            return "/tags/"
+    }
+}
+---
+
+<a href={linkAddress()}><button class="bttn primary">{link}</button></a>

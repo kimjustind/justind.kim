@@ -1,6 +1,16 @@
 ---
+import Links from "./Links.astro";
 ---
-<a href="/">Home</a>
-<a href="/about/">About</a>
-<a href="/blog/">Blog</a>
-<a href="/tags/">Tags</a>
+<nav>
+    <Links link="Home"/>
+    <Links link="About"/>
+    <Links link="Blog"/>
+    <Links link="Tags"/>
+</nav>
+<style>
+    nav {
+        background-color: #14141480;
+        display: flex;
+        justify-content: center;
+    }
+</style>
