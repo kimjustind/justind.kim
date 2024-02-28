@@ -1,0 +1,14 @@
+baseURL = 'https://justind.kim'
+theme = 'hugo-bearblog'
+sectionPagesMenu = 'main'
+
+# Basic metadata configuration for your blog.
+title = "justind.kim"
+author = "Justin"
+copyright = "Copyright © 2024, Justin Kim."
+languageCode = "en-US"
+
+# Generate a nice robots.txt for SEO
+enableRobotsTXT = true
+
+dateFormat = "January 02, 2006"
