@@ -1,7 +1,7 @@
-+++ title = "George" date = "2024-02-27T21:20:35-08:00"
-
-tags = [story] +++
-
+---
+title: "George"
+date: 2024-02-27T21:29:52-08:00
+---
 # George
 
 George was a businessman. I use "was" because he is no longer a businessman. Upon reading that sentence, you might have assumed that George still was a businessman. However, he isn't. George lived in Salem, Oregon. Where does he live now? He doesn't. George is dead. He died about 20 minutes ago, burnt to a crisp by the sun.
