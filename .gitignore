@@ -3,4 +3,6 @@
 
 # Package Files
 node_modules/
+
+.zed/
 public/
