@@ -1,7 +1,10 @@
 +++ title = "George" date = "2024-02-27T21:20:35-08:00"
-description is optional
-description = "An optional description for SEO. If not provided, an automatically created summary will be used."
-tags = [] +++
+#
+# description is optional
+#
+# description = "An optional description for SEO. If not provided, an automatically created summary will be used."
+
+tags = [story] +++
 
 # George
 
