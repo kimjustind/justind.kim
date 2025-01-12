@@ -1,2 +1,1 @@
-My Astro website hosted by Netlify
-https://main--justindkim.netlify.app/
+this is my personal website and it hosts a porfolio of my work
