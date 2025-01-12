@@ -1,0 +1,110 @@
+/* Google fonts import */
+@import url('https://fonts.googleapis.com/css2?family=Mukta+Vaani&family=Sirin+Stencil&family=VT323&display=swap');
+
+:root {
+  --main-family: 'Sirin Stencil', cursive;
+}
+
+html {
+    background-color: #191716;
+    color: #C5D1EB;
+    font-family: var(--main-family);
+    min-height: 100%;
+}
+
+#background {
+    position: fixed;
+    width: 100%;
+    z-index: -1;
+    height: 100%;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.header{
+    text-align: center;
+}
+
+@media only screen and (max-width: 450px) {
+  .header h2 {
+    width: 90%;
+    padding: 5%;
+  }
+}
+
+.bttns{
+  margin-bottom: 5%;
+}
+
+.bttn{
+  padding: 15px 30px;
+  width: 150px;
+  margin: 0 1%;
+}
+
+.bttn.primary{
+  display: inline-block;
+  width: max-content;
+  border: none;
+  color: #C5D1EB;
+  background: none;
+}
+
+.bttn.primary:hover {
+  background: #92AFD7;
+  color: #093C4F;
+  box-shadow: inset 3px 4px 10px rgb(35 33 33 / 40%);
+  /* -webkit-box-shadow: inset 3px 4px 10px rgb(35 33 33 / 40%); */
+}
+
+.bttn.secondary{
+  background: transparent;
+  border: #093C4F 2px solid;
+  color: #0D1D24;
+}
+
+.bttn.secondary:hover {
+  background: #05171f;
+  color: white;
+}
+
+.resource-list {
+  font-family: 'Mukta Vaani', Arial, sans-serif;
+  font-size: larger;
+  text-align: center;
+  width: 100%;
+}
+
+.resource-list ul {
+  text-align: left;
+  margin: 0 auto;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 2%;
+}
+
+.resource-list li {
+  padding: 2%;
+  font-weight: bold;
+}
+
+.resource-list a {
+  color: black;
+  line-height: 30px;
+}
+
+footer {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+footer img {
+  width: 20px;
+}

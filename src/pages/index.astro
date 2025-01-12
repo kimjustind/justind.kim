@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <title>justind.kim</title>
+  </head>
+  <body>
+    <BaseLayout>
+      <header class="h-screen">
+        <div id="intro" class="h-3/5 flex flex-col justify-end text-center px-5">
+          <h2 class="text-2xl sm:text-4xl">hello, welcome to </h2>
+          <h1 id="title" class="text-4xl underline sm:text-8xl hover:cursor-pointer">justind.kim</h1>
+          <div class="my-4">
+            <p class="text-2xl sm:text-4xl">my name is Justin D. Kim</p>
+            <p class="text-lg sm:text-xl my-2">that's probably why i bought this domain name</p>
+            <p class="text-md sm:text-lg">i think i'll use it as a personal blog and portfolio or something</p>
+          </div>
+        </div>
+      </header>
+      <section class="h-screen">
+        <div id="about" class="text-center flex flex-col w-full h-3/4 justify-center items-center px-5">
+          <img src="">
+          <p class="text-md sm:text-lg">this site was built with Astro, TailwindCSS, and GSAP</p>
+          <p class="text-md sm:text-lg"><a href="https://github.com/kimjustind/justind.kim" class="underline">check out the github repository</a></p>
+          <p class="text-md sm:text-lg">if you would like to know more <a href="/about" class="underline">about me</a>, check out my <a href="/about" class="underline">about me page</a></p>
+        </div>
+      </section>
+    </BaseLayout>
+    <script>
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.to("#intro", { scrollTrigger: { scrub: true, trigger: 'section', start: 'top bottom', end: 'top center' }, opacity: 0, y: 300 });
+
+      gsap.from("section", { immediateRender: true, scrollTrigger: { scrub: true, trigger: '#intro', start: 'center', end: 'bottom' }, opacity: 0, x: -100 });
+
+      const title = document.getElementById("title");
+
+      window.addEventListener("load", () => {
+        gsap.from("header", { opacity: 0, duration: 1, y: -100 });
+      })
+
+      title.addEventListener("click", () => {
+        let tl = gsap.timeline();
+        tl.to ("#title", { color: "darkgrey", scale: 0.9, duration: 0.4, ease: "power1.inOut" });
+        tl.to ("#title", { color: "#C5D1EB", scale: 1, duration: 0.2, delay: 0.2, ease: "power1.out" });
+      })
+
+    </script>
+  </body>
+</html>

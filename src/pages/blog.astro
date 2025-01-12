@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+const allPosts = Object.values(import.meta.glob('../pages/posts/*.md', { eager: true}));
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} >
+  </head>
+  <body>
+    <BaseLayout title="Blog">
+    <p>This is where I will post about my journey learning Astro.</p>
+    {allPosts.map((post) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}
+    </BaseLayout>
+  </body>
+</html>

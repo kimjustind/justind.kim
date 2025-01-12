@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+const allPosts = await Astro.glob('../posts/*.md');
+const tags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body>
+  <BaseLayout title="justind.kim | Tags">
+    <div>{tags.map((tag) => <a href={`/tags/${tag}`}><p>{tag}</p></a>)}</div>
+  </BaseLayout>
+  </body>
+</html>
