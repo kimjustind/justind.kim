@@ -1,5 +1,11 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/favicon.ico"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/_astro/about.BDZyNSyR.css">
-<link rel="stylesheet" href="/_astro/post-2.BLxGVp2k.css"></head> <body> <html lang="en" data-astro-cid-37fxchfa> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/x-icon" href="/favicon.ico"><title>about justin</title></head> <body data-astro-cid-37fxchfa> <nav class="w-100 flex justify-center"> <a href="/"><button class="bttn primary">Home</button></a> <a href="/about/"><button class="bttn primary">About</button></a> <a href="/blog/"><button class="bttn primary">Blog</button></a> <a href="/tags/"><button class="bttn primary">Tags</button></a> </nav>  <header class="flex flex-col justify-end items-center h-screen p-4"> <div id="intro" class="h-3/5"> <h2 id="first" class="text-2xl sm:text-4xl">hi, my name is</h2> <h1 id="second" class="text-5xl sm:text-9xl">Justin D. Kim</h1> <h3 id="secondhalf" class="text-lg sm:text-xl sm:text-right">he/him</h3> <h3 id="third" class="text-lg sm:text-xl sm:text-right">i am a software developer based in las vegas, nevada </h3><h3 id="fourth" class="text-lg sm:text-xl sm:text-right">this presentation can be found at <a href="." class="underline">https://justind.kim/about/</a></h3> </div> </header> <section id="fifth" class="flex flex-col items-center h-screen p-8"> <div class="xl:w-3/5"> <ul class="h-3/5 list-disc"> <h1 class="text-5xl md:text-6xl xl:text-8xl underline">About Me</h1> <li class="text-md md:text-xl 2xl:text-3xl mt-6">
+/* empty css                                 */
+import { c as createComponent, r as renderTemplate, a as renderHead, b as renderComponent, d as renderScript } from '../chunks/astro/server_1hIIhLnJ.mjs';
+import 'kleur/colors';
+import { $ as $$BaseLayout } from '../chunks/BaseLayout_siL8i1LE.mjs';
+export { renderers } from '../renderers.mjs';
+
+const $$About = createComponent(($$result, $$props, $$slots) => {
+  return renderTemplate`<html lang="en"> <head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/favicon.ico"><meta name="viewport" content="width=device-width">${renderHead()}</head> <body> ${renderComponent($$result, "BaseLayout", $$BaseLayout, { "title": "about justin" }, { "default": ($$result2) => renderTemplate` <header class="flex flex-col justify-end items-center h-screen p-4"> <div id="intro" class="h-3/5"> <h2 id="first" class="text-2xl sm:text-4xl">hi, my name is</h2> <h1 id="second" class="text-5xl sm:text-9xl">Justin D. Kim</h1> <h3 id="secondhalf" class="text-lg sm:text-xl sm:text-right">he/him</h3> <h3 id="third" class="text-lg sm:text-xl sm:text-right">i am a software developer based in las vegas, nevada </h3><h3 id="fourth" class="text-lg sm:text-xl sm:text-right">this presentation can be found at <a href="." class="underline">https://justind.kim/about/</a></h3> </div> </header> <section id="fifth" class="flex flex-col items-center h-screen p-8"> <div class="xl:w-3/5"> <ul class="h-3/5 list-disc"> <h1 class="text-5xl md:text-6xl xl:text-8xl underline">About Me</h1> <li class="text-md md:text-xl 2xl:text-3xl mt-6">
 UNR graduate with a Bachelor of Science in Business Administration with a major in Information Systems.
 </li> <li class="text-md md:text-xl 2xl:text-3xl mt-3">
 I currently work at the Clark County Flood Control District as a Programmer Analyst II.
@@ -47,4 +53,19 @@ I believe the most important thing is keeping stakeholders and end users satisfi
 At my current position, I email and set up meetings with users and keep them updated on any issues or changes.
 </li> <li class="text-md md:text-xl 2xl:text-3xl mt-3">
 Working at the help desk in City of Henderson, I was able to provide excellent customer service to users with an average satisfaction score of 98.8%.
-</li> </ul> </div> </section> <section id="tenth" class="flex flex-col justify-center items-center h-screen p-8"> <h1 class="text-5xl sm:text-8xl underline hover:cursor-pointer">Thank You!</h1> </section>  <footer class="bottom-0"> <hr class="w-3/4 mx-auto my-4"> <p>created with astro 🚀</p> <p>learn more about my projects on <a href="https://www.github.com/kimjustind" class="underline" target="_blank">GitHub</a>!</p> <a href="https://www.LinkedIn.com/in/kimjustind" class="underline" target="_blank">LinkedIn</a> </footer> </body></html> <script type="module" src="/_astro/about.astro_astro_type_script_index_0_lang.DZLtmwIs.js"></script> </body> </html>
+</li> </ul> </div> </section> <section id="tenth" class="flex flex-col justify-center items-center h-screen p-8"> <h1 class="text-5xl sm:text-8xl underline hover:cursor-pointer">Thank You!</h1> </section> ` })} ${renderScript($$result, "G:/Projects/Websites/justind.kim/src/pages/about.astro?astro&type=script&index=0&lang.ts")} </body> </html>`;
+}, "G:/Projects/Websites/justind.kim/src/pages/about.astro", undefined);
+
+const $$file = "G:/Projects/Websites/justind.kim/src/pages/about.astro";
+const $$url = "/about";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$About,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };
