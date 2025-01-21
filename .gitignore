@@ -1,4 +1,6 @@
+# build folder
 dist/
+.output/
 
 # dependencies
 node_modules/
