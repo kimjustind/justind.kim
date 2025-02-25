@@ -20,8 +20,48 @@ const { posts } = Astro.props;
 const filteredPosts = posts.filter((post) => post.frontmatter.tags?.includes(tag));
 ---
 <BaseLayout pageTitle={tag}>
-  <p>Posts tagged with {tag}</p>
-  <ul>
-    {filteredPosts.map((post) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}
-  </ul>
+  <div class="min-h-[30vh] flex items-center justify-center mb-8">
+    <h1 class="tag-title text-4xl font-bold bg-opacity-10 bg-white dark:bg-opacity-10 dark:bg-gray-800 backdrop-blur-sm px-6 py-3 rounded-lg shadow-sm inline-block">
+      {tag}
+    </h1>
+  </div>
+  
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-2xl mb-4">Posts tagged with {tag}</h2>
+    <ul class="space-y-4">
+      {filteredPosts.map((post) => (
+        <li class="bg-opacity-5 bg-white dark:bg-opacity-5 dark:bg-gray-800 p-4 rounded-lg transition-all duration-300 hover:bg-opacity-10 dark:hover:bg-opacity-10 hover:shadow-md">
+          <a href={post.url} class="block">
+            <h3 class="text-xl font-medium">{post.frontmatter.title}</h3>
+            {post.frontmatter.description && 
+              <p class="mt-2 opacity-80">{post.frontmatter.description}</p>
+            }
+          </a>
+        </li>
+      ))}
+    </ul>
+    
+    <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800">
+      <a href="/tags" class="inline-block px-4 py-2 bg-opacity-10 bg-white dark:bg-opacity-10 dark:bg-gray-800 backdrop-blur-sm rounded-lg transition-all duration-300 hover:bg-opacity-20 dark:hover:bg-opacity-20">
+        ← All Tags
+      </a>
+    </div>
+  </div>
+
+  <script>
+    import { gsap } from 'gsap';
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      // Animate the title with floating effect
+      gsap.to('.tag-title', {
+        y: '+=10',
+        x: '+=5',
+        rotation: '+=2',
+        duration: 6,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true
+      });
+    });
+  </script>
 </BaseLayout>
