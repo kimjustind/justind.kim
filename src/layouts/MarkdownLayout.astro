@@ -1,10 +1,416 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 const { frontmatter } = Astro.props;
+
+// Format date to be more readable
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+// Get reading time estimate
+function getReadingTime(content) {
+  const text = content;
+  const wpm = 225;
+  const words = text.trim().split(/\s+/).length;
+  const time = Math.ceil(words / wpm);
+  return time;
+}
+
+// Approximate reading time from slot content
+const content = await Astro.slots.render('default');
+const readingTime = getReadingTime(content);
 ---
-<BaseLayout>
-    <h1>{frontmatter.title}</h1>
-    <p>Written by {frontmatter.author}</p>
-    <p>Date written: {frontmatter.pubDate}</p>
-    <slot />
+
+<BaseLayout title={frontmatter.title}>
+  <article class="post-container">
+    <div class="post-header">
+      <div class="tag-container">
+        {frontmatter.tags && frontmatter.tags.map((tag) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+      <h1 id="post-title" class="post-title">{frontmatter.title}</h1>
+      <div class="post-meta">
+        {frontmatter.image && frontmatter.image.url && (
+          <div class="featured-image-container">
+            <img 
+              src={frontmatter.image.url} 
+              alt={frontmatter.image.alt || frontmatter.title} 
+              class="featured-image"
+            />
+          </div>
+        )}
+        <div class="meta-info">
+          {frontmatter.author && (
+            <div class="author">
+              <span class="meta-label">Author:</span>
+              <span class="meta-value">{frontmatter.author}</span>
+            </div>
+          )}
+          {frontmatter.pubDate && (
+            <div class="pub-date">
+              <span class="meta-label">Published:</span>
+              <span class="meta-value">{formatDate(frontmatter.pubDate)}</span>
+            </div>
+          )}
+          <div class="reading-time">
+            <span class="meta-label">Reading time:</span>
+            <span class="meta-value">{readingTime} min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {frontmatter.description && (
+      <div class="post-description">
+        <p>{frontmatter.description}</p>
+      </div>
+    )}
+    
+    <div class="post-content" id="post-content">
+      <slot />
+    </div>
+    
+    <div class="post-footer">
+      <div class="share-links">
+        <h3>Share this post</h3>
+        <div class="share-buttons">
+          <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(frontmatter.title)}&url=${encodeURIComponent(Astro.url)}`} target="_blank" rel="noopener noreferrer" class="share-button twitter">
+            Twitter
+          </a>
+          <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.url)}`} target="_blank" rel="noopener noreferrer" class="share-button linkedin">
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      
+      <div class="back-link">
+        <a href="/blog" id="back-to-blog">← Back to all posts</a>
+      </div>
+    </div>
+  </article>
+  
+  <style>
+    .post-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    
+    .post-header {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .post-title {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      margin: 1rem 0;
+      font-weight: 700;
+      background: linear-gradient(90deg, #ffffff, #C5D1EB);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    @media (min-width: 768px) {
+      .post-title {
+        font-size: 3.5rem;
+      }
+    }
+    
+    .post-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    @media (min-width: 768px) {
+      .post-meta {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      
+      .featured-image-container {
+        flex: 0 0 300px;
+      }
+      
+      .meta-info {
+        flex: 1;
+        padding-left: 1.5rem;
+      }
+    }
+    
+    .featured-image {
+      width: 100%;
+      border-radius: 0.5rem;
+      object-fit: cover;
+      aspect-ratio: 16/9;
+    }
+    
+    .meta-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .meta-label {
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.7);
+      margin-right: 0.5rem;
+    }
+    
+    .meta-value {
+      color: #C5D1EB;
+    }
+    
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .tag {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      transition: all 0.3s ease;
+    }
+    
+    .tag:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    .post-description {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 0.5rem;
+      border-left: 4px solid #C5D1EB;
+    }
+    
+    .post-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .post-content :global(h2) {
+      font-size: 1.8rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .post-content :global(h3) {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .post-content :global(p) {
+      margin-bottom: 1.5rem;
+    }
+    
+    .post-content :global(a) {
+      color: #C5D1EB;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: all 0.2s ease;
+    }
+    
+    .post-content :global(a:hover) {
+      color: white;
+    }
+    
+    .post-content :global(ul), .post-content :global(ol) {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+    
+    .post-content :global(li) {
+      margin-bottom: 0.5rem;
+    }
+    
+    .post-content :global(pre) {
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+    }
+    
+    .post-content :global(img) {
+      max-width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .post-content :global(blockquote) {
+      border-left: 4px solid #C5D1EB;
+      padding-left: 1rem;
+      margin-left: 0;
+      margin-right: 0;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+    
+    .post-footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    @media (min-width: 768px) {
+      .post-footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    
+    .share-links h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .share-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .share-button {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .share-button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    .back-link a {
+      display: inline-block;
+      color: #C5D1EB;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    
+    .back-link a:hover {
+      color: white;
+      transform: translateX(-5px);
+    }
+  </style>
+  
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // On page load animations
+    window.addEventListener("load", () => {
+      // Header elements animation
+      const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+      
+
+      tl.from(".tag-container", {
+          opacity: 0,
+          y: -50
+      })
+      tl.to(".tag-container", {
+        y: 0, 
+        opacity: 1,
+        duration: 1, 
+        stagger: 0.2
+      });
+      
+      tl.from("#post-title", { 
+        opacity: 0, 
+        y: -30, 
+        duration: 0.8 
+      }, "-=0.3");
+      
+      tl.from(".meta-info > div", { 
+        opacity: 0, 
+        x: -20, 
+        duration: 0.5, 
+        stagger: 0.15 
+      }, "-=0.5");
+      
+      tl.from(".featured-image", { 
+        opacity: 0, 
+        scale: 0.9, 
+        duration: 0.8 
+      }, "-=0.7");
+      
+      // Subtle animation for the back button on hover
+      const backButton = document.getElementById("back-to-blog");
+      if (backButton) {
+        backButton.addEventListener("mouseenter", () => {
+          gsap.to(backButton, { x: -5, duration: 0.3 });
+        });
+        
+        backButton.addEventListener("mouseleave", () => {
+          gsap.to(backButton, { x: 0, duration: 0.3 });
+        });
+      }
+    });
+    
+    // Scroll animations
+    document.addEventListener("DOMContentLoaded", () => {
+      // Animate headings when they come into view
+      gsap.utils.toArray(".post-content h2, .post-content h3").forEach(heading => {
+        gsap.from(heading, {
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 80%",
+            toggleActions: "play none none none"
+          },
+          opacity: 0,
+          x: -30,
+          duration: 0.8
+        });
+      });
+      
+      // Subtle parallax effect for images
+      gsap.utils.toArray(".post-content img").forEach(img => {
+        gsap.to(img, {
+          scrollTrigger: {
+            trigger: img,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+          },
+          y: 30,
+          ease: "none"
+        });
+      });
+    });
+  </script>
 </BaseLayout>

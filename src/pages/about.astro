@@ -15,7 +15,6 @@ const pageTitle = "About Me";
       <div id="intro" class="h-3/5">
         <h2 id="first" class="text-2xl sm:text-4xl">hi, my name is</h2>
         <h1 id="second" class="text-5xl sm:text-9xl">Justin D. Kim</h1>
-        <h3 id="secondhalf" class="text-lg sm:text-xl sm:text-right">he/him</h3>
         <h3 id="third" class="text-lg sm:text-xl sm:text-right">i am a software developer based in las vegas, nevada</p>
       </div>
     </header>
@@ -59,9 +58,7 @@ const pageTitle = "About Me";
       const tl = gsap.timeline();
       tl.from("#first", { opacity: 0, duration: 1, x: -100 });
       tl.from("#second", { opacity: 0, duration: 1, x: -100 });
-      tl.from("#secondhalf", { opacity: 0, duration: 0.5, x: -100 });
       tl.from("#third", { opacity: 0, duration: 0.5, x: -100 });
-      tl.from("#fourth", { opacity: 0, duration: 0.5, x: -100 });
     })
     
     gsap.to("#intro", { scrollTrigger: { scrub: true, trigger: '#fifth', start: 'top bottom', end: 'top center' }, opacity: 0, y: -300 });

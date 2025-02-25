@@ -1,6 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 const allPosts = Object.values(import.meta.glob('../pages/posts/*.md', { eager: true}));
+
+// Sort posts by date (newest first)
+const sortedPosts = allPosts.sort((a, b) => {
+  return new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime();
+});
+
+// Format date to be more readable
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
 ---
 
 <html lang="en">
@@ -9,11 +24,173 @@ const allPosts = Object.values(import.meta.glob('../pages/posts/*.md', { eager: 
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} >
+    <style>
+      .posts-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem 0;
+        justify-content: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      .post-card {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        opacity: 0.8;
+      }
+      
+      .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        background-color: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.2);
+        opacity: 1;
+      }
+      
+      .post-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        transition: color 0.3s ease;
+      }
+      
+      .post-card:hover .post-title {
+        color: #C5D1EB;
+      }
+      
+      .post-meta {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 1rem;
+      }
+      
+      .post-description {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+      }
+      
+      .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: auto;
+      }
+      
+      .tag {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 9999px;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+        transition: all 0.3s ease;
+      }
+      
+      .post-card:hover .tag {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      .blog-header {
+        text-align: center;
+        margin: 3rem 0;
+      }
+      
+      .post-image {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 0.25rem;
+        margin-bottom: 1rem;
+      }
+      
+      .read-more {
+        margin-top: 1rem;
+        color: #C5D1EB;
+        font-weight: 500;
+        display: inline-block;
+        transition: all 0.3s ease;
+      }
+      
+      .post-card:hover .read-more {
+        transform: translateX(5px);
+      }
+      
+      .posts-wrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
     <BaseLayout title="Blog">
-    <p>This is where I will post about my journey learning Astro.</p>
-    {allPosts.map((post) => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}
+      <div class="blog-header">
+        <h1 class="text-4xl sm:text-6xl">my blog</h1>
+        <p class="text-lg sm:text-xl mt-4 text-gray-300">thoughts, stories, and ideas</p>
+      </div>
+      
+      <div class="posts-wrapper">
+        <div class="posts-container">
+          {sortedPosts.map((post) => (
+            <a href={post.url} class="post-card-link">
+              <div class="post-card">
+                {post.frontmatter.image && post.frontmatter.image.url && (
+                  <img 
+                    src={post.frontmatter.image.url} 
+                    alt={post.frontmatter.image.alt || post.frontmatter.title} 
+                    class="post-image"
+                  />
+                )}
+                <h2 class="post-title">{post.frontmatter.title}</h2>
+                <div class="post-meta">
+                  {post.frontmatter.author && <span>By {post.frontmatter.author}</span>}
+                  {post.frontmatter.pubDate && (
+                    <span> • {formatDate(post.frontmatter.pubDate)}</span>
+                  )}
+                </div>
+                {post.frontmatter.description && (
+                  <p class="post-description">{post.frontmatter.description}</p>
+                )}
+                {post.frontmatter.tags && (
+                  <div class="post-tags">
+                    {post.frontmatter.tags.slice(0, 3).map((tag) => (
+                      <span class="tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
+                <div class="read-more">Read more →</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
     </BaseLayout>
+
+    <script>
+      import { gsap } from "gsap";
+      
+      window.addEventListener("load", () => {
+        gsap.from(".blog-header", { 
+          opacity: 0, 
+          y: -50, 
+          duration: 1 
+        });
+        
+        gsap.fromTo(".post-card", { 
+          y: -50,
+          duration: 0.8,
+        }, {
+          opacity: 1, 
+          y: 0, 
+        })
+      });
+    </script>
   </body>
 </html>
