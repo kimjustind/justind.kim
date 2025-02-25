@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "post-2.md",
+                "file": "genesis.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "post-2"
+              "title": "genesis"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "post-2.md",
+                "file": "genesis.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for post-2"
+              "title": "Backlinks for genesis"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "post-2.md",
+                "file": "genesis.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from post-2"
+              "title": "Outgoing links from genesis"
             }
           },
           {
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "post-2.md",
+                "file": "genesis.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of post-2"
+              "title": "Outline of genesis"
             }
           }
         ]
@@ -170,8 +170,8 @@
   },
   "active": "92213577c9e4ad1a",
   "lastOpenFiles": [
-    "test.md",
     "post-2.md",
+    "test.md",
     "genesis.md",
     "pexels-gradienta-7130470.jpg",
     "2022-07-01.md"

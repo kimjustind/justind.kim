@@ -101,3 +101,8 @@ footer {
 footer img {
   width: 20px;
 }
+
+.blog-header {
+  text-align: center;
+  margin: 3rem 0;
+}
