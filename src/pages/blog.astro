@@ -27,25 +27,30 @@ function formatDate(dateString) {
     <style>
       .posts-container {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 2rem;
-        padding: 2rem 0;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: clamp(1rem, 3vw, 2rem);
+        padding: clamp(1rem, 3vw, 2rem) 1rem;
         justify-content: center;
         max-width: 1200px;
         margin: 0 auto;
+        width: 100%;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       }
       
       .post-card {
         background-color: rgba(255, 255, 255, 0.1);
         border-radius: 0.5rem;
-        padding: 1.5rem;
+        padding: clamp(1rem, 3vw, 1.5rem);
         border: 1px solid rgba(255, 255, 255, 0.1);
         height: 100%;
         display: flex;
         flex-direction: column;
         position: relative;
         overflow: hidden;
-        opacity: 0.8;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform, opacity;
       }
       
       .post-card:hover {
@@ -57,9 +62,10 @@ function formatDate(dateString) {
       }
       
       .post-title {
-        font-size: 1.5rem;
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
         margin-bottom: 0.5rem;
         transition: color 0.3s ease;
+        line-height: 1.3;
       }
       
       .post-card:hover .post-title {
@@ -67,15 +73,16 @@ function formatDate(dateString) {
       }
       
       .post-meta {
-        font-size: 0.875rem;
+        font-size: clamp(0.75rem, 2vw, 0.875rem);
         color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 1rem;
+        margin-bottom: clamp(0.75rem, 2vw, 1rem);
       }
       
       .post-description {
-        font-size: 1rem;
-        margin-bottom: 1rem;
+        font-size: clamp(0.875rem, 2vw, 1rem);
+        margin-bottom: clamp(0.75rem, 2vw, 1rem);
         flex-grow: 1;
+        line-height: 1.6;
       }
       
       .post-tags {
@@ -89,8 +96,9 @@ function formatDate(dateString) {
         background-color: rgba(255, 255, 255, 0.1);
         border-radius: 9999px;
         padding: 0.25rem 0.75rem;
-        font-size: 0.75rem;
+        font-size: clamp(0.7rem, 1.5vw, 0.75rem);
         transition: all 0.3s ease;
+        white-space: nowrap;
       }
       
       .post-card:hover .tag {
@@ -99,18 +107,19 @@ function formatDate(dateString) {
       
       .post-image {
         width: 100%;
-        height: 150px;
+        height: clamp(120px, 25vw, 150px);
         object-fit: cover;
         border-radius: 0.25rem;
-        margin-bottom: 1rem;
+        margin-bottom: clamp(0.75rem, 2vw, 1rem);
       }
       
       .read-more {
-        margin-top: 1rem;
+        margin-top: clamp(0.75rem, 2vw, 1rem);
         color: #C5D1EB;
         font-weight: 500;
         display: inline-block;
         transition: all 0.3s ease;
+        font-size: clamp(0.875rem, 2vw, 1rem);
       }
       
       .post-card:hover .read-more {
@@ -121,6 +130,36 @@ function formatDate(dateString) {
         display: flex;
         justify-content: center;
         width: 100%;
+      }
+      
+      .blog-header {
+        padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
+        text-align: center;
+      }
+      
+      .blog-header h1 {
+        font-size: clamp(2rem, 6vw, 4rem);
+        line-height: 1.2;
+        margin-bottom: clamp(0.5rem, 2vw, 1rem);
+      }
+      
+      .blog-header p {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+        opacity: 0.8;
+      }
+      
+      @media (max-width: 640px) {
+        .posts-container {
+          grid-template-columns: 1fr;
+        }
+        
+        .post-card {
+          margin-bottom: 1rem;
+        }
+        
+        .post-tags {
+          margin-top: 0.75rem;
+        }
       }
     </style>
   </head>
@@ -172,20 +211,36 @@ function formatDate(dateString) {
       import { gsap } from "gsap";
       
       window.addEventListener("load", () => {
+        // Fade in header
         gsap.from(".blog-header", { 
           opacity: 0, 
-          y: -50, 
-          duration: 1 
+          y: 30, 
+          duration: 1,
+          ease: "power3.out"
         });
         
-        gsap.fromTo(".post-card", { 
-          y: -50,
-          duration: 0.8,
-        }, {
-          opacity: 1, 
+        // Animate cards up from bottom
+        gsap.to(".post-card", { 
+          opacity: 1,
           y: 0,
-          stagger: 0.2
-        })
+          duration: 0.8,
+          stagger: {
+            amount: 0.6,
+            ease: "power3.out"
+          }
+        });
+
+        // Add resize observer for smooth grid transitions
+        const postsContainer = document.querySelector('.posts-container');
+        if (postsContainer) {
+          const observer = new ResizeObserver(entries => {
+            entries.forEach(entry => {
+              const cards = entry.target.querySelectorAll('.post-card');
+            });
+          });
+          
+          observer.observe(postsContainer);
+        }
       });
     </script>
   </body>
