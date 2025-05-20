@@ -22,10 +22,10 @@ import BaseLayout from '../layouts/BaseLayout.astro'
           </div>
         </div>
       </header>
-      <section class="h-screen">
+      <section id="animated-section" class="h-screen">
         <div id="about" class="text-center flex flex-col w-full h-3/4 justify-center items-center px-5">
-          <img src="">
           <p class="text-md sm:text-lg">this site was built with Astro, TailwindCSS, and GSAP</p>
+          <p class="text-md sm:text-lg">it is also my technology playground where I play with tools like AI</p>
           <p class="text-md sm:text-lg"><a href="https://github.com/kimjustind/justind.kim" class="underline">check out the github repository</a></p>
           <p class="text-md sm:text-lg">if you would like to know more <a href="/about" class="underline">about me</a>, check out my <a href="/about" class="underline">about me page</a></p>
         </div>
@@ -37,9 +37,9 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
       gsap.registerPlugin(ScrollTrigger);
 
-      gsap.to("#intro", { scrollTrigger: { scrub: true, trigger: 'section', start: 'top bottom', end: 'top center' }, opacity: 0, y: 300 });
+      gsap.to("#intro", { scrollTrigger: { scrub: 1, trigger: 'section', start: 'top bottom', end: 'top center' }, opacity: 0, y: 300 });
 
-      gsap.from("section", { immediateRender: true, scrollTrigger: { scrub: true, trigger: '#intro', start: 'center', end: 'bottom' }, opacity: 0, x: -100 });
+      gsap.from("section", { immediateRender: true, scrollTrigger: { scrub: 1, trigger: '#intro', start: 'center', end: 'bottom' }, opacity: 0, x: -100 });
 
       const title = document.getElementById("title");
 
@@ -56,3 +56,12 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     </script>
   </body>
 </html>
+
+<style>
+  #intro {
+    will-change: transform, opacity;
+  }
+  #animated-section {
+    will-change: transform, opacity;
+  }
+</style>
