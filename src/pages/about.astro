@@ -1,6 +1,41 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 const pageTitle = "About Me";
+
+const historyExperience = [
+  {
+    concise: "B.S. Business Administration (Information Systems) - UNR",
+    detailed: "Graduated from the University of Nevada, Reno with a Bachelor of Science in Business Administration, majoring in Information Systems.",
+    type: "education"
+  },
+  {
+    concise: "Programmer Analyst II - CCFCD",
+    detailed: "Currently work at the Clark County Flood Control District as a Programmer Analyst II, developing and maintaining software solutions.",
+    type: "job"
+  },
+  {
+    concise: "Computer Analyst I - City of Henderson",
+    detailed: "Worked at the City of Henderson as a Computer Analyst I, assisting with help desk duties and IT support.",
+    type: "job"
+  }
+];
+
+const skills = [
+  "C#",
+  "JavaScript",
+  "Python",
+  "SQL",
+  "Azure",
+  "AWS",
+  "Adaptability & Quick Learning"
+];
+
+const interests = [
+  "Video Game Development & Playing (Hollow Knight)",
+  "Guitar Playing",
+  "Golf",
+  "Mixology"
+];
 ---
 
 <html lang="en">
@@ -20,31 +55,53 @@ const pageTitle = "About Me";
       </header>
     <section id="fifth" class="flex flex-col items-center h-screen p-8">
       <div class="xl:w-3/5">
-        <ul class="h-3/5 list-disc">
-          <h1 class="text-5xl md:text-6xl xl:text-8xl underline">About Me</h1>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-6">
-            UNR graduate with a Bachelor of Science in Business Administration with a major in Information Systems.
-          </li>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-3">
-            I currently work at the Clark County Flood Control District as a Programmer Analyst II.
-          </li>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-3">
-            I have worked at the City of Henderson as a Computer Analyst I where I assisted with help desk duties.
-          </li>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-3">
-            Primarily experienced with C# and JavaScript; comfortable with Python, SQL, and learning new languages and frameworks.
-          </li>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-3">
-            I am also comfortable using cloud service providers like Azure and AWS. I have a <a href="https://www.credly.com/badges/67ef9949-cf7a-4fcd-a7ab-d3470aa1f255" class="underline">Microsoft Certified: Azure Fundamentals certification</a>.
-          </li>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-3">
-            I develop and play video games, my favorite game being Hollow Knight!
-            <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/367520/b2e50d3cc54ab9b248341c36fd8a368f0fb88cc7.png" width="30px" class="inline" />
-          </li>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-3">
-            I am also learning to play the guitar, golf, and practicing mixology in my spare time. 
-          </li>
-        </ul>
+        <h1 class="text-5xl md:text-6xl xl:text-8xl underline mb-12 text-center">About Me</h1>
+        
+        <section id="history-experience" class="mb-12">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-center">History & Experience</h2>
+          {historyExperience.map(item => {
+            const isJob = item.type === 'job';
+            const commonClasses = "mb-6 rounded-lg transition-shadow duration-300";
+            const jobCardClasses = isJob ? "p-6 bg-white shadow-xl border border-blue-200 hover:shadow-2xl" : "";
+            const educationItemClasses = !isJob ? "p-4 bg-gray-50 border border-gray-200 shadow-sm hover:shadow-md" : "";
+            
+            const conciseClasses = `history-concise text-lg md:text-xl 2xl:text-2xl font-semibold ${isJob ? 'text-blue-700 mb-2' : 'text-gray-800'}`;
+            const detailedClasses = `history-detailed text-sm md:text-lg 2xl:text-xl mt-1 p-2 rounded ${isJob ? 'bg-blue-50 text-blue-700' : 'bg-gray-100 text-gray-600'}`;
+
+            return (
+              <div class:list={[commonClasses, isJob ? jobCardClasses : educationItemClasses]}>
+                <p class={conciseClasses}>{item.concise}</p>
+                <p class={detailedClasses} style="display: none;">{item.detailed}</p>
+              </div>
+            );
+          })}
+        </section>
+
+        <section id="skills" class="mb-12">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-center">Skills</h2>
+          <div class="flex flex-wrap justify-center">
+            {skills.map(skill => (
+              <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm md:text-md lg:text-lg mr-2 mb-2 shadow hover:bg-blue-600 transition-colors">{skill}</span>
+            ))}
+          </div>
+        </section>
+
+        <section id="interests" class="mb-8">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-center">Interests</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {interests.map(interest => (
+              <div class="interest-box p-6 border border-gray-300 rounded-lg bg-gray-50 shadow-md hover:shadow-lg transition-shadow text-center">
+                <p class="text-md md:text-xl 2xl:text-2xl text-gray-700">{interest.includes("Hollow Knight") ? (
+                    <>
+                      Video Game Development & Playing, my favorite game being Hollow Knight!
+                      <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/367520/b2e50d3cc54ab9b248341c36fd8a368f0fb88cc7.png" width="24px" class="inline ml-2" alt="Hollow Knight Icon"/>
+                    </>
+                  ) : interest}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </section>
   </BaseLayout>
@@ -59,7 +116,54 @@ const pageTitle = "About Me";
       tl.from("#first", { opacity: 0, duration: 1, x: -100 });
       tl.from("#second", { opacity: 0, duration: 1, x: -100 });
       tl.from("#third", { opacity: 0, duration: 0.5, x: -100 });
-    })
+
+      // History/Experience mouseover animations
+      const historyItems = document.querySelectorAll('#history-experience > div');
+
+      historyItems.forEach(item => {
+        // const conciseEl = item.querySelector('.history-concise'); // Not needed if listening on item
+        const detailedEl = item.querySelector('.history-detailed');
+
+        if (detailedEl) {
+          // Set initial opacity to 0 for GSAP animation
+          gsap.set(detailedEl, { opacity: 0 });
+
+          item.addEventListener('mouseover', () => {
+            detailedEl.style.display = 'block';
+            gsap.to(detailedEl, { opacity: 1, duration: 0.3, ease: "power1.inOut" });
+          });
+
+          item.addEventListener('mouseout', () => {
+            gsap.to(detailedEl, { 
+              opacity: 0, 
+              duration: 0.3, 
+              ease: "power1.inOut",
+              onComplete: () => {
+                detailedEl.style.display = 'none';
+              }
+            });
+          });
+        }
+      });
+
+      // Entrance animation for History & Experience items
+      const historySectionItems = document.querySelectorAll('#history-experience > div');
+      if (historySectionItems.length > 0) {
+        gsap.from(historySectionItems, {
+          scrollTrigger: {
+            trigger: '#history-experience', // The container of all history items
+            start: 'top 80%', // When the top of the trigger hits 80% from the top of the viewport
+            toggleActions: 'play none none none', // Play animation once when it enters
+            // markers: true, // Uncomment for debugging ScrollTrigger
+          },
+          opacity: 0,
+          y: 50, // Slide in from bottom
+          duration: 0.5,
+          stagger: 0.2, // Stagger the animation for each item by 0.2 seconds
+          ease: 'power1.out',
+        });
+      }
+    });
     
     gsap.to("#intro", { scrollTrigger: { scrub: true, trigger: '#fifth', start: 'top bottom', end: 'top center' }, opacity: 0, y: -300 });
     gsap.from("#fifth", { scrollTrigger: { scrub: true, trigger: 'header', start: 'center center', end: 'center top' }, opacity: 0, x: -300 });
