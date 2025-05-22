@@ -1,6 +1,39 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-const pageTitle = "About Me";
+
+const historyExperience = [
+  {
+    concise: "Bachelor of Science in Business Administration, Majoring in Information Systems",
+    detailed: "Graduated from the University of Nevada, Reno with a Bachelor of Science in Business Administration, majoring in Information Systems.",
+  },
+  {
+    concise: "Programmer Analyst II",
+    detailed: "Currently working at the Clark County Flood Control District as a Programmer Analyst II, developing and maintaining software solutions.",
+  },
+  {
+    concise: "Computer Analyst I",
+    detailed: "Worked at the City of Henderson as a Computer Analyst I, assisting with help desk duties and IT support.",
+  }
+];
+
+const skills = [
+  "C#",
+  "JavaScript",
+  "Python",
+  "SQL",
+  "Azure",
+  "AWS",
+  "Godot"
+];
+
+const interests = [
+  "Software Development",
+  "Working on my Homelab",
+  "Collecting and Playing Guitars",
+  "Golfing",
+  "Mixology",
+  "Video Games"
+];
 ---
 
 <html lang="en">
@@ -11,40 +44,52 @@ const pageTitle = "About Me";
   </head>
   <body>
     <BaseLayout title="about justin">
-      <header class="h-screen flex flex-col justify-center items-center h-3/5">
-        <div id="intro" class="px-5">
-          <h2 id="first" class="text-2xl sm:text-4xl">hi, my name is</h2>
-          <h1 id="second" class="text-5xl sm:text-9xl">Justin D. Kim</h1>
-          <h3 id="third" class="text-lg sm:text-xl mt-5">i am a software developer based in las vegas, nevada</p>
-        </div>
-      </header>
-    <section id="fifth" class="flex flex-col items-center h-screen p-8">
+    <header class="h-screen flex flex-col justify-center items-center">
+      <div id="intro" class="px-6">
+        <h2 id="first" class="text-xl sm:text-3xl mb-2">hi, my name is</h2>
+        <h1 id="second" class="text-5xl sm:text-8xl">Justin Kim</h1>
+        <h2 id="third" class="text-xl sm:text-3xl mt-4">i like computers and stuff</p>
+      </div>
+    </header>
+    <section id="fifth" class="flex flex-col items-center p-8">
       <div class="xl:w-3/5">
-        <ul class="h-3/5 list-disc">
-          <h1 class="text-5xl md:text-6xl xl:text-8xl underline">About Me</h1>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-6">
-            UNR graduate with a Bachelor of Science in Business Administration with a major in Information Systems.
-          </li>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-3">
-            I currently work at the Clark County Flood Control District as a Programmer Analyst II.
-          </li>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-3">
-            I have worked at the City of Henderson as a Computer Analyst I where I assisted with help desk duties.
-          </li>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-3">
-            Primarily experienced with C# and JavaScript; comfortable with Python, SQL, and learning new languages and frameworks.
-          </li>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-3">
-            I am also comfortable using cloud service providers like Azure and AWS. I have a <a href="https://www.credly.com/badges/67ef9949-cf7a-4fcd-a7ab-d3470aa1f255" class="underline">Microsoft Certified: Azure Fundamentals certification</a>.
-          </li>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-3">
-            I develop and play video games, my favorite game being Hollow Knight!
-            <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/367520/b2e50d3cc54ab9b248341c36fd8a368f0fb88cc7.png" width="30px" class="inline" />
-          </li>
-          <li class="text-md md:text-xl 2xl:text-3xl mt-3">
-            I am also learning to play the guitar, golf, and practicing mixology in my spare time. 
-          </li>
-        </ul>
+        <section id="history-experience" class="mb-12">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-center">History & Experience</h2>
+          { historyExperience.map(item => {
+              return (
+                <div class="mb-6 rounded-lg transition-shadow duration-200">
+                  <p class="text-lg md:text-xl 2xl:text-2xl font-semibold">{item.concise}</p>
+                  <p class="history-detailed text-sm md:text-lg 2xl:text-xl mt-1 py-2 rounded text-gray-100">{item.detailed}</p>
+                </div>
+              );
+            })
+          }
+        </section>
+
+        <section id="skills" class="mb-12">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-center">Skills</h2>
+          <div class="flex flex-wrap justify-center">
+            {skills.map(skill => (
+              <span class="text-center text-slate-800 border border-gray-300 bg-gray-50 rounded-lg w-40 py-2 text-sm md:text-md lg:text-lg mr-2 mb-2 shadow hover:bg-blue-200 transition-colors">{skill}</span>
+            ))}
+          </div>
+        </section>
+
+        <section id="interests" class="mb-8">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-center">Hobbies</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {interests.map(interest => (
+              <div class="interest-box p-6 border border-gray-300 rounded-lg bg-gray-50 shadow-md hover:shadow-lg transition-shadow text-center">
+                <p class="text-md md:text-xl 2xl:text-2xl text-gray-700">{interest.includes("Hollow Knight") ? (
+                    <>
+                      Video Game Development
+                    </>
+                  ) : interest}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </section>
   </BaseLayout>
@@ -56,13 +101,12 @@ const pageTitle = "About Me";
 
     window.addEventListener("load", () => {
       const tl = gsap.timeline();
-      tl.from("#first", { opacity: 0, duration: 1, x: -100 });
-      tl.from("#second", { opacity: 0, duration: 1, x: -100 });
-      tl.from("#third", { opacity: 0, duration: 0.5, x: -100 });
-    })
-    
-    gsap.to("#intro", { scrollTrigger: { scrub: true, trigger: '#fifth', start: 'top bottom', end: 'top center' }, opacity: 0, y: -300 });
-    gsap.from("#fifth", { scrollTrigger: { scrub: true, trigger: 'header', start: 'center center', end: 'center top' }, opacity: 0, x: -300 });
+      tl.from("#first", { opacity: 0, duration: 1, y: 100 });
+      tl.from("#second", { opacity: 0, duration: 1, y: 100 });
+      tl.from("#third", { opacity: 0, duration: 1, y: 100 });
+    });
+    gsap.to("#intro", { scrollTrigger: { scrub: 1, trigger: "#fifth", start: 'top center', end: 'center' }, opacity: 0, y: 300 } )
+    gsap.from("#fifth", { immediateRender: true, scrollTrigger: { scrub: 1, trigger: '#intro', start: 'center', end: 'bottom' }, opacity: 0 });
 
   </script>
   </body>
