@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>justind.kim</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="index.css" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script></head>
+<body>
+
+<!-- Starfield -->
+<canvas id="star-canvas"></canvas>
+
+<!-- ======== HERO ======== -->
+<section id="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="hero-frame">
+    <div class="corner-bl"></div>
+    <div class="corner-br"></div>
+
+    <div class="hero-eyebrow">portfolio</div>
+    <h1 class="hero-name">
+      <span class="first">Justin</span>
+      <span class="last">Kim</span>
+    </h1>
+
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-outline">Links</a>
+    </div>
+  </div>
+</section>
+
+<div class="orn-divider">✦ ✦ ✦</div>
+
+<!-- ======== ABOUT ======== -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-stamp">about</div>
+      <h2 class="section-title">Justin Kim</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a <strong>Systems Support Analyst</strong>
+          with a background in Information Systems. I blend technical IT expertise
+          with a genuine interest in software development.
+        </p>
+        <p>
+          I enjoy working across the full range — from keeping city infrastructure
+          running to building projects in <strong>Godot</strong>, writing scripts in
+          <strong>Python</strong>, and experimenting with cloud platforms.
+        </p>
+        <p>
+          When I'm not at a keyboard for work, I'm usually at one for fun — exploring
+          indie games, tinkering on side projects, and picking up whatever's caught
+          my curiosity lately.
+        </p>
+      </div>
+
+      <div class="about-sidebar">
+        <div class="info-row">
+          <span class="info-label">Role</span>
+          <span class="info-value">Systems Support Analyst</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Employer</span>
+          <span class="info-value">City of Henderson</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">School</span>
+          <span class="info-value">University of Nevada, Reno</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Side Work</span>
+          <span class="info-value">Game dev &amp; personal projects</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="orn-divider">— ◆ —</div>
+
+<!-- ======== EXPERIENCE + EDUCATION ======== -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-stamp">background</div>
+      <h2 class="section-title">Experience &amp; Education</h2>
+    </div>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-content">
+          <span class="tl-badge badge-current">● Current</span>
+          <h3>Systems Support Analyst</h3>
+          <div class="tl-org">City of Henderson - Utilities</div>
+          <p>
+            Providing systems support and technical assistance across city departments,
+            maintaining infrastructure, and ensuring reliable IT operations for municipal services.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-content">
+          <span class="tl-badge badge-past">Previous</span>
+          <h3>Programmer Analyst II</h3>
+          <div class="tl-org">Clark County Flood Control District</div>
+          <p>
+            Developed and maintained software solutions to support flood control operations,
+            contributing to data management systems and internal tooling.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-content">
+          <span class="tl-badge badge-past">Previous</span>
+          <h3>Computer Analyst I</h3>
+          <div class="tl-org">City of Henderson - IT</div>
+          <p>
+            Assisted with help desk duties and IT support, troubleshooting hardware and software
+            issues for city staff and ensuring smooth day-to-day operations.
+          </p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-content">
+          <span class="tl-badge badge-edu">Education</span>
+          <h3>B.S. Business Administration Majoring in Information Systems</h3>
+          <div class="tl-org">University of Nevada, Reno</div>
+          <p>
+            Graduated with a Bachelor of Science in Business Administration with a focus on
+            Information Systems — blending business strategy, data management, and technology.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="orn-divider">✦ ✦ ✦</div>
+
+<!-- ======== SKILLS ======== -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-stamp">toolkit</div>
+      <h2 class="section-title">Skills</h2>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-pill pink">   <span>⚡</span> C#         </div>
+      <div class="skill-pill yellow"> <span>✦</span>  JavaScript </div>
+      <div class="skill-pill green">  <span>🐍</span> Python     </div>
+      <div class="skill-pill purple"> <span>◈</span>  SQL        </div>
+      <div class="skill-pill blue">   <span>☁</span>  Azure      </div>
+      <div class="skill-pill orange"> <span>▲</span>  AWS        </div>
+      <div class="skill-pill pink">   <span>🗺️</span> ArcGIS     </div>
+      <div class="skill-pill green">  <span>⟨/⟩</span> HTML/CSS   </div>
+      <div class="skill-pill yellow"> <span>🤖</span> CI/CD      </div>
+      <div class="skill-pill purple"> <span>📈</span> Power BI   </div>
+      <div class="skill-pill orange"> <span>⚙</span>  IT Support </div>
+      <div class="skill-pill blue">   <span>👾</span> AI Tooling </div>
+    </div>
+  </div>
+</section>
+
+<div class="orn-divider">— ◆ —</div>
+
+<!-- ======== PROJECTS ======== -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-stamp">links</div>
+      <h2 class="section-title">Projects &amp; Links</h2>
+    </div>
+
+    <div class="projects-grid">
+      
+      <a href="https://tbh.vc" class="project-bubble pb-blue">
+        <div class="pb-icon">💻</div>
+        <div class="pb-tag">website</div>
+        <h3>tbh.vc</h3>
+        <p>My personal indie website/blog hosted on Neocities.</p>
+        <span class="pb-link">tbh.vc →</span>
+      </a>
+
+      <a href="https://github.com/kimjustind" target="_blank" rel="noopener" class="project-bubble pb-green">
+        <div class="pb-icon">🐙</div>
+        <div class="pb-tag">profile</div>
+        <h3>GitHub</h3>
+        <p>Repositories and open-source contributions.</p>
+        <span class="pb-link">github.com →</span>
+      </a>
+
+      <a href="https://www.linkedin.com/in/kimjustind/" target="_blank" rel="noopener" class="project-bubble pb-blue">
+        <div class="pb-icon">🔗</div>
+        <div class="pb-tag">network</div>
+        <h3>LinkedIn</h3>
+        <p>Professional profile and full work history.</p>
+        <span class="pb-link">linkedin.com →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<div class="orn-divider">✦ ✦ ✦</div>
+
+<!-- FOOTER -->
+<footer>
+  Justin D. Kim &nbsp;<span>·</span>&nbsp; justind.kim
+</footer>
+
+<!-- ============================
+     JS
+============================ -->
+<script>
+  /* ---------- Starfield ---------- */
+  (function () {
+    const canvas = document.getElementById('star-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const COUNT = 120;
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function init() {
+      stars = [];
+      for (let i = 0; i < COUNT; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.2 + 0.2,
+          speed: Math.random() * 0.003 + 0.001,
+          phase: Math.random() * Math.PI * 2,
+        });
+      }
+    }
+
+    function draw(t) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const s of stars) {
+        const alpha = 0.25 + 0.45 * Math.abs(Math.sin(t * s.speed + s.phase));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(168,200,248,${alpha})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+
+    resize(); init(); requestAnimationFrame(draw);
+    window.addEventListener('resize', () => { resize(); init(); });
+  })();
+
+  /* ---------- GSAP ---------- */
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* hero entrance */
+  const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  heroTl
+    .from('.hero-eyebrow',      { opacity: 0, y: 12, duration: 0.5 })
+    .from('.hero-name .first',  { opacity: 0, x: -40, duration: 0.65 }, '-=0.2')
+    .from('.hero-name .last',   { opacity: 0, x:  40, duration: 0.65 }, '-=0.5')
+    .from('.hero-cta',          { opacity: 0, y: 16, duration: 0.5 }, '-=0.2')
+    .from('.hero-frame::before, .corner-bl, .corner-br', { scaleX: 0, duration: 0.6, transformOrigin: 'center' }, 0);
+
+  /* blob float */
+  gsap.to('.blob-1', { y: 28, x: 18,  duration: 7, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+  gsap.to('.blob-2', { y: -22, x: -14, duration: 8, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+
+  /* scroll reveals — use gsap.from() so no CSS initial hide needed */
+  function scrollReveal(selector, vars, triggerVars) {
+    gsap.utils.toArray(selector).forEach((el, i) => {
+      gsap.from(el, {
+        ...vars,
+        delay: (i % 5) * 0.07,
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 90%',
+          once: true,
+          ...triggerVars,
+        },
+      });
+    });
+  }
+
+  scrollReveal('.section-stamp',  { opacity: 0, y: 10, duration: 0.4, ease: 'power2.out' });
+  scrollReveal('.section-title',  { opacity: 0, y: 18, duration: 0.55, ease: 'power2.out' });
+  scrollReveal('.about-text p',   { opacity: 0, y: 20, duration: 0.55, ease: 'power2.out' });
+  scrollReveal('.info-row',       { opacity: 0, x: 20, duration: 0.45, ease: 'power2.out' });
+  scrollReveal('.skill-pill',     { opacity: 0, scale: 0.8, duration: 0.4, ease: 'back.out(1.4)' });
+  scrollReveal('.project-bubble', { opacity: 0, y: 30, duration: 0.55, ease: 'power2.out' });
+  scrollReveal('.contact-btn',    { opacity: 0, y: 14, duration: 0.45, ease: 'power2.out' });
+  scrollReveal('.orn-divider',    { opacity: 0, duration: 0.6, ease: 'power1.out' });
+
+  /* timeline items */
+  gsap.utils.toArray('.tl-item').forEach((item, i) => {
+    gsap.from(item, {
+      opacity: 0, x: -30, duration: 0.6, ease: 'power2.out',
+      delay: i * 0.1,
+      scrollTrigger: { trigger: item, start: 'top 88%', once: true },
+    });
+  });
+</script>
+</body>
+</html>
