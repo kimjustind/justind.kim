@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
 /* ============================
@@ -9,21 +10,27 @@
   --bg:         #16161d;
   --bg2:        #1e1e28;
   --bg3:        #23232f;
-  --blue:       #a8c8f8;
-  --purple:     #c8a4f8;
-  --green:      #a8e6cf;
-  --pink:       #ffb3c6;
-  --yellow:     #ffd6a5;
-  --orange:     #ffb085;
-  --text-muted: #7a7a9a;
-  --border:     rgba(168, 200, 248, 0.15);
+  --text:       #ede8e3;
+  --blue:       #7ec8ff;
+  --purple:     #c066ff;
+  --green:      #3ddba8;
+  --pink:       #ff6b9d;
+  --yellow:     #ffc147;
+  --orange:     #ff8c42;
+  --text-muted: #8a8aaa;
+  --border:     rgba(126, 200, 255, 0.15);
 }
 
 html { scroll-behavior: smooth; }
 
+h1, h2, h3 {
+  font-family: 'Newsreader', Georgia, serif;
+  color: var(--text);
+}
+
 body {
   background: var(--bg);
-  color: var(--blue);
+  color: var(--text);
   font-family: 'Nunito', monospace;
   overflow-x: hidden;
   line-height: 1.6;
@@ -98,7 +105,7 @@ body::after {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: left;
   padding: 4rem 2rem;
   overflow: hidden;
 }
@@ -125,6 +132,7 @@ body::after {
 .blob-2 { width: 450px; height: 450px; background: var(--blue);   bottom: -120px; right: -120px; }
 
 .hero-frame {
+  background-color: var(--bg);
   position: relative;
   padding: 3rem 4rem;
   display: flex;
@@ -159,14 +167,11 @@ body::after {
 }
 
 .hero-name {
-  font-family: 'Nunito', monospace;
   font-size: clamp(3.2rem, 10vw, 8rem);
   line-height: 0.95;
   letter-spacing: -1px;
+  display: block;
 }
-
-.hero-name .first { color: var(--blue);   display: block; }
-.hero-name .last  { color: var(--purple); display: block; }
 
 .hero-cta {
   display: flex;
@@ -241,10 +246,8 @@ section {
 }
 
 .section-title {
-  font-family: 'Nunito', monospace;
   font-size: clamp(1.6rem, 4vw, 2.6rem);
   line-height: 1.15;
-  color: var(--blue);
   display: flex;
   align-items: center;
   gap: 1.25rem;
@@ -309,7 +312,7 @@ section {
 
 .info-value {
   font-size: 0.82rem;
-  color: var(--blue);
+  color: var(--text);
   font-weight: 500;
 }
 
@@ -425,9 +428,7 @@ section {
 }
 
 .tl-content h3 {
-  font-family: 'Nunito', monospace;
   font-size: 1rem;
-  color: var(--blue);
   margin-bottom: 0.25rem;
   line-height: 1.3;
   letter-spacing: 0.5px;
@@ -442,9 +443,9 @@ section {
   letter-spacing: 0.5px;
 }
 
-.tl-item:nth-child(2) .tl-org { color: var(--blue); }
-.tl-item:nth-child(3) .tl-org { color: var(--green); }
-.tl-item:nth-child(4) .tl-org { color: var(--yellow); }
+.tl-item:nth-child(2) .tl-org { color: var(--yellow); }
+.tl-item:nth-child(3) .tl-org { color: var(--purple); }
+.tl-item:nth-child(4) .tl-org { color: var(--green); }
 
 .tl-content p {
   color: var(--text-muted);
@@ -609,6 +610,8 @@ footer {
 }
 
 footer span { color: var(--pink); }
+footer a { text-decoration: none; color: var(--blue)}
+footer a:hover { text-decoration: underline; }
 
 /* ============================
    RESPONSIVE
