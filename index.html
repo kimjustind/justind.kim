@@ -24,32 +24,33 @@
 
 <!-- ======== HERO ======== -->
 <section id="hero">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-
   <div class="hero-frame">
     <div class="corner-bl"></div>
     <div class="corner-br"></div>
 
-    <div class="hero-eyebrow">portfolio</div>
+    <span class="frame-star fs-tl">✦</span>
+    <span class="frame-star fs-tr">✦</span>
+    <span class="frame-star fs-bl">✦</span>
+    <span class="frame-star fs-br">✦</span>
+
     <h1 class="hero-name">
-      <span class="first">Justin</span>
-      <span class="last">Kim</span>
+      <span class="hero-welcome">Welcome to</span>
+      <span class="hero-line">
+        <span class="first">justind.kim</span>
+      </span>
+      <span class="hero-site">justin's personal website</span>
     </h1>
 
-    <div class="hero-cta">
-      <a href="#projects" class="btn btn-outline">
-        <i class="ph ph-link-simple" style="margin-right:6px"></i> Links
-      </a>
-      <a href="#about" class="btn btn-aero">
-        <span class="gloss"></span>
-        <span>Enter Site <i class="ph-bold ph-arrow-right" style="margin-left:6px;vertical-align:-1px"></i></span>
-      </a>
-    </div>
+    <nav class="hero-cta">
+      <a href="#about" class="btn btn-accent btn-blue"><i class="ph ph-user"></i> About</a>
+      <a href="#experience" class="btn btn-accent btn-purple"><i class="ph ph-briefcase"></i> Experience</a>
+      <a href="#skills" class="btn btn-accent btn-green"><i class="ph ph-wrench"></i> Skills</a>
+      <a href="#projects" class="btn btn-accent btn-pink"><i class="ph ph-link-simple"></i> Links</a>
+    </nav>
   </div>
 </section>
 
-<div class="orn-divider">✦ ✦ ✦</div>
+<div class="orn-divider">✦</div>
 
 <!-- ======== ABOUT ======== -->
 <section id="about">
@@ -100,7 +101,7 @@
   </div>
 </section>
 
-<div class="orn-divider">— ◆ —</div>
+<div class="orn-divider">✦</div>
 
 <!-- ======== EXPERIENCE + EDUCATION ======== -->
 <section id="experience">
@@ -168,7 +169,7 @@
   </div>
 </section>
 
-<div class="orn-divider">✦ ✦ ✦</div>
+<div class="orn-divider">✦</div>
 
 <!-- ======== SKILLS ======== -->
 <section id="skills">
@@ -210,7 +211,7 @@
   </div>
 </section>
 
-<div class="orn-divider">— ◆ —</div>
+<div class="orn-divider">✦</div>
 
 <!-- ======== PROJECTS ======== -->
 <section id="projects">
@@ -311,15 +312,11 @@
   /* hero entrance */
   const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   heroTl
-    .from('.hero-eyebrow',      { opacity: 0, y: 12, duration: 0.5 })
-    .from('.hero-name .first',  { opacity: 0, x: -40, duration: 0.65 }, '-=0.2')
-    .from('.hero-name .last',   { opacity: 0, x:  40, duration: 0.65 }, '-=0.5')
+    .from('.hero-welcome',      { opacity: 0, y: 12, duration: 0.5 })
+    .from('.hero-name .first',  { opacity: 0, y: 24, duration: 0.7 }, '-=0.25')
+    .from('.hero-site',         { opacity: 0, y: 14, duration: 0.5 }, '-=0.35')
     .from('.hero-cta',          { opacity: 0, y: 16, duration: 0.5 }, '-=0.2')
     .from('.hero-frame::before, .corner-bl, .corner-br', { scaleX: 0, duration: 0.6, transformOrigin: 'center' }, 0);
-
-  /* blob float */
-  gsap.to('.blob-1', { y: 28, x: 18,  duration: 7, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-  gsap.to('.blob-2', { y: -22, x: -14, duration: 8, yoyo: true, repeat: -1, ease: 'sine.inOut' });
 
   /* scroll reveals — use gsap.from() so no CSS initial hide needed */
   function scrollReveal(selector, vars, triggerVars) {
