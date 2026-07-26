@@ -79,23 +79,27 @@ body {
 .orn-divider {
   position: relative;
   z-index: 1;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
   padding: 1.5rem 0;
-  color: var(--text-muted);
+  background: transparent;
+  /* half-strength star, via alpha so it reads the same over the starfield */
+  color: color-mix(in srgb, var(--text-muted) 50%, transparent);
   font-family: 'Nunito', monospace;
   font-size: 0.75rem;
-  letter-spacing: 4px;
-  opacity: 0.5;
 }
 
+/* full-bleed band, but the rules still span only half the page */
 .orn-divider::before,
 .orn-divider::after {
   content: '';
-  display: inline-block;
-  vertical-align: middle;
-  width: 80px; height: 1px;
+  flex: 1;
+  max-width: 25%;
+  height: 1px;
+  opacity: 0.5;
   background: linear-gradient(to right, transparent, var(--text-muted));
-  margin: 0 1rem;
 }
 
 .orn-divider::after {
@@ -114,37 +118,22 @@ body {
   justify-content: center;
   align-items: center;
   text-align: left;
-  padding: 4rem 2rem;
+  padding: clamp(2rem, 5vw, 4rem) 1rem;
   overflow: hidden;
 }
 
-/* grain texture */
-#hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  opacity: 0.35;
-}
-
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  pointer-events: none;
-}
-
-.blob-1 { width: 550px; height: 550px; background: var(--purple); top: -140px; left: -180px; opacity: 0.15; }
-.blob-2 { width: 450px; height: 450px; background: var(--blue);   bottom: -120px; right: -120px; opacity: 0.15; }
-
+/* fills a good chunk of the viewport at every width, never all of it */
 .hero-frame {
-  background-color: var(--bg);
+  /* darker than the page, but sheer enough for the starfield to read through */
+  background-color: color-mix(in srgb, var(--void) 60%, transparent);
   position: relative;
-  padding: 3rem 4rem;
+  width: min(92vw, 860px);
+  min-height: 62vh;
+  padding: clamp(2.5rem, 5vw, 3.75rem) clamp(1.5rem, 4vw, 4.5rem);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 }
 
@@ -164,31 +153,87 @@ body {
 .corner-bl { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
 .corner-br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
 
-.hero-eyebrow {
-  font-family: 'Nunito', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
+/* stars tucked into the frame corners */
+.frame-star {
+  position: absolute;
+  font-size: 0.8rem;
+  line-height: 1;
+  color: var(--text);
+  text-shadow: 0 0 10px rgba(237, 232, 227, 0.35);
+  pointer-events: none;
+  animation: star-twinkle 3.6s ease-in-out infinite;
+}
+
+.fs-tl { top: 11px; left: 11px; }
+.fs-tr { top: 11px; right: 11px; animation-delay: 0.9s; }
+.fs-bl { bottom: 11px; left: 11px; animation-delay: 1.8s; }
+.fs-br { bottom: 11px; right: 11px; animation-delay: 2.7s; }
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.3;  transform: scale(0.9); }
+  50%      { opacity: 0.85; transform: scale(1.1); }
 }
 
 .hero-name {
-  font-size: clamp(2.25rem, 6.5vw, 5rem);
+  font-size: clamp(2.75rem, 9vw, 5rem);
   font-weight: 700;
-  line-height: 0.98;
+  line-height: 1;
   letter-spacing: -1px;
-  white-space: nowrap;
-  display: block;
-  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.7rem, 1.9vw, 1.25rem);
+  text-align: center;
 }
 
+.hero-welcome {
+  font-family: 'Nunito', monospace;
+  font-size: 0.24em;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 5px;
+  text-indent: 5px; /* offset trailing letter-space so it stays optically centered */
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-line { white-space: nowrap; }
+
+.hero-name .first {
+  text-decoration: underline;
+  text-decoration-thickness: 0.04em;
+  text-underline-offset: 0.12em;
+}
+
+.hero-site {
+  font-size: 0.46em;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--text);
+}
+
+/* equal-width columns; 4 across, 2x2 on narrow screens */
 .hero-cta {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
   justify-content: center;
+  width: 100%;
   margin-top: 2.5rem;
+}
+
+.hero-cta .btn {
+  justify-content: center;
+  padding: 0 0.6rem;
+}
+
+.hero-cta .btn i { margin-right: 6px; }
+
+/* below this the frame is too narrow for 4 across without the labels colliding */
+@media (max-width: 780px) {
+  .hero-cta { grid-template-columns: repeat(2, 1fr); }
 }
 
 .btn {
@@ -215,11 +260,29 @@ body {
   border-style: solid;
   border-width: 1.5px;
   pointer-events: none;
+  transition: width 0.3s ease, height 0.3s ease;
 }
 .btn::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
 .btn::after  { bottom: -1px; right: -1px; border-left: none; border-top: none; }
 
-.btn:hover { transform: translateY(-3px); }
+.btn:hover,
+.btn:focus-visible { transform: translateY(-3px); }
+
+/* the two corner Ls sweep out and meet, closing into a full outline */
+.hero-cta .btn:hover::before,
+.hero-cta .btn:hover::after,
+.hero-cta .btn:focus-visible::before,
+.hero-cta .btn:focus-visible::after {
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+}
+
+/* the closed brackets are the focus ring, so the UA outline is redundant */
+.hero-cta .btn:focus-visible { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn::before, .btn::after { transition: none; }
+}
 
 .btn-outline {
   color: var(--blue);
@@ -228,6 +291,31 @@ body {
 }
 .btn-outline::before, .btn-outline::after { border-color: var(--blue); }
 .btn-outline:hover { background: rgba(126, 200, 255, 0.12); border-color: var(--blue); }
+
+/* same treatment as .btn-outline, but hue-swappable via --accent */
+.btn-accent {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.btn-accent::before, .btn-accent::after { border-color: var(--accent); }
+.btn-accent:hover,
+.btn-accent:focus-visible {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px var(--glow);
+}
+
+/* hold the border at its resting tint so the growing brackets read as the change */
+.hero-cta .btn-accent:hover,
+.hero-cta .btn-accent:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.btn-blue   { --accent: var(--blue);   --glow: var(--blue-glow); }
+.btn-purple { --accent: var(--purple); --glow: var(--purple-glow); }
+.btn-green  { --accent: var(--green);  --glow: var(--green-glow); }
+.btn-pink   { --accent: var(--pink);   --glow: var(--pink-glow); }
 
 .btn-primary {
   color: var(--void);
@@ -263,23 +351,6 @@ body {
 }
 .btn-sunset::before, .btn-sunset::after { border-color: #fff; z-index: 2; }
 .btn-sunset > span { position: relative; z-index: 2; }
-
-.btn-aero {
-  position: relative;
-  overflow: hidden;
-  color: var(--void);
-  background: var(--grad-solo);
-  border-color: rgba(192, 102, 255, 0.5);
-  font-weight: 800;
-  box-shadow: 0 6px 22px var(--purple-glow);
-}
-.btn-aero > .gloss {
-  position: absolute; top: 0; left: 0; right: 0; height: 50%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0));
-  pointer-events: none; z-index: 1;
-}
-.btn-aero::before, .btn-aero::after { border-color: #fff; z-index: 2; }
-.btn-aero > span { position: relative; z-index: 2; }
 
 /* ============================
    SECTION SHARED
@@ -330,7 +401,7 @@ section {
 /* ============================
    ABOUT
 ============================ */
-#about { background: var(--bg2); }
+#about { background: transparent; }
 
 .about-grid {
   display: grid;
@@ -385,7 +456,7 @@ section {
 /* ============================
    EXPERIENCE + EDUCATION
 ============================ */
-#experience { background: var(--bg); }
+#experience { background: transparent; }
 
 .timeline {
   position: relative;
@@ -397,10 +468,13 @@ section {
   content: '';
   position: absolute;
   left: 10px;
-  top: 8px;
-  bottom: 8px;
+  top: 0;
+  bottom: 0;
   width: 1px;
   background: linear-gradient(to bottom, var(--green), var(--yellow), var(--pink), var(--blue));
+  /* fade the rail out at both ends instead of stopping abruptly */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
 }
 
 .tl-item {
@@ -415,9 +489,9 @@ section {
 .tl-dot {
   flex-shrink: 0;
   width: 21px;
-  padding-top: 6px;
   display: flex;
   justify-content: center;
+  align-items: center; /* stretches to .tl-content's height, so this centers on it */
 }
 
 .tl-dot-inner {
@@ -546,7 +620,7 @@ section {
 /* ============================
    SKILLS
 ============================ */
-#skills { background: var(--bg2); }
+#skills { background: transparent; }
 
 .skills-grid {
   display: flex;
@@ -587,7 +661,7 @@ section {
 /* ============================
    PROJECTS
 ============================ */
-#projects { background: var(--bg); }
+#projects { background: transparent; }
 
 .projects-grid {
   display: grid;
@@ -614,13 +688,15 @@ section {
   width: 12px; height: 12px;
   border-color: rgba(168,200,248,0.2);
   border-style: solid;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, width 0.35s ease, height 0.35s ease;
 }
 
-.project-bubble::before { top: -1px; left:  -1px; border-width: 2px 0 0 2px; }
-.project-bubble::after  { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+/* diagonal corners so the two Ls can meet and close, as on the hero buttons */
+.project-bubble::before { top: -1px;    left:  -1px; border-width: 2px 0 0 2px; }
+.project-bubble::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
 
-.project-bubble:hover { transform: translateY(-5px); }
+.project-bubble:hover,
+.project-bubble:focus-visible { transform: translateY(-5px); }
 
 .pb-blue   { --accent: var(--blue);   --glow: var(--blue-glow); }
 .pb-purple { --accent: var(--purple); --glow: var(--purple-glow); }
@@ -629,13 +705,27 @@ section {
 .pb-pink   { --accent: var(--pink);   --glow: var(--pink-glow); }
 .pb-orange { --accent: var(--orange); --glow: var(--orange-glow); }
 
-.project-bubble:hover {
-  border-color: var(--accent);
+/* border holds at its resting tint so the growing brackets read as the change */
+.project-bubble:hover,
+.project-bubble:focus-visible {
   box-shadow: 0 10px 36px var(--glow);
 }
 
 .project-bubble:hover::before,
-.project-bubble:hover::after { border-color: var(--accent); }
+.project-bubble:hover::after,
+.project-bubble:focus-visible::before,
+.project-bubble:focus-visible::after {
+  border-color: var(--accent);
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+}
+
+/* the closed brackets are the focus ring, so the UA outline is redundant */
+.project-bubble:focus-visible { outline: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .project-bubble::before, .project-bubble::after { transition: border-color 0.25s; }
+}
 
 .pb-icon { font-size: 2rem; line-height: 1; color: var(--text); }
 
@@ -674,7 +764,8 @@ section {
   transition: opacity 0.2s, gap 0.2s;
 }
 
-.project-bubble:hover .pb-link { opacity: 1; gap: 0.55rem; }
+.project-bubble:hover .pb-link,
+.project-bubble:focus-visible .pb-link { opacity: 1; gap: 0.55rem; }
 
 .pb-placeholder {
   border-style: dashed;
@@ -707,10 +798,7 @@ footer a:hover { text-decoration: underline; }
    RESPONSIVE
 ============================ */
 @media (max-width: 600px) {
-  .hero-frame { padding: 2rem 1.5rem; }
+  .hero-line { white-space: normal; }
   .timeline::before { left: 8px; }
   .tl-item { gap: 1.5rem; }
-  .hero-name { white-space: normal; text-align: center; }
-  .hero-name .first,
-  .hero-name .last  { display: block; }
 }
