@@ -76,13 +76,11 @@
     });
   }
 
-  scrollReveal('.section-stamp',  { opacity: 0, y: 10, duration: 0.4, ease: 'power2.out' });
   scrollReveal('.section-title',  { opacity: 0, y: 18, duration: 0.55, ease: 'power2.out' });
   scrollReveal('.about-text p',   { opacity: 0, y: 20, duration: 0.55, ease: 'power2.out' });
   scrollReveal('.info-row',       { opacity: 0, x: 20, duration: 0.45, ease: 'power2.out' });
   scrollReveal('.project-bubble', { opacity: 0, y: 30, duration: 0.55, ease: 'power2.out' });
   scrollReveal('.attr-row',       { opacity: 0, y: 18, duration: 0.5, ease: 'power2.out' });
-  scrollReveal('.orn-divider',    { opacity: 0, duration: 0.6, ease: 'power1.out' });
 
   if (HAS_GSAP) gsap.utils.toArray('.tl-item').forEach((item, i) => {
     if (REDUCED) return;
@@ -177,6 +175,43 @@
   })();
 
   /* ============================================================
+     RESTART — appears once the hero scrolls away, warps back to
+     the title screen
+  ============================================================ */
+  (function restart() {
+    const btn  = document.getElementById('restart-btn');
+    const hero = document.getElementById('hero');
+    if (!btn) return;
+
+    let shown = false;
+
+    function update() {
+      const limit = (hero ? hero.offsetHeight : window.innerHeight) * 0.6;
+      const want = window.scrollY > limit;
+      if (want === shown) return;
+      shown = want;
+      if (want) {
+        btn.hidden = false;
+        /* separate style computation so the fade-in transition runs */
+        void btn.offsetHeight;
+        btn.classList.add('show');
+      } else {
+        btn.classList.remove('show');
+        setTimeout(() => { if (!shown) btn.hidden = true; }, 260);
+      }
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
+    });
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  /* ============================================================
      DIALOGUE ENGINE — opens on click from journey items,
      tech tree nodes, and attributes
   ============================================================ */
@@ -194,6 +229,7 @@
       if (state === 'closed') return;
       state = 'closing';
       box.classList.remove('show');
+      document.body.classList.remove('dlg-open');
       setTimeout(() => {
         /* a newer say() may have re-opened the box mid-close */
         if (state !== 'closing') return;
@@ -222,6 +258,7 @@
          are separate style computations — keeps the fade transition */
       void box.offsetHeight;
       box.classList.add('show');
+      document.body.classList.add('dlg-open');
       state = 'typing';
 
       if (REDUCED) { finishTyping(); return; }
