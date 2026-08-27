@@ -76,6 +76,7 @@ body {
   gap: 1rem;
   padding: 1.5rem 0;
   background: transparent;
+  color: var(--text-muted);
   /* half-strength star, via alpha so it reads the same over the starfield */
   color: color-mix(in srgb, var(--text-muted) 50%, transparent);
   font-family: 'Nunito', sans-serif;
@@ -116,6 +117,7 @@ body {
 /* fills a good chunk of the viewport at every width, never all of it */
 .hero-frame {
   /* darker than the page, but sheer enough for the starfield to read through */
+  background-color: var(--void);
   background-color: color-mix(in srgb, var(--void) 60%, transparent);
   position: relative;
   width: min(92vw, 860px);
@@ -945,6 +947,7 @@ footer a:hover { text-decoration: underline; }
   z-index: 5;
   max-width: 250px;
   padding: 0.55rem 0.75rem 0.65rem;
+  background: var(--void);
   background: color-mix(in srgb, var(--void) 94%, transparent);
   box-shadow:
     0 -3px 0 0 var(--border-strong), 0 3px 0 0 var(--border-strong),
@@ -1058,6 +1061,7 @@ html.js-on .tree-fallback { display: none; }
   width: min(92vw, 700px);
   z-index: 60;
   padding: 0.9rem 1.2rem 1.5rem;
+  background: var(--void);
   background: color-mix(in srgb, var(--void) 93%, transparent);
   box-shadow:
     0 -4px 0 0 var(--bg3), 0 4px 0 0 var(--bg3),
