@@ -7,7 +7,9 @@
 
   document.documentElement.classList.add('js-on');
 
-  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const REDUCED_MQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let REDUCED = REDUCED_MQ.matches;
+  REDUCED_MQ.addEventListener?.('change', (e) => { REDUCED = e.matches; });
   /* if the GSAP CDN fails, everything still works — animations just don't play */
   const HAS_GSAP = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
 
@@ -17,20 +19,25 @@
   (function starfield() {
     const canvas = document.getElementById('star-canvas');
     const ctx = canvas.getContext('2d');
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
     let stars = [];
+    let W = 0, H = 0;
     const COUNT = 120;
 
     function resize() {
-      canvas.width  = window.innerWidth;
-      canvas.height = window.innerHeight;
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width  = W * DPR;
+      canvas.height = H * DPR;
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     }
 
     function init() {
       stars = [];
       for (let i = 0; i < COUNT; i++) {
         stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
+          x: Math.random() * W,
+          y: Math.random() * H,
           r: Math.random() * 1.2 + 0.2,
           speed: Math.random() * 0.003 + 0.001,
           phase: Math.random() * Math.PI * 2,
@@ -39,7 +46,7 @@
     }
 
     function draw(t) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, W, H);
       for (const s of stars) {
         const alpha = 0.25 + 0.45 * Math.abs(Math.sin(t * s.speed + s.phase));
         ctx.beginPath();
@@ -52,9 +59,15 @@
 
     resize(); init(); requestAnimationFrame(draw);
     window.addEventListener('resize', () => {
-      /* ignore height-only changes (mobile URL bar) so stars don't reshuffle mid-scroll */
-      if (canvas.width === window.innerWidth) { canvas.height = window.innerHeight; }
-      else { resize(); init(); }
+      /* ignore height-only changes (mobile URL bar) so stars don't reshuffle mid-scroll;
+         stretch their positions proportionally so no bare strip is left behind */
+      if (W === window.innerWidth) {
+        const oldH = H;
+        resize();
+        for (const s of stars) s.y = (s.y / oldH) * H;
+      } else {
+        resize(); init();
+      }
       if (REDUCED) requestAnimationFrame(draw);
     });
   })();
@@ -128,7 +141,7 @@
      on hover. Everywhere else the void stays base.
   ============================================================ */
   (function sceneTints() {
-    if (!HAS_GSAP) return;
+    if (!HAS_GSAP || REDUCED) return;
     const BASE = '#16161d';
     const setTint = (color) => {
       gsap.to('body', {
@@ -166,7 +179,8 @@
     items.forEach((it, i) => it.addEventListener('mouseenter', () => setActive(i)));
 
     document.addEventListener('keydown', (e) => {
-      if (window.scrollY > window.innerHeight * 0.8) return;
+      /* only hijack arrows while the menu itself has focus — never block page scrolling */
+      if (!items.includes(document.activeElement)) return;
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
         const next = (sel + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
@@ -265,7 +279,9 @@
         Dlg.say(c.dataset.name, c.dataset.line);
       };
       c.addEventListener('click', open);
-      c.addEventListener('keydown', (e) => { if (e.key === 'Enter') open(e); });
+      c.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(e); }
+      });
     });
 
     document.querySelectorAll('.attr-row').forEach((row) => {
@@ -279,7 +295,9 @@
         Dlg.say(name, lv + ' \u00b7 ' + flavor);
       };
       row.addEventListener('click', open);
-      row.addEventListener('keydown', (e) => { if (e.key === 'Enter') open(e); });
+      row.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(e); }
+      });
     });
   })();
 
@@ -394,7 +412,7 @@
         const g = el('g', {
           class: 'tt-node', 'data-id': n.id,
           transform: `translate(${x}, ${y})`,
-          tabindex: '0', role: 'img',
+          tabindex: '0', role: 'button',
           'aria-label': `${n.label}: ${n.desc}`,
           style: `color: ${ACCENTS[n.accent]}`,
         });
@@ -426,6 +444,14 @@
           e.stopPropagation();
           hideTip();
           Dlg.say(n.label, n.desc);
+        });
+        g.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            e.stopPropagation();
+            hideTip();
+            Dlg.say(n.label, n.desc);
+          }
         });
       });
     }
