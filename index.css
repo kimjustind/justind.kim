@@ -425,6 +425,7 @@ section, footer { position: relative; z-index: 1; }
   background: var(--bg);
   border: 2px solid var(--accent);
   transform: translateY(-50%) rotate(45deg);
+  transition: background 0.25s, opacity 0.25s;
 }
 
 .tl-item:hover::before { background: var(--accent); }

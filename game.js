@@ -64,7 +64,7 @@
 
   reveal('.section-title, .char-bio p, .project-bubble, .attr-row', { y: 20 });
   reveal('.info-row', { x: 20 });
-  reveal('.tl-item', { x: -30, duration: 0.6 }, 0.1);
+  reveal('.tl-content', { x: -30, duration: 0.6 }, 0.1); /* the card, not the rail diamond */
 
   /* ---------- character level: age, birthday 11/28/1996 ---------- */
   (() => {
