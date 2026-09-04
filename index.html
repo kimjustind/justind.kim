@@ -3,25 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Justin D. Kim — developer, game maker, tinkerer. A personal site styled like a retro game title screen." />
+  <meta name="description" content="Justin D. Kim: developer, game maker, tinkerer. A personal site styled like a retro game title screen." />
   <title>justind.kim</title>
 
-  <!-- Styles -->
   <link rel="stylesheet" href="index.css" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Newsreader:opsz,wght@6..72,400..700&family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Newsreader:opsz,wght@6..72,400..700&family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
 
-
-  <!-- GSAP -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="game.js"></script>
 </head>
 <body>
 
-<!-- Icon sprite (Phosphor, inlined) -->
+<!-- Phosphor icons, inlined as a sprite -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
   <symbol id="i-cake" viewBox="0 0 256 256"><path d="M232,112a24,24,0,0,0-24-24H136V79a32.06,32.06,0,0,0,24-31c0-28-26.44-45.91-27.56-46.66a8,8,0,0,0-8.88,0C122.44,2.09,96,20,96,48a32.06,32.06,0,0,0,24,31v9H48a24,24,0,0,0-24,24v23.33a40.84,40.84,0,0,0,8,24.24V200a24,24,0,0,0,24,24H200a24,24,0,0,0,24-24V159.57a40.84,40.84,0,0,0,8-24.24ZM112,48c0-13.57,10-24.46,16-29.79,6,5.33,16,16.22,16,29.79a16,16,0,0,1-32,0ZM40,112a8,8,0,0,1,8-8H208a8,8,0,0,1,8,8v23.33c0,13.25-10.46,24.31-23.32,24.66A24,24,0,0,1,168,136a8,8,0,0,0-16,0,24,24,0,0,1-48,0,8,8,0,0,0-16,0,24,24,0,0,1-24.68,24C50.46,159.64,40,148.58,40,135.33Zm160,96H56a8,8,0,0,1-8-8V172.56A38.77,38.77,0,0,0,62.88,176a39.69,39.69,0,0,0,29-11.31A40.36,40.36,0,0,0,96,160a40,40,0,0,0,64,0,40.36,40.36,0,0,0,4.13,4.67A39.67,39.67,0,0,0,192,176c.38,0,.76,0,1.14,0A38.77,38.77,0,0,0,208,172.56V200A8,8,0,0,1,200,208Z"/></symbol>
   <symbol id="i-user" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"/></symbol>
@@ -30,9 +27,6 @@
   <symbol id="i-faders" viewBox="0 0 256 256"><path d="M136,120v96a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm64,72a8,8,0,0,0-8,8v16a8,8,0,0,0,16,0V200A8,8,0,0,0,200,192Zm24-32H208V40a8,8,0,0,0-16,0V160H176a8,8,0,0,0,0,16h48a8,8,0,0,0,0-16ZM56,160a8,8,0,0,0-8,8v48a8,8,0,0,0,16,0V168A8,8,0,0,0,56,160Zm24-32H64V40a8,8,0,0,0-16,0v88H32a8,8,0,0,0,0,16H80a8,8,0,0,0,0-16Zm72-48H136V40a8,8,0,0,0-16,0V80H104a8,8,0,0,0,0,16h48a8,8,0,0,0,0-16Z"/></symbol>
   <symbol id="i-wrench" viewBox="0 0 256 256"><path d="M226.76,69a8,8,0,0,0-12.84-2.88l-40.3,37.19-17.23-3.7-3.7-17.23,37.19-40.3A8,8,0,0,0,187,29.24,72,72,0,0,0,88,96,72.34,72.34,0,0,0,94,124.94L33.79,177c-.15.12-.29.26-.43.39a32,32,0,0,0,45.26,45.26c.13-.13.27-.28.39-.42L131.06,162A72,72,0,0,0,232,96,71.56,71.56,0,0,0,226.76,69ZM160,152a56.14,56.14,0,0,1-27.07-7,8,8,0,0,0-9.92,1.77L67.11,211.51a16,16,0,0,1-22.62-22.62L109.18,133a8,8,0,0,0,1.77-9.93,56,56,0,0,1,58.36-82.31l-31.2,33.81a8,8,0,0,0-1.94,7.1L141.83,108a8,8,0,0,0,6.14,6.14l26.35,5.66a8,8,0,0,0,7.1-1.94l33.81-31.2A56.06,56.06,0,0,1,160,152Z"/></symbol>
   <symbol id="i-skull" viewBox="0 0 256 256"><path d="M92,104a28,28,0,1,0,28,28A28,28,0,0,0,92,104Zm0,40a12,12,0,1,1,12-12A12,12,0,0,1,92,144Zm72-40a28,28,0,1,0,28,28A28,28,0,0,0,164,104Zm0,40a12,12,0,1,1,12-12A12,12,0,0,1,164,144ZM128,16C70.65,16,24,60.86,24,116c0,34.1,18.27,66,48,84.28V216a16,16,0,0,0,16,16h80a16,16,0,0,0,16-16V200.28C213.73,182,232,150.1,232,116,232,60.86,185.35,16,128,16Zm44.12,172.69a8,8,0,0,0-4.12,7V216H152V192a8,8,0,0,0-16,0v24H120V192a8,8,0,0,0-16,0v24H88V195.69a8,8,0,0,0-4.12-7C56.81,173.69,40,145.84,40,116c0-46.32,39.48-84,88-84s88,37.68,88,84C216,145.83,199.19,173.69,172.12,188.69Z"/></symbol>
-  <symbol id="i-copyright" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM96,128a32,32,0,0,0,57.6,19.2,8,8,0,0,1,12.8,9.61,48,48,0,1,1,0-57.62,8,8,0,0,1-12.8,9.61A32,32,0,0,0,96,128Z"/></symbol>
-  <symbol id="i-github" viewBox="0 0 256 256"><path d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"/></symbol>
-  <symbol id="i-linkedin" viewBox="0 0 256 256"><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/></symbol>
   <symbol id="i-arrow-up" viewBox="0 0 256 256"><path d="M205.66,117.66a8,8,0,0,1-11.32,0L136,59.31V216a8,8,0,0,1-16,0V59.31L61.66,117.66a8,8,0,0,1-11.32-11.32l72-72a8,8,0,0,1,11.32,0l72,72A8,8,0,0,1,205.66,117.66Z"/></symbol>
   <symbol id="i-arrow-up-right" viewBox="0 0 256 256"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></symbol>
   <symbol id="i-globe-duo" viewBox="0 0 256 256"><path d="M213.09,172.48a96,96,0,0,1-80.41,51.41l3.17-16.44a8,8,0,0,0-2-6.95l-19.74-20.33a8,8,0,0,1-1.44-8.69l13.7-30.74a8,8,0,0,1,8.38-4.67l22.82,3.08a8.11,8.11,0,0,1,3.12,1.11ZM116.71,95,129,88.24a7.46,7.46,0,0,0,1.5-1.07l26.91-24.33A8,8,0,0,0,159,53l-10.5-18.81A96.62,96.62,0,0,0,128,32,95.61,95.61,0,0,0,67.78,53.23L56,81.08A8,8,0,0,0,55.88,87l11.5,30.67a8,8,0,0,0,5.81,5l2.69.58L89.2,100a8,8,0,0,1,6.94-4h16.71A7.9,7.9,0,0,0,116.71,95Z" opacity="0.2"/><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm88,104a87.62,87.62,0,0,1-6.4,32.94l-44.7-27.49a15.92,15.92,0,0,0-6.24-2.23l-22.82-3.08a16.11,16.11,0,0,0-16,7.86h-8.72l-3.8-7.86a15.91,15.91,0,0,0-11-8.67l-8-1.73L96.14,104h16.71a16.06,16.06,0,0,0,7.73-2l12.25-6.76a16.62,16.62,0,0,0,3-2.14l26.91-24.34A15.93,15.93,0,0,0,166,49.1l-.36-.65A88.11,88.11,0,0,1,216,128ZM143.31,41.34,152,56.9,125.09,81.24,112.85,88H96.14a16,16,0,0,0-13.88,8l-8.73,15.23L63.38,84.19,74.32,58.32a87.87,87.87,0,0,1,69-17ZM40,128a87.53,87.53,0,0,1,8.54-37.8l11.34,30.27a16,16,0,0,0,11.62,10l21.43,4.61L96.74,143a16.09,16.09,0,0,0,14.4,9h1.48l-7.23,16.23a16,16,0,0,0,2.86,17.37l.14.14L128,205.94l-1.94,10A88.11,88.11,0,0,1,40,128Zm102.58,86.78,1.13-5.81a16.09,16.09,0,0,0-4-13.9,1.85,1.85,0,0,1-.14-.14L120,174.74,133.7,144l22.82,3.08,45.72,28.12A88.18,88.18,0,0,1,142.58,214.78Z"/></symbol>
@@ -40,15 +34,13 @@
   <symbol id="i-linkedin-duo" viewBox="0 0 256 256"><path d="M224,40V216a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8H216A8,8,0,0,1,224,40Z" opacity="0.2"/><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/></symbol>
 </svg>
 
-<!-- Starfield -->
 <canvas id="star-canvas"></canvas>
 
-<!-- ======== HERO / TITLE SCREEN ======== -->
+<!-- title screen -->
 <section id="hero">
   <div class="hero-frame">
     <div class="corner-bl"></div>
     <div class="corner-br"></div>
-
     <span class="frame-star fs-tl">✦</span>
     <span class="frame-star fs-tr">✦</span>
     <span class="frame-star fs-bl">✦</span>
@@ -58,22 +50,22 @@
     <h1 class="ts-title">JUSTIND.KIM</h1>
 
     <nav class="title-menu" aria-label="Main menu">
-      <a href="#about" class="menu-item">
+      <a href="#about" class="menu-item card">
         <span class="mi-cursor" aria-hidden="true">&#10095;</span>
         <span class="mi-label">New Game</span>
         <span class="mi-sub">about</span>
       </a>
-      <a href="#experience" class="menu-item">
+      <a href="#experience" class="menu-item card">
         <span class="mi-cursor" aria-hidden="true">&#10095;</span>
         <span class="mi-label">Journey</span>
         <span class="mi-sub">experience</span>
       </a>
-      <a href="#skills" class="menu-item">
+      <a href="#skills" class="menu-item card">
         <span class="mi-cursor" aria-hidden="true">&#10095;</span>
         <span class="mi-label">Tech Tree</span>
         <span class="mi-sub">skills</span>
       </a>
-      <a href="#projects" class="menu-item">
+      <a href="#projects" class="menu-item card">
         <span class="mi-cursor" aria-hidden="true">&#10095;</span>
         <span class="mi-label">Continue</span>
         <span class="mi-sub">links</span>
@@ -82,16 +74,12 @@
   </div>
 </section>
 
-<!-- ======== ABOUT / CHARACTER SHEET ======== -->
+<!-- character sheet -->
 <section id="about">
   <div class="section-inner">
-    <div class="section-header">
-      <h2 class="section-title">Character Sheet</h2>
-    </div>
+    <h2 class="section-title">Character Sheet</h2>
 
     <div class="char-sheet">
-
-      <!-- status card -->
       <aside class="char-card">
         <div class="cc-strip">player one</div>
 
@@ -138,116 +126,80 @@
         </div>
       </aside>
 
-      <!-- bio -->
       <div class="char-bio">
-        <div class="bio-block">
-          <div class="bio-heading">biography</div>
-          <div class="about-text">
-            <p>
-              As a tinkerer, Justin usually pokes at stuff until he understands it. 
-              He has been learning <strong>Godot</strong> on and off, nominally to make games, but mostly he just plays them.
-            </p>
-            <p>
-              Justin grew up on games and still plays them. He especially enjoys story-driven stuff like JRPGs and visual novels, boomer-shooters, and indie games that try something different.
-              <strong>Hollow Knight</strong> is his current favorite video game.
-            </p>
-            <p>
-              Recently picked up baking and guitar, partly to cut down on screen time.
-            </p>
-          </div>
-        </div>
+        <h3 class="bio-heading">biography</h3>
+        <p>
+          As a tinkerer, Justin usually pokes at stuff until he understands it.
+          He has been learning <strong>Godot</strong> on and off, nominally to make games, but mostly he just plays them.
+        </p>
+        <p>
+          Justin grew up on games and still plays them. He especially enjoys story-driven stuff like JRPGs and visual novels, boomer-shooters, and indie games that try something different.
+          <strong>Hollow Knight</strong> is his current favorite video game.
+        </p>
+        <p>
+          Recently picked up baking and guitar, partly to cut down on screen time.
+        </p>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ======== OBJECTIVES (EXPERIENCE + EDUCATION) ======== -->
+<!-- journey: experience + education -->
 <section id="experience">
   <div class="section-inner">
-    <div class="section-header">
-      <h2 class="section-title">Journey</h2>
-    </div>
+    <h2 class="section-title">Journey</h2>
 
     <div class="timeline">
-
       <div class="tl-item">
-        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
-        <div class="tl-content"
-             data-name="City of Henderson — Utilities"
-             data-line="Current objective: keeping municipal systems running.">
-          <span class="tl-badge badge-current">[ current ]</span>
+        <div class="tl-content card" data-line="Current objective: keeping municipal systems running.">
+          <span class="tl-badge badge-accent">[ current ]</span>
           <h3>Systems Support Analyst</h3>
-          <div class="tl-org">City of Henderson - Utilities</div>
-          <p>
-            Providing systems support and technical assistance across city departments,
-            maintaining infrastructure, and ensuring reliable IT operations for municipal services.
-          </p>
+          <div class="tl-org">City of Henderson &middot; Utilities</div>
+          <p>Keeps the utility department's servers, apps, and integrations running, and fixes what breaks.</p>
         </div>
       </div>
 
       <div class="tl-item">
-        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
-        <div class="tl-content"
-             data-name="Clark County Flood Control District"
-             data-line="Objective complete: software supporting flood control operations.">
-          <span class="tl-badge badge-past">[ complete ]</span>
+        <div class="tl-content card" data-line="Objective complete: software supporting flood control operations.">
+          <span class="tl-badge">[ complete ]</span>
           <h3>Programmer Analyst II</h3>
           <div class="tl-org">Clark County Flood Control District</div>
-          <p>
-            Developed and maintained software solutions to support flood control operations,
-            contributing to data management systems and internal tooling.
-          </p>
+          <p>Built and maintained the internal tools and data systems behind the district's flood control work.</p>
         </div>
       </div>
 
       <div class="tl-item">
-        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
-        <div class="tl-content"
-             data-name="City of Henderson — IT"
-             data-line="Objective complete: help desk duty and day-to-day troubleshooting.">
-          <span class="tl-badge badge-past">[ complete ]</span>
+        <div class="tl-content card" data-line="Objective complete: help desk duty and day-to-day troubleshooting.">
+          <span class="tl-badge">[ complete ]</span>
           <h3>Computer Analyst I</h3>
-          <div class="tl-org">City of Henderson - IT</div>
-          <p>
-            Assisted with help desk duties and IT support, troubleshooting hardware and software
-            issues for city staff and ensuring smooth day-to-day operations.
-          </p>
+          <div class="tl-org">City of Henderson &middot; IT</div>
+          <p>Help desk for city staff. Broken laptops, stubborn printers, and the occasional mystery.</p>
         </div>
       </div>
 
       <div class="tl-item">
-        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
-        <div class="tl-content"
-             data-name="University of Nevada, Reno"
-             data-line="Objective complete: B.S. Business Administration, Information Systems.">
-          <span class="tl-badge badge-edu">[ education ]</span>
-          <h3>B.S. Business Administration Majoring in Information Systems</h3>
+        <div class="tl-content card" data-line="Objective complete: B.S. Business Administration, Information Systems.">
+          <span class="tl-badge badge-accent">[ education ]</span>
+          <h3>B.S. Business Administration, Information Systems</h3>
           <div class="tl-org">University of Nevada, Reno</div>
-          <p>
-            Graduated with a Bachelor of Science in Business Administration with a focus on
-            Information Systems — blending business strategy, data management, and technology.
-          </p>
+          <p>Business school with a database habit. Information Systems was the part that stuck.</p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ======== TECH TREE (SKILLS) ======== -->
+<!-- tech tree -->
 <section id="skills">
   <div class="section-inner">
-    <div class="section-header">
-      <h2 class="section-title">Tech Tree</h2>
-    </div>
+    <h2 class="section-title">Tech Tree</h2>
 
     <div class="techtree-wrap" id="tt-wrap">
       <svg id="techtree" role="img" aria-label="A tech tree of Justin's skills"></svg>
-      <div id="tt-tooltip" hidden></div>
+      <div id="tt-tooltip" hidden><span class="tt-name"></span><span class="tt-desc"></span></div>
     </div>
 
-    <!-- plain-text fallback for crawlers / no-JS — keep in sync with NODES in game.js -->
+    <!-- plain-text fallback for crawlers / no-JS. Keep in sync with NODES in game.js -->
     <ul class="tree-fallback">
       <li>C#</li><li>Python</li><li>PowerShell</li><li>GDScript</li>
       <li>JavaScript</li><li>Node.js</li><li>HTML/CSS</li><li>PHP</li>
@@ -258,69 +210,64 @@
   </div>
 </section>
 
-<!-- ======== ATTRIBUTES (HOBBIES) ======== -->
+<!-- attributes: hobbies -->
 <section id="attributes">
   <div class="section-inner">
-    <div class="section-header">
-      <h2 class="section-title">Attributes</h2>
-    </div>
+    <h2 class="section-title">Attributes</h2>
 
     <div class="attr-list">
-      <div class="attr-row">
+      <div class="attr-row" style="--lv: 9">
         <div class="attr-head"><span class="attr-name">Gaming</span><span class="attr-lv">LV 9</span></div>
-        <div class="attr-bar"><i class="attr-fill" style="--w: 90%"></i></div>
+        <div class="attr-bar"><span class="attr-fill"></span></div>
         <p class="attr-flavor">I used to be a pro gamer like you. Then I took an arrow in the knee...</p>
       </div>
 
-      <div class="attr-row">
+      <div class="attr-row" style="--lv: 6">
         <div class="attr-head"><span class="attr-name">Homelab</span><span class="attr-lv">LV 6</span></div>
-        <div class="attr-bar"><i class="attr-fill" style="--w: 60%"></i></div>
+        <div class="attr-bar"><span class="attr-fill"></span></div>
         <p class="attr-flavor">A rack that hums at 2am so everything else doesn't have to.</p>
       </div>
 
-      <div class="attr-row">
+      <div class="attr-row" style="--lv: 5">
         <div class="attr-head"><span class="attr-name">Game Dev</span><span class="attr-lv">LV 5</span></div>
-        <div class="attr-bar"><i class="attr-fill" style="--w: 50%"></i></div>
+        <div class="attr-bar"><span class="attr-fill"></span></div>
         <p class="attr-flavor">Godot prototypes in various states of alive.</p>
       </div>
 
-      <div class="attr-row">
+      <div class="attr-row" style="--lv: 5">
         <div class="attr-head"><span class="attr-name">Mixology</span><span class="attr-lv">LV 5</span></div>
-        <div class="attr-bar"><i class="attr-fill" style="--w: 50%"></i></div>
+        <div class="attr-bar"><span class="attr-fill"></span></div>
         <p class="attr-flavor">Well-stocked home bar, well-worn shaker.</p>
       </div>
 
-      <div class="attr-row">
+      <div class="attr-row" style="--lv: 5">
         <div class="attr-head"><span class="attr-name">Baking</span><span class="attr-lv">LV 5</span></div>
-        <div class="attr-bar"><i class="attr-fill" style="--w: 50%"></i></div>
+        <div class="attr-bar"><span class="attr-fill"></span></div>
         <p class="attr-flavor">Sourdough, cookies, and one ongoing croissant investigation.</p>
       </div>
 
-      <div class="attr-row">
+      <div class="attr-row" style="--lv: 2">
         <div class="attr-head"><span class="attr-name">Guitar</span><span class="attr-lv">LV 2</span></div>
-        <div class="attr-bar"><i class="attr-fill" style="--w: 20%"></i></div>
+        <div class="attr-bar"><span class="attr-fill"></span></div>
         <p class="attr-flavor">Check this out I can play the pentatonic scale.</p>
       </div>
 
-      <div class="attr-row">
+      <div class="attr-row" style="--lv: 1">
         <div class="attr-head"><span class="attr-name">Golf</span><span class="attr-lv">LV 1</span></div>
-        <div class="attr-bar"><i class="attr-fill" style="--w: 10%"></i></div>
+        <div class="attr-bar"><span class="attr-fill"></span></div>
         <p class="attr-flavor">Handicap trending down. Slowly.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======== PROJECTS ======== -->
+<!-- projects + links -->
 <section id="projects">
   <div class="section-inner">
-    <div class="section-header">
-      <h2 class="section-title">Projects &amp; Links</h2>
-    </div>
+    <h2 class="section-title">Projects &amp; Links</h2>
 
     <div class="projects-grid">
-
-      <a href="https://tbh.vc" class="project-bubble pb-blue">
+      <a href="https://tbh.vc" target="_blank" rel="noopener" class="project-bubble card pb-blue">
         <div class="pb-icon"><svg class="icon" aria-hidden="true"><use href="#i-globe-duo"/></svg></div>
         <div class="pb-tag">website</div>
         <h3>tbh.vc</h3>
@@ -328,7 +275,7 @@
         <span class="pb-link">tbh.vc <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></span>
       </a>
 
-      <a href="https://github.com/kimjustind" target="_blank" rel="noopener" class="project-bubble pb-green">
+      <a href="https://github.com/kimjustind" target="_blank" rel="noopener" class="project-bubble card pb-green">
         <div class="pb-icon"><svg class="icon" aria-hidden="true"><use href="#i-github-duo"/></svg></div>
         <div class="pb-tag">profile</div>
         <h3>GitHub</h3>
@@ -336,45 +283,36 @@
         <span class="pb-link">github.com <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></span>
       </a>
 
-      <a href="https://www.linkedin.com/in/kimjustind/" target="_blank" rel="noopener" class="project-bubble pb-pink">
+      <a href="https://www.linkedin.com/in/kimjustind/" target="_blank" rel="noopener" class="project-bubble card pb-pink">
         <div class="pb-icon"><svg class="icon" aria-hidden="true"><use href="#i-linkedin-duo"/></svg></div>
         <div class="pb-tag">network</div>
         <h3>LinkedIn</h3>
         <p>Professional profile and full work history.</p>
         <span class="pb-link">linkedin.com <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></span>
       </a>
-
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <svg class="icon" style="margin-right:5px" aria-hidden="true"><use href="#i-copyright"/></svg>
-  Justin D. Kim &nbsp;<span>&middot;</span>&nbsp; <a href="#hero">justind.kim</a>
+  &copy; Justin D. Kim &nbsp;<span>&middot;</span>&nbsp; <a href="#hero">justind.kim</a>
   &nbsp;<span>&middot;</span>&nbsp;
-  <a href="https://github.com/kimjustind" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></a>
+  <a href="https://github.com/kimjustind" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="#i-github-duo"/></svg></a>
   &nbsp;
-  <a href="https://www.linkedin.com/in/kimjustind/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+  <a href="https://www.linkedin.com/in/kimjustind/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" aria-hidden="true"><use href="#i-linkedin-duo"/></svg></a>
 </footer>
 
-<!-- Restart / back to top -->
-<button id="restart-btn" type="button" hidden aria-label="Restart — scroll back to top">
+<!-- restart: back to the title screen -->
+<button id="restart-btn" class="card" type="button" aria-label="Restart: scroll back to top">
   <span class="rb-icon"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></span>
   <span class="rb-label">Restart</span>
   <span class="rb-sub">top</span>
 </button>
 
-<!-- Dialogue box -->
-<div id="dialogue-box" hidden>
+<div id="dialogue-box">
   <div class="dlg-top"><span class="dlg-name">Justin</span><span class="dlg-close" aria-hidden="true">&times;</span></div>
   <p class="dlg-text"></p>
   <span class="dlg-next" aria-hidden="true">&#9660;</span>
 </div>
-
-<!-- ============================
-     JS
-============================ -->
-<script defer src="game.js"></script>
 </body>
 </html>
