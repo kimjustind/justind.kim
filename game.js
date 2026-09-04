@@ -55,7 +55,9 @@
     gsap.utils.toArray(selector).forEach((el, i) => gsap.from(el, {
       opacity: 0, duration: 0.55, ease: 'power2.out', ...from,
       delay: (i % 5) * stagger,
-      clearProps: 'all', /* leave no inline transform behind, or CSS hover lifts stop working */
+      /* clear only what the tween set: a leftover inline transform kills CSS hover lifts,
+         and 'all' would also wipe the --lv custom property on attribute rows */
+      clearProps: 'opacity,transform',
       scrollTrigger: { trigger: el, start: 'top 90%', once: true },
     }));
   }
