@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Justin D. Kim: developer, game maker, tinkerer. A personal site styled like a retro game title screen." />
+  <meta name="description" content="Justin D. Kim: systems analyst, tinkerer, occasional game maker." />
+  <meta name="theme-color" content="#15112a" />
   <title>justind.kim</title>
 
   <link rel="stylesheet" href="index.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Newsreader:opsz,wght@6..72,400..700&family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -18,116 +19,90 @@
 </head>
 <body>
 
-<!-- Phosphor icons, inlined as a sprite -->
+<!-- Phosphor icons + ornaments, inlined as a sprite -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
-  <symbol id="i-cake" viewBox="0 0 256 256"><path d="M232,112a24,24,0,0,0-24-24H136V79a32.06,32.06,0,0,0,24-31c0-28-26.44-45.91-27.56-46.66a8,8,0,0,0-8.88,0C122.44,2.09,96,20,96,48a32.06,32.06,0,0,0,24,31v9H48a24,24,0,0,0-24,24v23.33a40.84,40.84,0,0,0,8,24.24V200a24,24,0,0,0,24,24H200a24,24,0,0,0,24-24V159.57a40.84,40.84,0,0,0,8-24.24ZM112,48c0-13.57,10-24.46,16-29.79,6,5.33,16,16.22,16,29.79a16,16,0,0,1-32,0ZM40,112a8,8,0,0,1,8-8H208a8,8,0,0,1,8,8v23.33c0,13.25-10.46,24.31-23.32,24.66A24,24,0,0,1,168,136a8,8,0,0,0-16,0,24,24,0,0,1-48,0,8,8,0,0,0-16,0,24,24,0,0,1-24.68,24C50.46,159.64,40,148.58,40,135.33Zm160,96H56a8,8,0,0,1-8-8V172.56A38.77,38.77,0,0,0,62.88,176a39.69,39.69,0,0,0,29-11.31A40.36,40.36,0,0,0,96,160a40,40,0,0,0,64,0,40.36,40.36,0,0,0,4.13,4.67A39.67,39.67,0,0,0,192,176c.38,0,.76,0,1.14,0A38.77,38.77,0,0,0,208,172.56V200A8,8,0,0,1,200,208Z"/></symbol>
-  <symbol id="i-user" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"/></symbol>
-  <symbol id="i-shield-star" viewBox="0 0 256 256"><path d="M80.57,117A8,8,0,0,1,91,112.57l29,11.61V96a8,8,0,0,1,16,0v28.18l29-11.61A8,8,0,1,1,171,127.43l-30.31,12.12L158.4,163.2a8,8,0,1,1-12.8,9.6L128,149.33,110.4,172.8a8,8,0,1,1-12.8-9.6l17.74-23.65L85,127.43A8,8,0,0,1,80.57,117ZM224,56v56c0,52.72-25.52,84.67-46.93,102.19-23.06,18.86-46,25.27-47,25.53a8,8,0,0,1-4.2,0c-1-.26-23.91-6.67-47-25.53C57.52,196.67,32,164.72,32,112V56A16,16,0,0,1,48,40H208A16,16,0,0,1,224,56Zm-16,0L48,56l0,56c0,37.3,13.82,67.51,41.07,89.81A128.25,128.25,0,0,0,128,223.62a129.3,129.3,0,0,0,39.41-22.2C194.34,179.16,208,149.07,208,112Z"/></symbol>
-  <symbol id="i-target" viewBox="0 0 256 256"><path d="M221.87,83.16A104.1,104.1,0,1,1,195.67,49l22.67-22.68a8,8,0,0,1,11.32,11.32l-96,96a8,8,0,0,1-11.32-11.32l27.72-27.72a40,40,0,1,0,17.87,31.09,8,8,0,1,1,16-.9,56,56,0,1,1-22.38-41.65L184.3,60.39a87.88,87.88,0,1,0,23.13,29.67,8,8,0,0,1,14.44-6.9Z"/></symbol>
-  <symbol id="i-faders" viewBox="0 0 256 256"><path d="M136,120v96a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm64,72a8,8,0,0,0-8,8v16a8,8,0,0,0,16,0V200A8,8,0,0,0,200,192Zm24-32H208V40a8,8,0,0,0-16,0V160H176a8,8,0,0,0,0,16h48a8,8,0,0,0,0-16ZM56,160a8,8,0,0,0-8,8v48a8,8,0,0,0,16,0V168A8,8,0,0,0,56,160Zm24-32H64V40a8,8,0,0,0-16,0v88H32a8,8,0,0,0,0,16H80a8,8,0,0,0,0-16Zm72-48H136V40a8,8,0,0,0-16,0V80H104a8,8,0,0,0,0,16h48a8,8,0,0,0,0-16Z"/></symbol>
-  <symbol id="i-wrench" viewBox="0 0 256 256"><path d="M226.76,69a8,8,0,0,0-12.84-2.88l-40.3,37.19-17.23-3.7-3.7-17.23,37.19-40.3A8,8,0,0,0,187,29.24,72,72,0,0,0,88,96,72.34,72.34,0,0,0,94,124.94L33.79,177c-.15.12-.29.26-.43.39a32,32,0,0,0,45.26,45.26c.13-.13.27-.28.39-.42L131.06,162A72,72,0,0,0,232,96,71.56,71.56,0,0,0,226.76,69ZM160,152a56.14,56.14,0,0,1-27.07-7,8,8,0,0,0-9.92,1.77L67.11,211.51a16,16,0,0,1-22.62-22.62L109.18,133a8,8,0,0,0,1.77-9.93,56,56,0,0,1,58.36-82.31l-31.2,33.81a8,8,0,0,0-1.94,7.1L141.83,108a8,8,0,0,0,6.14,6.14l26.35,5.66a8,8,0,0,0,7.1-1.94l33.81-31.2A56.06,56.06,0,0,1,160,152Z"/></symbol>
-  <symbol id="i-skull" viewBox="0 0 256 256"><path d="M92,104a28,28,0,1,0,28,28A28,28,0,0,0,92,104Zm0,40a12,12,0,1,1,12-12A12,12,0,0,1,92,144Zm72-40a28,28,0,1,0,28,28A28,28,0,0,0,164,104Zm0,40a12,12,0,1,1,12-12A12,12,0,0,1,164,144ZM128,16C70.65,16,24,60.86,24,116c0,34.1,18.27,66,48,84.28V216a16,16,0,0,0,16,16h80a16,16,0,0,0,16-16V200.28C213.73,182,232,150.1,232,116,232,60.86,185.35,16,128,16Zm44.12,172.69a8,8,0,0,0-4.12,7V216H152V192a8,8,0,0,0-16,0v24H120V192a8,8,0,0,0-16,0v24H88V195.69a8,8,0,0,0-4.12-7C56.81,173.69,40,145.84,40,116c0-46.32,39.48-84,88-84s88,37.68,88,84C216,145.83,199.19,173.69,172.12,188.69Z"/></symbol>
-  <symbol id="i-arrow-up" viewBox="0 0 256 256"><path d="M205.66,117.66a8,8,0,0,1-11.32,0L136,59.31V216a8,8,0,0,1-16,0V59.31L61.66,117.66a8,8,0,0,1-11.32-11.32l72-72a8,8,0,0,1,11.32,0l72,72A8,8,0,0,1,205.66,117.66Z"/></symbol>
   <symbol id="i-arrow-up-right" viewBox="0 0 256 256"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></symbol>
   <symbol id="i-globe-duo" viewBox="0 0 256 256"><path d="M213.09,172.48a96,96,0,0,1-80.41,51.41l3.17-16.44a8,8,0,0,0-2-6.95l-19.74-20.33a8,8,0,0,1-1.44-8.69l13.7-30.74a8,8,0,0,1,8.38-4.67l22.82,3.08a8.11,8.11,0,0,1,3.12,1.11ZM116.71,95,129,88.24a7.46,7.46,0,0,0,1.5-1.07l26.91-24.33A8,8,0,0,0,159,53l-10.5-18.81A96.62,96.62,0,0,0,128,32,95.61,95.61,0,0,0,67.78,53.23L56,81.08A8,8,0,0,0,55.88,87l11.5,30.67a8,8,0,0,0,5.81,5l2.69.58L89.2,100a8,8,0,0,1,6.94-4h16.71A7.9,7.9,0,0,0,116.71,95Z" opacity="0.2"/><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm88,104a87.62,87.62,0,0,1-6.4,32.94l-44.7-27.49a15.92,15.92,0,0,0-6.24-2.23l-22.82-3.08a16.11,16.11,0,0,0-16,7.86h-8.72l-3.8-7.86a15.91,15.91,0,0,0-11-8.67l-8-1.73L96.14,104h16.71a16.06,16.06,0,0,0,7.73-2l12.25-6.76a16.62,16.62,0,0,0,3-2.14l26.91-24.34A15.93,15.93,0,0,0,166,49.1l-.36-.65A88.11,88.11,0,0,1,216,128ZM143.31,41.34,152,56.9,125.09,81.24,112.85,88H96.14a16,16,0,0,0-13.88,8l-8.73,15.23L63.38,84.19,74.32,58.32a87.87,87.87,0,0,1,69-17ZM40,128a87.53,87.53,0,0,1,8.54-37.8l11.34,30.27a16,16,0,0,0,11.62,10l21.43,4.61L96.74,143a16.09,16.09,0,0,0,14.4,9h1.48l-7.23,16.23a16,16,0,0,0,2.86,17.37l.14.14L128,205.94l-1.94,10A88.11,88.11,0,0,1,40,128Zm102.58,86.78,1.13-5.81a16.09,16.09,0,0,0-4-13.9,1.85,1.85,0,0,1-.14-.14L120,174.74,133.7,144l22.82,3.08,45.72,28.12A88.18,88.18,0,0,1,142.58,214.78Z"/></symbol>
   <symbol id="i-github-duo" viewBox="0 0 256 256"><path d="M208,104v8a48,48,0,0,1-48,48H136a32,32,0,0,1,32,32v40H104V192a32,32,0,0,1,32-32H112a48,48,0,0,1-48-48v-8a49.28,49.28,0,0,1,8.51-27.3A51.92,51.92,0,0,1,76,32a52,52,0,0,1,43.83,24h32.34A52,52,0,0,1,196,32a51.92,51.92,0,0,1,3.49,44.7A49.28,49.28,0,0,1,208,104Z" opacity="0.2"/><path d="M208.3,75.68A59.74,59.74,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58,58,0,0,0,208.3,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.76,41.76,0,0,1,200,104Z"/></symbol>
   <symbol id="i-linkedin-duo" viewBox="0 0 256 256"><path d="M224,40V216a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8H216A8,8,0,0,1,224,40Z" opacity="0.2"/><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/></symbol>
+  <symbol id="i-controller" viewBox="0 0 256 256"><path d="M247.44,173.75a.68.68,0,0,0,0-.14L231.05,89.44c0-.06,0-.12,0-.18A60.08,60.08,0,0,0,172,40H83.89a59.88,59.88,0,0,0-59,49.52L8.58,173.61a.68.68,0,0,0,0,.14,36,36,0,0,0,60.9,31.71l.35-.37L109.52,160h37l39.71,45.09c.11.13.23.25.35.37A36.08,36.08,0,0,0,212,216a36,36,0,0,0,35.43-42.25ZM104,112H96v8a8,8,0,0,1-16,0v-8H72a8,8,0,0,1,0-16h8V88a8,8,0,0,1,16,0v8h8a8,8,0,0,1,0,16Zm40-8a8,8,0,0,1,8-8h24a8,8,0,0,1,0,16H152A8,8,0,0,1,144,104Zm84.37,87.47a19.84,19.84,0,0,1-12.9,8.23A20.09,20.09,0,0,1,198,194.31L167.8,160H172a60,60,0,0,0,51-28.38l8.74,45A19.82,19.82,0,0,1,228.37,191.47Z"/></symbol>
+  <symbol id="i-drives" viewBox="0 0 256 256"><path d="M208,40H48A16,16,0,0,0,32,56v48a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V56A16,16,0,0,0,208,40ZM180,92a12,12,0,1,1,12-12A12,12,0,0,1,180,92Z"/><path d="M208,136H48a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V152A16,16,0,0,0,208,136Zm-28,52a12,12,0,1,1,12-12A12,12,0,0,1,180,188Z"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 256 256"><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,120,47.65,76,128,32l80.35,44Zm8,99.64V133.83l80-43.78v85.76Z"/></symbol>
+  <symbol id="i-martini" viewBox="0 0 256 256"><path d="M237.66,45.66A8,8,0,0,0,232,32H24a8,8,0,0,0-5.66,13.66L120,147.31V208H88a8,8,0,0,0,0,16h80a8,8,0,0,0,0-16H136V147.31Zm-25,2.34-16,16H59.31l-16-16Z"/></symbol>
+  <symbol id="i-bread" viewBox="0 0 256 256"><path d="M200,40H48a40,40,0,0,0-16,76.65V200a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V116.65A40,40,0,0,0,200,40Zm-56,64a8,8,0,0,0,0,16v80H48V120a8,8,0,0,0,0-16,24,24,0,0,1,0-48h96a24,24,0,0,1,0,48Z"/></symbol>
+  <symbol id="i-guitar" viewBox="0 0 256 256"><path d="M249.66,46.34l-40-40a8,8,0,0,0-11.32,11.32L200.69,20,140.52,80.16C117.73,68.3,92.21,69.29,76.75,84.74a42.27,42.27,0,0,0-9.39,14.37A8.24,8.24,0,0,1,59.81,104c-14.59.49-27.26,5.72-36.65,15.11C11.08,131.22,6,148.6,8.74,168.07,11.4,186.7,21.07,205.15,36,220s33.34,24.56,52,27.22A71.13,71.13,0,0,0,98.1,248c15.32,0,28.83-5.23,38.76-15.16,9.39-9.39,14.62-22.06,15.11-36.65a8.24,8.24,0,0,1,4.92-7.55,42.22,42.22,0,0,0,14.37-9.39c15.45-15.46,16.44-41,4.58-63.77L236,55.31l2.34,2.35a8,8,0,0,0,11.32-11.32Zm-156,159.31a8,8,0,0,1-11.31,0l-32-32a8,8,0,0,1,11.32-11.31l32,32A8,8,0,0,1,93.66,205.65Zm42.14-45.86a28,28,0,1,1,0-39.59A28,28,0,0,1,135.8,159.79Zm31.06-58a86.94,86.94,0,0,0-6-6.68,85.23,85.23,0,0,0-6.69-6L176,67.31,188.69,80ZM200,68.68,187.32,56,212,31.31,224.69,44Z"/></symbol>
+  <symbol id="i-pennant" viewBox="0 0 256 256"><path d="M248,104a8,8,0,0,1-5.37,7.56L64,173.69V216a8,8,0,0,1-16,0V40a8,8,0,0,1,10.63-7.56l184,64A8,8,0,0,1,248,104Z"/></symbol>
+  <!-- ornaments: a filigree rule with a center diamond, and a lone diamond -->
+  <symbol id="o-fleur" viewBox="0 0 240 24">
+    <path d="M4 12H92M148 12H236" fill="none" stroke="currentColor" stroke-width="1"/>
+    <path d="M92 12c6 0 8-6 14-6M148 12c-6 0-8-6-14-6M92 12c6 0 8 6 14 6M148 12c-6 0-8 6-14 6" fill="none" stroke="currentColor" stroke-width="1"/>
+    <path d="M120 2l10 10-10 10-10-10z"/>
+    <path d="M100 12l3-3 3 3-3 3zM134 12l3-3 3 3-3 3z"/>
+    <circle cx="4" cy="12" r="1.5"/><circle cx="236" cy="12" r="1.5"/>
+  </symbol>
+  <symbol id="o-diamond" viewBox="0 0 16 16"><path d="M8 0l8 8-8 8-8-8z"/></symbol>
 </svg>
 
-<canvas id="star-canvas"></canvas>
+<!-- appears once the title screen scrolls away -->
+<header id="site-header">
+  <a href="#hero" class="hd-mark" id="hd-home" aria-label="Back to the title screen">JK</a>
+  <nav class="hd-nav" aria-label="Sections">
+    <a href="#about">About</a>
+    <a href="#experience">Journey</a>
+    <a href="#toolkit">Toolkit</a>
+    <a href="#pastimes">Pastimes</a>
+    <a href="#elsewhere">Elsewhere</a>
+  </nav>
+  <span class="hd-progress" aria-hidden="true"></span>
+</header>
 
 <!-- title screen -->
-<section id="hero">
-  <div class="hero-frame">
-    <div class="corner-bl"></div>
-    <div class="corner-br"></div>
-    <span class="frame-star fs-tl">✦</span>
-    <span class="frame-star fs-tr">✦</span>
-    <span class="frame-star fs-bl">✦</span>
-    <span class="frame-star fs-br">✦</span>
+<section id="hero" data-parallax="away">
+  <div class="sky" aria-hidden="true"><span class="moon"></span></div>
+  <canvas id="motes" aria-hidden="true"></canvas>
 
-    <div class="ts-kicker">Welcome to</div>
-    <h1 class="ts-title">JUSTIND.KIM</h1>
+  <div class="scene" aria-hidden="true">
+    <svg class="layer l1" data-depth="0.55" viewBox="0 0 1440 560" preserveAspectRatio="xMidYMax slice"><path d="M-40 385L23 215L60 313L72 321L104 366L180 295L196 304L252 243L378 384L485 312L504 321L571 269L686 369L801 304L813 309L862 216L969 378L1125 290L1176 333L1185 337L1216 371L1271 311L1283 320L1324 274L1482 362V560H-40Z"/></svg>
+    <svg class="layer l2" data-depth="0.42" viewBox="0 0 1440 560" preserveAspectRatio="xMidYMax slice"><path d="M-40 440L7 421L19 429L49 397L150 425L219 337L254 373L268 379L291 423L438 378L485 413L497 418L553 420L620 425L629 437L703 401L804 434L873 417L892 428L906 398L1014 418L1060 408L1068 417L1124 349L1270 434L1397 371L1434 410L1447 419L1498 437V560H-40Z"/></svg>
+    <svg class="layer l3" data-depth="0.3" viewBox="0 0 1440 560" preserveAspectRatio="xMidYMax slice"><path d="M-40 459C34 459 34 480 107 480C221 480 221 480 335 480C409 480 409 479 484 479C570 479 570 482 655 482C764 482 764 469 873 469C963 469 963 447 1054 447C1140 447 1140 463 1227 463C1304 463 1304 473 1381 473C1430 473 1430 470 1480 470V560H-40Z"/></svg>
+    <svg class="layer l4" data-depth="0.16" viewBox="0 0 1440 560" preserveAspectRatio="xMidYMax slice"><path d="M-40 500C39 500 39 494 118 494C256 494 256 494 394 494C516 494 516 506 638 506C718 506 718 506 797 506C931 506 931 508 1065 508C1205 508 1205 504 1345 504C1412 504 1412 496 1480 496V560H-40Z"/><path d="M-38 466L-30 466L-46 495L-34 495L-52 522L12 522L-6 495L6 495L-10 466L-2 466L-20 431ZM-8 487L-3 487L-12 505L-6 505L-16 522L20 522L10 505L16 505L7 487L12 487L2 466ZM20 473L26 473L14 498L23 498L9 522L58 522L45 498L53 498L41 473L47 473L34 443ZM45 465L52 465L38 495L48 495L32 522L88 522L73 495L83 495L69 465L76 465L60 431ZM77 479L82 479L72 501L79 501L68 522L109 522L98 501L105 501L95 479L100 479L89 452ZM87 454L97 454L78 489L91 489L70 522L148 522L127 489L140 489L121 454L130 454L109 413ZM116 459L125 459L107 492L119 492L100 522L171 522L152 492L164 492L146 459L155 459L136 421ZM140 469L146 469L134 496L142 496L129 522L178 522L165 496L173 496L161 469L167 469L154 437ZM163 473L169 473L156 498L165 498L150 522L204 522L190 498L199 498L186 473L192 473L177 443ZM198 476L204 476L193 500L201 500L189 522L232 522L220 500L228 500L217 476L222 476L210 448ZM224 490L228 490L220 507L226 507L216 522L251 522L241 507L247 507L238 490L243 490L233 470ZM244 473L250 473L237 498L246 498L232 522L283 522L269 498L278 498L265 473L272 473L258 443ZM275 481L280 481L269 502L277 502L265 522L309 522L297 502L305 502L294 481L299 481L287 457ZM291 484L295 484L286 504L293 504L282 522L321 522L310 504L317 504L307 484L312 484L301 461ZM304 466L311 466L297 495L307 495L292 522L347 522L332 495L341 495L328 466L335 466L319 431ZM323 469L330 469L317 496L326 496L311 522L365 522L350 496L360 496L346 469L353 469L338 436ZM336 464L344 464L328 494L339 494L321 522L386 522L368 494L380 494L363 464L372 464L354 428ZM367 458L376 458L358 491L370 491L351 522L421 522L402 491L414 491L396 458L405 458L386 418ZM411 496L415 496L408 509L413 509L405 522L433 522L426 509L431 509L423 496L427 496L419 480ZM428 466L436 466L420 495L431 495L413 522L477 522L460 495L471 495L455 466L463 466L445 431ZM452 491L456 491L449 507L454 507L446 522L474 522L466 507L471 507L464 491L468 491L460 472ZM469 494L472 494L466 508L470 508L463 522L489 522L482 508L486 508L480 494L483 494L476 476ZM485 456L493 456L477 490L488 490L471 522L534 522L516 490L527 490L512 456L519 456L502 416ZM509 488L513 488L504 506L511 506L501 522L537 522L527 506L533 506L524 488L529 488L519 468ZM657 491L661 491L652 507L658 507L648 522L684 522L674 507L681 507L672 491L676 491L666 471ZM864 463L872 463L856 494L867 494L850 522L914 522L896 494L908 494L892 463L900 463L882 428ZM884 455L894 455L875 490L888 490L868 522L942 522L921 490L934 490L916 455L925 455L905 415ZM918 472L925 472L912 498L921 498L907 522L957 522L943 498L952 498L939 472L945 472L932 442ZM941 476L947 476L935 500L943 500L930 522L978 522L965 500L973 500L961 476L967 476L954 447ZM963 466L970 466L955 495L966 495L949 522L1010 522L993 495L1004 495L988 466L996 466L979 431ZM989 466L996 466L981 495L992 495L974 522L1038 522L1020 495L1032 495L1016 466L1024 466L1006 431ZM1018 454L1027 454L1009 489L1021 489L1003 522L1071 522L1052 489L1064 489L1047 454L1056 454L1037 413ZM1040 456L1049 456L1030 490L1043 490L1022 522L1099 522L1078 490L1091 490L1072 456L1082 456L1061 415ZM1074 494L1078 494L1071 508L1076 508L1068 522L1096 522L1088 508L1093 508L1086 494L1090 494L1082 476ZM1097 466L1104 466L1089 495L1100 495L1083 522L1144 522L1127 495L1138 495L1123 466L1130 466L1114 432ZM1131 463L1138 463L1124 493L1134 493L1118 522L1175 522L1159 493L1169 493L1155 463L1162 463L1147 427ZM1150 463L1157 463L1143 493L1153 493L1138 522L1193 522L1178 493L1188 493L1174 463L1181 463L1165 426ZM1180 462L1188 462L1172 493L1183 493L1166 522L1229 522L1212 493L1223 493L1207 462L1215 462L1198 426ZM1212 474L1219 474L1206 499L1215 499L1201 522L1250 522L1237 499L1245 499L1233 474L1239 474L1226 444ZM1242 473L1249 473L1235 498L1245 498L1230 522L1285 522L1270 498L1280 498L1266 473L1273 473L1257 443ZM1262 467L1268 467L1255 496L1264 496L1249 522L1304 522L1289 496L1299 496L1285 467L1292 467L1277 434ZM1289 489L1293 489L1285 506L1291 506L1281 522L1316 522L1307 506L1313 506L1304 489L1308 489L1299 469ZM1298 458L1307 458L1289 491L1301 491L1282 522L1353 522L1333 491L1346 491L1328 458L1337 458L1317 419ZM1321 468L1329 468L1313 496L1324 496L1307 522L1369 522L1352 496L1363 496L1347 468L1355 468L1338 434ZM1342 484L1348 484L1337 504L1345 504L1333 522L1376 522L1364 504L1372 504L1361 484L1366 484L1354 460ZM1360 491L1364 491L1356 507L1362 507L1353 522L1384 522L1375 507L1381 507L1373 491L1377 491L1368 473ZM1366 467L1374 467L1358 495L1369 495L1352 522L1414 522L1397 495L1408 495L1392 467L1400 467L1383 433ZM1390 488L1394 488L1385 506L1392 506L1381 522L1420 522L1409 506L1416 506L1406 488L1411 488L1400 467ZM1420 490L1424 490L1416 506L1422 506L1413 522L1443 522L1435 506L1440 506L1433 490L1437 490L1428 470ZM1447 497L1451 497L1443 510L1448 510L1441 522L1469 522L1461 510L1466 510L1459 497L1463 497L1455 481Z"/></svg>
+    <svg class="layer l5" viewBox="0 0 1440 560" preserveAspectRatio="xMidYMax slice"><path d="M-40 544C61 544 61 537 162 537C309 537 309 547 455 547C589 547 589 541 723 541C875 541 875 543 1026 543C1174 543 1174 542 1323 542C1401 542 1401 533 1480 533V560H-40Z"/></svg>
+  </div>
+
+  <div class="hero-content" data-depth="-0.25">
+    <p class="ts-kicker">The personal site of</p>
+    <h1 class="ts-title">Justin Kim</h1>
+    <svg class="orn ts-orn" aria-hidden="true"><use href="#o-fleur"/></svg>
+    <p class="ts-sub">Systems analyst. Tinkerer. Occasional game maker.</p>
 
     <nav class="title-menu" aria-label="Main menu">
-      <a href="#about" class="menu-item card">
-        <span class="mi-cursor" aria-hidden="true">&#10095;</span>
-        <span class="mi-label">New Game</span>
-        <span class="mi-sub">about</span>
-      </a>
-      <a href="#experience" class="menu-item card">
-        <span class="mi-cursor" aria-hidden="true">&#10095;</span>
-        <span class="mi-label">Journey</span>
-        <span class="mi-sub">experience</span>
-      </a>
-      <a href="#skills" class="menu-item card">
-        <span class="mi-cursor" aria-hidden="true">&#10095;</span>
-        <span class="mi-label">Tech Tree</span>
-        <span class="mi-sub">skills</span>
-      </a>
-      <a href="#projects" class="menu-item card">
-        <span class="mi-cursor" aria-hidden="true">&#10095;</span>
-        <span class="mi-label">Continue</span>
-        <span class="mi-sub">links</span>
-      </a>
+      <a href="#about" class="menu-item"><svg class="mi-orn" aria-hidden="true"><use href="#o-diamond"/></svg><span>About</span><svg class="mi-orn" aria-hidden="true"><use href="#o-diamond"/></svg></a>
+      <a href="#experience" class="menu-item"><svg class="mi-orn" aria-hidden="true"><use href="#o-diamond"/></svg><span>Journey</span><svg class="mi-orn" aria-hidden="true"><use href="#o-diamond"/></svg></a>
+      <a href="#toolkit" class="menu-item"><svg class="mi-orn" aria-hidden="true"><use href="#o-diamond"/></svg><span>Toolkit</span><svg class="mi-orn" aria-hidden="true"><use href="#o-diamond"/></svg></a>
+      <a href="#elsewhere" class="menu-item"><svg class="mi-orn" aria-hidden="true"><use href="#o-diamond"/></svg><span>Elsewhere</span><svg class="mi-orn" aria-hidden="true"><use href="#o-diamond"/></svg></a>
     </nav>
   </div>
 </section>
 
-<!-- character sheet -->
+<main>
+<!-- about -->
 <section id="about">
   <div class="section-inner">
-    <h2 class="section-title">Character Sheet</h2>
+    <header class="section-head">
+      <span class="eyebrow">I</span>
+      <h2 class="section-title">About</h2>
+      <svg class="orn" aria-hidden="true"><use href="#o-fleur"/></svg>
+    </header>
 
-    <div class="char-sheet">
-      <aside class="char-card">
-        <div class="cc-strip">player one</div>
+    <div class="about">
+      <figure class="portrait" data-parallax>
+        <span class="sheet s1" data-depth="0.5" aria-hidden="true"></span>
+        <span class="sheet s2" data-depth="0.25" aria-hidden="true"></span>
+        <img src="https://r2.tbh.vc/very.jpg" alt="Justin D. Kim" width="200" height="200" loading="lazy" />
+      </figure>
 
-        <div class="cc-top">
-          <div class="cc-portrait"><img src="https://r2.tbh.vc/very.jpg" alt="Justin D. Kim" width="64" height="64" loading="lazy" /></div>
-          <div class="cc-id">
-            <span class="cc-name">Justin Kim</span>
-            <span class="cc-class">"I know how to use the computer good"</span>
-          </div>
-        </div>
-
-        <div class="cc-lvl" title="level = current age (born 11/28)">
-          <span class="cc-lvl-label">LV</span>
-          <span class="cc-lvl-num" id="char-lvl">--</span>
-          <span class="cc-lvl-note"><svg class="icon" aria-hidden="true"><use href="#i-cake"/></svg> 11/28</span>
-        </div>
-
-        <div class="info-rows">
-          <div class="info-row">
-            <span class="info-label"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>Pronouns</span>
-            <span class="info-value">he / him</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label"><svg class="icon" aria-hidden="true"><use href="#i-shield-star"/></svg>Class</span>
-            <span class="info-value">Aspiring developer</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label"><svg class="icon" aria-hidden="true"><use href="#i-target"/></svg>Quest</span>
-            <span class="info-value">Ship something new</span>
-          </div>
-        </div>
-
-        <div class="cc-subhead"><svg class="icon" aria-hidden="true"><use href="#i-faders"/></svg> current loadout</div>
-
-        <div class="info-rows">
-          <div class="info-row">
-            <span class="info-label"><svg class="icon" aria-hidden="true"><use href="#i-wrench"/></svg>Equipped</span>
-            <span class="info-value">Claude Code (Begrudgingly)</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label"><svg class="icon" aria-hidden="true"><use href="#i-skull"/></svg>Debuffs</span>
-            <span class="info-value">Chronically Online</span>
-          </div>
-        </div>
-      </aside>
-
-      <div class="char-bio">
-        <h3 class="bio-heading">biography</h3>
+      <div class="about-copy">
+        <p class="lede">Systems analyst by day. Tinkerer the rest of the time.</p>
         <p>
           As a tinkerer, Justin usually pokes at stuff until he understands it.
           He has been learning <strong>Godot</strong> on and off, nominally to make games, but mostly he just plays them.
@@ -139,6 +114,15 @@
         <p>
           Recently picked up baking and guitar, partly to cut down on screen time.
         </p>
+
+        <dl class="facts">
+          <div title="level = current age (born 11/28)"><dt>Level</dt><dd id="char-lvl">--</dd></div>
+          <div><dt>Pronouns</dt><dd>he / him</dd></div>
+          <div><dt>Class</dt><dd>Aspiring developer</dd></div>
+          <div><dt>Quest</dt><dd>Ship something new</dd></div>
+          <div><dt>Equipped</dt><dd>Claude Code (begrudgingly)</dd></div>
+          <div><dt>Debuffs</dt><dd>Chronically online</dd></div>
+        </dl>
       </div>
     </div>
   </div>
@@ -147,12 +131,16 @@
 <!-- journey: experience + education -->
 <section id="experience">
   <div class="section-inner">
-    <h2 class="section-title">Journey</h2>
+    <header class="section-head">
+      <span class="eyebrow">II</span>
+      <h2 class="section-title">Journey</h2>
+      <svg class="orn" aria-hidden="true"><use href="#o-fleur"/></svg>
+    </header>
 
     <div class="timeline">
       <div class="tl-item">
-        <div class="tl-content card" data-line="Current objective: keeping municipal systems running.">
-          <span class="tl-badge badge-accent">[ current ]</span>
+        <div class="tl-content paper" data-line="Current objective: keeping municipal systems running.">
+          <span class="tl-badge badge-accent">Current</span>
           <h3>Systems Support Analyst</h3>
           <div class="tl-org">City of Henderson &middot; Utilities</div>
           <p>Keeps the utility department's servers, apps, and integrations running, and fixes what breaks.</p>
@@ -160,8 +148,8 @@
       </div>
 
       <div class="tl-item">
-        <div class="tl-content card" data-line="Objective complete: software supporting flood control operations.">
-          <span class="tl-badge">[ complete ]</span>
+        <div class="tl-content paper" data-line="Objective complete: software supporting flood control operations.">
+          <span class="tl-badge">Complete</span>
           <h3>Programmer Analyst II</h3>
           <div class="tl-org">Clark County Flood Control District</div>
           <p>Built and maintained the internal tools and data systems behind the district's flood control work.</p>
@@ -169,8 +157,8 @@
       </div>
 
       <div class="tl-item">
-        <div class="tl-content card" data-line="Objective complete: help desk duty and day-to-day troubleshooting.">
-          <span class="tl-badge">[ complete ]</span>
+        <div class="tl-content paper" data-line="Objective complete: help desk duty and day-to-day troubleshooting.">
+          <span class="tl-badge">Complete</span>
           <h3>Computer Analyst I</h3>
           <div class="tl-org">City of Henderson &middot; IT</div>
           <p>Help desk for city staff. Broken laptops, stubborn printers, and the occasional mystery.</p>
@@ -178,8 +166,8 @@
       </div>
 
       <div class="tl-item">
-        <div class="tl-content card" data-line="Objective complete: B.S. Business Administration, Information Systems.">
-          <span class="tl-badge badge-accent">[ education ]</span>
+        <div class="tl-content paper" data-line="Objective complete: B.S. Business Administration, Information Systems.">
+          <span class="tl-badge badge-accent">Education</span>
           <h3>B.S. Business Administration, Information Systems</h3>
           <div class="tl-org">University of Nevada, Reno</div>
           <p>Business school with a database habit. Information Systems was the part that stuck.</p>
@@ -189,130 +177,164 @@
   </div>
 </section>
 
-<!-- tech tree -->
-<section id="skills">
+<!-- torn paper strip between chapters -->
+<div class="divider" data-parallax aria-hidden="true">
+  <svg class="d1" data-depth="0.6" viewBox="0 0 1440 260" preserveAspectRatio="none"><path d="M-10 40L-10 41L-1 42L8 39L21 41L37 37L54 32L68 31L84 33L99 28L116 28L132 27L149 31L163 36L180 32L194 28L202 33L219 28L226 25L243 29L261 27L269 21L281 22L289 20L300 18L307 18L314 20L326 23L340 23L355 22L368 28L383 33L398 34L414 30L420 33L434 32L447 31L459 26L465 21L476 20L484 21L492 18L498 22L514 18L529 18L540 23L556 18L574 18L587 18L594 18L609 21L618 25L634 23L645 21L654 25L671 27L682 32L698 36L713 41L728 39L742 37L759 33L775 34L791 34L806 38L813 35L821 29L834 33L847 37L864 41L872 42L884 40L896 43L909 42L921 39L935 42L945 39L958 40L975 40L985 42L998 43L1011 39L1019 35L1029 36L1046 38L1056 36L1067 32L1075 26L1087 25L1094 26L1105 26L1112 30L1121 28L1129 24L1140 20L1153 21L1168 25L1180 29L1194 25L1208 28L1224 28L1242 26L1260 20L1267 18L1284 23L1298 23L1307 24L1322 20L1338 22L1351 28L1361 22L1376 22L1389 25L1403 19L1418 25L1434 27L1447 24L1450 24V260H-10Z"/></svg>
+  <svg class="d2" data-depth="0.3" viewBox="0 0 1440 260" preserveAspectRatio="none"><path d="M-10 95L-10 96L1 90L18 92L35 90L50 95L63 96L72 93L83 92L89 93L105 97L112 95L125 94L135 92L142 90L153 92L165 92L176 94L193 99L205 103L222 105L233 106L240 104L246 108L254 105L268 101L277 97L292 95L305 98L312 102L329 105L346 100L354 94L372 94L381 94L397 97L413 91L420 92L435 87L445 86L460 88L473 84L491 90L504 93L512 97L520 96L534 95L546 100L557 101L571 96L579 93L595 91L613 91L621 91L633 85L645 89L657 85L663 87L675 82L691 77L707 79L724 81L738 85L748 88L759 82L767 77L773 77L781 75L791 77L800 75L815 78L829 82L837 80L850 79L863 77L875 82L892 81L902 87L917 92L926 97L943 100L955 102L972 98L984 97L999 100L1014 101L1020 99L1035 100L1041 100L1058 94L1076 97L1088 101L1105 106L1112 109L1122 111L1129 110L1136 108L1147 106L1157 100L1168 99L1184 103L1190 102L1203 104L1211 99L1222 94L1231 95L1239 101L1256 102L1264 101L1278 98L1289 96L1300 92L1306 89L1320 91L1326 96L1333 91L1348 94L1362 95L1379 89L1388 85L1399 83L1407 78L1415 78L1433 75L1445 77L1450 77V260H-10Z"/></svg>
+  <svg class="d3" viewBox="0 0 1440 260" preserveAspectRatio="none"><path d="M-10 150L-10 155L4 158L21 160L29 159L40 156L48 155L64 156L78 160L94 161L100 159L118 161L133 165L143 166L154 166L160 166L166 166L178 165L186 165L194 165L201 159L216 160L232 164L246 166L262 165L279 163L289 157L296 153L303 154L317 150L323 145L337 150L354 154L371 157L384 158L391 157L402 157L415 158L428 158L443 156L459 150L466 152L483 149L490 145L496 145L510 146L521 150L527 154L544 154L554 150L568 145L577 147L584 148L601 142L618 139L631 134L648 135L657 137L667 137L678 143L694 148L711 143L720 143L732 138L745 135L756 136L772 135L780 134L788 134L805 137L819 141L826 142L843 138L854 136L869 138L887 134L894 138L911 140L918 140L929 143L943 140L950 135L961 140L975 144L992 148L1007 146L1021 149L1036 149L1049 152L1063 148L1079 151L1088 149L1095 153L1104 152L1120 154L1135 149L1149 153L1155 156L1166 152L1172 149L1184 155L1197 156L1203 155L1212 161L1219 158L1233 155L1250 151L1259 155L1270 161L1279 155L1295 154L1306 159L1319 162L1333 160L1350 162L1356 163L1362 162L1373 165L1385 159L1402 164L1417 164L1430 165L1445 166L1450 166V260H-10Z"/></svg>
+</div>
+
+<!-- toolkit -->
+<section id="toolkit">
   <div class="section-inner">
-    <h2 class="section-title">Tech Tree</h2>
+    <header class="section-head">
+      <span class="eyebrow">III</span>
+      <h2 class="section-title">Toolkit</h2>
+      <svg class="orn" aria-hidden="true"><use href="#o-fleur"/></svg>
+    </header>
 
-    <div class="techtree-wrap" id="tt-wrap">
-      <svg id="techtree" role="img" aria-label="A tech tree of Justin's skills"></svg>
-      <div id="tt-tooltip" hidden><span class="tt-name"></span><span class="tt-desc"></span></div>
+    <div class="kit-grid">
+      <article class="kit paper" style="--accent: var(--ember)">
+        <h3>Scripting</h3>
+        <p>Languages for building and automating.</p>
+        <ul class="chips"><li>C#</li><li>Python</li><li>PowerShell</li><li>GDScript</li></ul>
+      </article>
+      <article class="kit paper" style="--accent: var(--lilac)">
+        <h3>Web</h3>
+        <p>Sites built by hand, including this one.</p>
+        <ul class="chips"><li>JavaScript</li><li>Node.js</li><li>HTML/CSS</li><li>PHP</li></ul>
+      </article>
+      <article class="kit paper" style="--accent: var(--teal)">
+        <h3>Cloud &amp; DevOps</h3>
+        <p>Infrastructure and the pipelines that ship it.</p>
+        <ul class="chips"><li>Azure</li><li>AWS</li><li>CI/CD</li></ul>
+      </article>
+      <article class="kit paper" style="--accent: var(--gold)">
+        <h3>Data</h3>
+        <p>From raw tables to maps and dashboards.</p>
+        <ul class="chips"><li>SQL</li><li>Power BI</li><li>ArcGIS</li></ul>
+      </article>
+      <article class="kit paper" style="--accent: var(--rose)">
+        <h3>Everything else</h3>
+        <p>Where it started, and where it's headed.</p>
+        <ul class="chips"><li>IT Support</li><li>AI Tooling</li><li>Claude Code</li><li>Local LLMs</li><li>Agents</li></ul>
+      </article>
     </div>
-
-    <!-- plain-text fallback for crawlers / no-JS. Keep in sync with NODES in game.js -->
-    <ul class="tree-fallback">
-      <li>C#</li><li>Python</li><li>PowerShell</li><li>GDScript</li>
-      <li>JavaScript</li><li>Node.js</li><li>HTML/CSS</li><li>PHP</li>
-      <li>Azure</li><li>AWS</li><li>CI/CD</li>
-      <li>SQL</li><li>Power BI</li><li>ArcGIS</li>
-      <li>IT Support</li><li>AI Tooling</li><li>Claude Code</li><li>Local LLMs</li><li>Agents</li>
-    </ul>
   </div>
 </section>
 
-<!-- attributes: hobbies -->
-<section id="attributes">
+<!-- pastimes -->
+<section id="pastimes" data-parallax>
   <div class="section-inner">
-    <h2 class="section-title">Attributes</h2>
+    <header class="section-head">
+      <span class="eyebrow">IV</span>
+      <h2 class="section-title">Pastimes</h2>
+      <svg class="orn" aria-hidden="true"><use href="#o-fleur"/></svg>
+    </header>
 
-    <div class="attr-list">
-      <div class="attr-row" style="--lv: 9">
-        <div class="attr-head"><span class="attr-name">Gaming</span><span class="attr-lv">LV 9</span></div>
-        <div class="attr-bar"><span class="attr-fill"></span></div>
-        <p class="attr-flavor">I used to be a pro gamer like you. Then I took an arrow in the knee...</p>
+    <div class="bento">
+      <div class="tile paper t-gaming" style="--accent: var(--lilac)" data-depth="0.25">
+        <svg class="cutout" aria-hidden="true"><use href="#i-controller"/></svg>
+        <h3>Gaming</h3>
+        <p>I used to be a pro gamer like you. Then I took an arrow in the knee...</p>
       </div>
-
-      <div class="attr-row" style="--lv: 6">
-        <div class="attr-head"><span class="attr-name">Homelab</span><span class="attr-lv">LV 6</span></div>
-        <div class="attr-bar"><span class="attr-fill"></span></div>
-        <p class="attr-flavor">A rack that hums at 2am so everything else doesn't have to.</p>
+      <div class="tile paper" style="--accent: var(--teal)" data-depth="0.4">
+        <svg class="cutout" aria-hidden="true"><use href="#i-drives"/></svg>
+        <h3>Homelab</h3>
+        <p>A rack that hums at 2am so everything else doesn't have to.</p>
       </div>
-
-      <div class="attr-row" style="--lv: 5">
-        <div class="attr-head"><span class="attr-name">Game Dev</span><span class="attr-lv">LV 5</span></div>
-        <div class="attr-bar"><span class="attr-fill"></span></div>
-        <p class="attr-flavor">Godot prototypes in various states of alive.</p>
+      <div class="tile paper" style="--accent: var(--ember)" data-depth="0.15">
+        <svg class="cutout" aria-hidden="true"><use href="#i-cube"/></svg>
+        <h3>Game Dev</h3>
+        <p>Godot prototypes in various states of alive.</p>
       </div>
-
-      <div class="attr-row" style="--lv: 5">
-        <div class="attr-head"><span class="attr-name">Mixology</span><span class="attr-lv">LV 5</span></div>
-        <div class="attr-bar"><span class="attr-fill"></span></div>
-        <p class="attr-flavor">Well-stocked home bar, well-worn shaker.</p>
+      <div class="tile paper" style="--accent: var(--rose)" data-depth="0.35">
+        <svg class="cutout" aria-hidden="true"><use href="#i-martini"/></svg>
+        <h3>Mixology</h3>
+        <p>Well-stocked home bar, well-worn shaker.</p>
       </div>
-
-      <div class="attr-row" style="--lv: 5">
-        <div class="attr-head"><span class="attr-name">Baking</span><span class="attr-lv">LV 5</span></div>
-        <div class="attr-bar"><span class="attr-fill"></span></div>
-        <p class="attr-flavor">Sourdough, cookies, and one ongoing croissant investigation.</p>
+      <div class="tile paper" style="--accent: var(--gold)" data-depth="0.2">
+        <svg class="cutout" aria-hidden="true"><use href="#i-bread"/></svg>
+        <h3>Baking</h3>
+        <p>Sourdough, cookies, and one ongoing croissant investigation.</p>
       </div>
-
-      <div class="attr-row" style="--lv: 2">
-        <div class="attr-head"><span class="attr-name">Guitar</span><span class="attr-lv">LV 2</span></div>
-        <div class="attr-bar"><span class="attr-fill"></span></div>
-        <p class="attr-flavor">Check this out I can play the pentatonic scale.</p>
+      <div class="tile paper t-wide" style="--accent: var(--ember)" data-depth="0.3">
+        <svg class="cutout" aria-hidden="true"><use href="#i-guitar"/></svg>
+        <h3>Guitar</h3>
+        <p>Check this out I can play the pentatonic scale.</p>
       </div>
-
-      <div class="attr-row" style="--lv: 1">
-        <div class="attr-head"><span class="attr-name">Golf</span><span class="attr-lv">LV 1</span></div>
-        <div class="attr-bar"><span class="attr-fill"></span></div>
-        <p class="attr-flavor">Handicap trending down. Slowly.</p>
+      <div class="tile paper t-wide" style="--accent: var(--teal)" data-depth="0.1">
+        <svg class="cutout" aria-hidden="true"><use href="#i-pennant"/></svg>
+        <h3>Golf</h3>
+        <p>Handicap trending down. Slowly.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- projects + links -->
-<section id="projects">
+<section id="elsewhere">
   <div class="section-inner">
-    <h2 class="section-title">Projects &amp; Links</h2>
+    <header class="section-head">
+      <span class="eyebrow">V</span>
+      <h2 class="section-title">Elsewhere</h2>
+      <svg class="orn" aria-hidden="true"><use href="#o-fleur"/></svg>
+    </header>
 
-    <div class="projects-grid">
-      <a href="https://tbh.vc" target="_blank" rel="noopener" class="project-bubble card pb-blue">
-        <div class="pb-icon"><svg class="icon" aria-hidden="true"><use href="#i-globe-duo"/></svg></div>
-        <div class="pb-tag">website</div>
+    <div class="links">
+      <a href="https://tbh.vc" target="_blank" rel="noopener" class="link-card paper" style="--accent: var(--ember)">
+        <svg class="icon lc-icon" aria-hidden="true"><use href="#i-globe-duo"/></svg>
+        <span class="lc-tag">Website</span>
         <h3>tbh.vc</h3>
         <p>My personal indie website/blog hosted on Neocities.</p>
-        <span class="pb-link">tbh.vc <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></span>
+        <span class="lc-go">tbh.vc <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></span>
       </a>
 
-      <a href="https://github.com/kimjustind" target="_blank" rel="noopener" class="project-bubble card pb-green">
-        <div class="pb-icon"><svg class="icon" aria-hidden="true"><use href="#i-github-duo"/></svg></div>
-        <div class="pb-tag">profile</div>
+      <a href="https://github.com/kimjustind" target="_blank" rel="noopener" class="link-card paper" style="--accent: var(--teal)">
+        <svg class="icon lc-icon" aria-hidden="true"><use href="#i-github-duo"/></svg>
+        <span class="lc-tag">Profile</span>
         <h3>GitHub</h3>
         <p>Repositories and open-source contributions.</p>
-        <span class="pb-link">github.com <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></span>
+        <span class="lc-go">github.com <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></span>
       </a>
 
-      <a href="https://www.linkedin.com/in/kimjustind/" target="_blank" rel="noopener" class="project-bubble card pb-pink">
-        <div class="pb-icon"><svg class="icon" aria-hidden="true"><use href="#i-linkedin-duo"/></svg></div>
-        <div class="pb-tag">network</div>
+      <a href="https://www.linkedin.com/in/kimjustind/" target="_blank" rel="noopener" class="link-card paper" style="--accent: var(--rose)">
+        <svg class="icon lc-icon" aria-hidden="true"><use href="#i-linkedin-duo"/></svg>
+        <span class="lc-tag">Network</span>
         <h3>LinkedIn</h3>
         <p>Professional profile and full work history.</p>
-        <span class="pb-link">linkedin.com <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></span>
+        <span class="lc-go">linkedin.com <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></span>
       </a>
     </div>
   </div>
 </section>
+</main>
 
-<footer>
-  &copy; Justin D. Kim &nbsp;<span>&middot;</span>&nbsp; <a href="#hero">justind.kim</a>
-  &nbsp;<span>&middot;</span>&nbsp;
-  <a href="https://github.com/kimjustind" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="#i-github-duo"/></svg></a>
-  &nbsp;
-  <a href="https://www.linkedin.com/in/kimjustind/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" aria-hidden="true"><use href="#i-linkedin-duo"/></svg></a>
+<!-- the ground: a last paper landscape -->
+<footer data-parallax="settle">
+  <div class="footer-copy">
+    <p class="fin">Thanks for playing.</p>
+    <a href="#hero" class="to-title">Return to title</a>
+    <p class="fine">
+      &copy; Justin D. Kim
+      <a href="https://github.com/kimjustind" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="#i-github-duo"/></svg></a>
+      <a href="https://www.linkedin.com/in/kimjustind/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" aria-hidden="true"><use href="#i-linkedin-duo"/></svg></a>
+    </p>
+  </div>
+  <div class="scene" aria-hidden="true">
+    <svg class="layer f1" data-depth="0.8" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice"><path d="M-40 170L68 55L111 100L129 102L152 157L186 100L199 104L212 55L304 153L325 142L342 153L342 93L404 165L440 99L469 123L488 132L502 149L541 101L551 113L562 71L620 160L689 127L743 147L755 154L785 150L830 110L842 114L875 52L949 158L1034 99L1054 132L1064 140L1093 163L1135 131L1148 139L1191 96L1270 151L1294 99L1309 107L1312 64L1376 156L1433 95L1448 132L1457 138L1467 159L1525 138L1542 145L1576 95L1702 145V320H-40Z"/></svg>
+    <svg class="layer f2" data-depth="0.5" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice"><path d="M-40 203C54 203 54 230 148 230C266 230 266 232 383 232C515 232 515 230 647 230C752 230 752 205 857 205C967 205 967 203 1076 203C1202 203 1202 221 1328 221C1404 221 1404 227 1480 227V320H-40Z"/></svg>
+    <svg class="layer f3" data-depth="0.25" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice"><path d="M-40 256C102 256 102 248 243 248C376 248 376 258 508 258C626 258 626 252 743 252C848 252 848 260 952 260C1095 260 1095 257 1237 257C1353 257 1353 260 1469 260C1475 260 1475 256 1480 256V320H-40Z"/><path d="M-33 236L-27 236L-39 257L-31 257L-43 277L3 277L-9 257L-1 257L-13 236L-7 236L-20 211ZM-9 213L-1 213L-17 246L-6 246L-23 277L38 277L21 246L32 246L17 213L25 213L8 174ZM22 217L28 217L15 248L24 248L9 277L65 277L49 248L59 248L45 217L52 217L37 180ZM47 216L55 216L38 247L50 247L32 277L98 277L80 247L91 247L75 216L83 216L65 178ZM70 247L74 247L66 262L72 262L63 277L95 277L86 262L92 262L84 247L88 247L79 228ZM99 252L102 252L96 265L100 265L93 277L117 277L110 265L115 265L109 252L112 252L105 236ZM124 229L130 229L118 254L126 254L114 277L159 277L147 254L154 254L143 229L149 229L136 200ZM149 225L155 225L143 252L152 252L139 277L186 277L173 252L181 252L169 225L175 225L162 193ZM178 241L182 241L173 259L179 259L170 277L205 277L196 259L202 259L193 241L197 241L187 218ZM195 227L201 227L188 253L197 253L183 277L235 277L220 253L229 253L217 227L223 227L209 197ZM229 244L234 244L224 261L231 261L220 277L258 277L247 261L254 261L245 244L249 244L239 224ZM248 231L254 231L241 255L250 255L236 277L289 277L274 255L283 255L270 231L277 231L262 202ZM273 216L280 216L266 247L276 247L260 277L318 277L302 247L312 247L298 216L305 216L289 178ZM313 248L317 248L309 263L315 263L306 277L338 277L330 263L335 263L327 248L331 248L322 230ZM334 243L339 243L330 261L336 261L326 277L362 277L352 261L358 261L349 243L354 243L344 223ZM355 222L361 222L348 250L357 250L343 277L394 277L380 250L389 250L376 222L383 222L369 188ZM388 235L394 235L382 257L390 257L377 277L424 277L411 257L419 257L407 235L413 235L401 210ZM414 222L422 222L407 250L417 250L401 277L459 277L443 250L454 250L439 222L446 222L430 188ZM453 246L457 246L449 262L455 262L446 277L478 277L469 262L475 262L467 246L471 246L462 227ZM478 221L485 221L471 250L481 250L466 277L520 277L505 250L515 250L501 221L508 221L493 187ZM497 217L505 217L489 248L500 248L483 277L545 277L528 248L539 248L524 217L531 217L514 180ZM562 211L570 211L555 245L566 245L548 277L612 277L594 245L605 245L590 211L597 211L580 170ZM594 215L602 215L587 247L597 247L581 277L640 277L624 247L634 247L619 215L627 215L610 176ZM880 235L885 235L875 257L882 257L871 277L911 277L900 257L907 257L897 235L902 235L891 209ZM919 209L929 209L909 244L923 244L901 277L980 277L958 244L972 244L952 209L962 209L941 167ZM946 233L951 233L940 256L948 256L935 277L982 277L969 256L977 256L965 233L971 233L958 206ZM970 243L975 243L965 261L972 261L962 277L999 277L989 261L995 261L986 243L991 243L980 223ZM999 234L1004 234L994 256L1001 256L990 277L1029 277L1018 256L1025 256L1015 234L1020 234L1010 208ZM1026 242L1030 242L1022 260L1028 260L1019 277L1052 277L1043 260L1049 260L1041 242L1045 242L1035 221ZM1052 227L1059 227L1045 253L1055 253L1040 277L1096 277L1081 253L1091 253L1077 227L1084 227L1068 196ZM1066 220L1073 220L1058 249L1069 249L1052 277L1113 277L1096 249L1107 249L1092 220L1099 220L1083 185ZM1104 252L1107 252L1101 265L1105 265L1099 277L1123 277L1117 265L1121 265L1115 252L1118 252L1111 237ZM1126 231L1132 231L1119 255L1128 255L1114 277L1166 277L1152 255L1161 255L1148 231L1154 231L1140 203ZM1147 238L1151 238L1143 258L1149 258L1139 277L1174 277L1165 258L1171 258L1162 238L1166 238L1157 214ZM1159 225L1166 225L1152 252L1162 252L1146 277L1204 277L1188 252L1198 252L1184 225L1191 225L1175 193ZM1173 214L1181 214L1165 246L1176 246L1158 277L1223 277L1205 246L1217 246L1200 214L1209 214L1191 175ZM1199 232L1204 232L1193 255L1201 255L1189 277L1233 277L1221 255L1229 255L1217 232L1223 232L1211 204ZM1231 240L1235 240L1226 259L1232 259L1222 277L1259 277L1249 259L1255 259L1246 240L1251 240L1241 218ZM1254 245L1258 245L1251 261L1256 261L1247 277L1278 277L1270 261L1275 261L1267 245L1271 245L1263 225ZM1261 210L1271 210L1251 245L1265 245L1244 277L1321 277L1300 245L1313 245L1294 210L1304 210L1282 169ZM1284 225L1290 225L1277 252L1286 252L1272 277L1326 277L1311 252L1320 252L1307 225L1313 225L1299 194ZM1312 226L1318 226L1306 252L1315 252L1302 277L1349 277L1336 252L1344 252L1332 226L1338 226L1325 195ZM1342 219L1349 219L1335 249L1345 249L1329 277L1386 277L1371 249L1381 249L1366 219L1373 219L1358 183ZM1371 211L1378 211L1363 245L1374 245L1357 277L1418 277L1401 245L1412 245L1397 211L1405 211L1388 171ZM1399 217L1407 217L1392 248L1402 248L1386 277L1447 277L1430 248L1441 248L1425 217L1433 217L1416 179ZM1418 219L1427 219L1410 249L1422 249L1403 277L1470 277L1452 249L1463 249L1447 219L1455 219L1437 183Z"/></svg>
+    <svg class="layer f4" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice"><path d="M-40 301C108 301 108 292 256 292C370 292 370 289 484 289C599 289 599 288 713 288C798 288 798 303 883 303C1028 303 1028 301 1172 301C1323 301 1323 292 1474 292C1477 292 1477 297 1480 297V320H-40Z"/></svg>
+  </div>
 </footer>
 
-<!-- restart: back to the title screen -->
-<button id="restart-btn" class="card" type="button" aria-label="Restart: scroll back to top">
-  <span class="rb-icon"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></span>
-  <span class="rb-label">Restart</span>
-  <span class="rb-sub">top</span>
-</button>
-
-<div id="dialogue-box">
-  <div class="dlg-top"><span class="dlg-name">Justin</span><span class="dlg-close" aria-hidden="true">&times;</span></div>
+<!-- Hollow Knight style text box -->
+<div id="dialogue-box" role="status" aria-live="polite">
+  <span class="dlg-name"></span>
+  <svg class="orn dlg-orn" aria-hidden="true"><use href="#o-fleur"/></svg>
   <p class="dlg-text"></p>
-  <span class="dlg-next" aria-hidden="true">&#9660;</span>
+  <svg class="orn dlg-orn dlg-orn-b" aria-hidden="true"><use href="#o-fleur"/></svg>
 </div>
 </body>
 </html>

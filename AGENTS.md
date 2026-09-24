@@ -1,38 +1,45 @@
 # justind.kim
 
-Personal portfolio site for Justin D. Kim, themed as a retro game (title screen,
-character sheet, tech tree, dialogue box). Static site on GitHub Pages, custom
-domain via `CNAME`.
+Personal portfolio site for Justin D. Kim. Styled like a refined indie game
+(think Hollow Knight or Celeste menus): a dusk title screen built from layered
+paper silhouettes, a menu, chapters, and a Hollow Knight style text box. Static
+site on GitHub Pages, custom domain via `CNAME`.
 
 ## Stack
 
 - Three hand-written files, no build step, no framework, no package.json:
-  - `index.html`: all content lives here
+  - `index.html`: all content lives here, including the inline SVG paper layers
   - `index.css`: one stylesheet in one pass. Tokens, shared pieces, then each
-    component once in page order, and a single reduced-motion block at the end
-  - `game.js`: one IIFE. Starfield canvas, GSAP scroll animations, title menu,
-    dialogue engine, SVG tech tree, attribute bars
+    component once in page order, keyframes, and a single reduced-motion block at the end
+  - `game.js`: one IIFE. Mote canvas, GSAP scroll reveals and paper parallax,
+    title menu, sticky header, journey rail, dialogue engine
 - CDN dependencies: GSAP + ScrollTrigger (cdnjs) and Google Fonts
-  (Newsreader for headings, Nunito for body, VT323 for all game UI)
+  (Cinzel for names/labels/nav, Cormorant Garamond for titles and dialogue, Manrope for body)
 - Icons: Phosphor SVGs inlined as a `<symbol>` sprite at the top of `<body>`,
   referenced with `<svg class="icon"><use href="#i-..."/></svg>`. No icon fonts.
+  The same sprite holds the ornaments `#o-fleur` (filigree rule) and `#o-diamond`.
 
 ## Conventions
 
 - Keep it three files. No bundlers, transpilers, or npm.
 - All animation respects `prefers-reduced-motion` (the `REDUCED` const in game.js).
 - Everything GSAP-dependent is gated on `HAS_GSAP` so the site works if the CDN fails.
-- `.card` is the shared bracket card (hero menu items, journey cards, project
-  cards, restart button). Its brackets close to `--accent`, falling back to `--bright`.
-- Color tokens: `--text` is body text, `--bright` is pure white for highlights,
-  hairlines are `--line` / `--line-strong`. Accents are
-  `--blue/--purple/--green/--pink/--yellow`; components take an `--accent`
-  override rather than introducing new colors.
+  The intro fade is pure CSS (`animation-fill-mode: backwards` so it never fights GSAP).
+- `.paper` is the shared panel (journey, toolkit, pastime tiles, link cards): grain and
+  shadow on `::after`, a second sheet on `::before` that fans out on hover. Takes `--accent`.
+- Paper parallax: put `data-depth` on a layer inside a `[data-parallax]` container.
+  `data-parallax="away"` (hero) sinks layers as you scroll off, `"settle"` (footer)
+  raises them into place, no value drifts them through the viewport.
+- Paper silhouettes are hand-placed inline SVG paths (`viewBox` 1440 wide,
+  `preserveAspectRatio="xMidYMax slice"`). The frontmost layer matches the color
+  of the section it hands off to so the seam disappears.
+- Color tokens: `--text` is body text, `--bright` is pure white, `--muted`/`--dim` for
+  secondary text, hairlines are `--line` / `--line-strong`. Paper layers step
+  `--layer-1..5` from indigo to plum. Accents are `--ember/--rose/--lilac/--teal/--gold`;
+  components take an `--accent` override rather than introducing new colors.
 - Journey cards: the `.tl-org` text is the dialogue speaker and `data-line` is
   what they say.
-- The skills `<ul class="tree-fallback">` in index.html is the no-JS/crawler
-  fallback for the SVG tech tree. Keep it in sync with the `NODES` array in game.js.
-- Character level is computed from birthday 11/28/1996 at runtime. Don't hardcode an age.
+- The Level fact is computed from birthday 11/28/1996 at runtime. Don't hardcode an age.
 - Fonts load from the single Google Fonts `<link>` in index.html. No CSS `@import`s.
 - Site copy avoids em dashes. Use a period, comma, or colon instead.
 
