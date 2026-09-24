@@ -82,7 +82,21 @@
   }
 
   reveal('.section-head, .about-copy > *, .kit, .link-card, .fin', { y: 28 });
-  reveal('.tile, .portrait', {}, 0.1);
+  reveal('.portrait', {});
+
+  /* pastimes come in together, in reading order: tiles entering on the same frame
+     form one batch and stagger left to right, top to bottom */
+  if (ANIMATE) {
+    gsap.set('.tile', { opacity: 0, y: 28 });
+    ScrollTrigger.batch('.tile', {
+      start: 'top 88%',
+      once: true,
+      onEnter: (batch) => gsap.to(batch, {
+        opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.09,
+        clearProps: 'opacity,transform',
+      }),
+    });
+  }
   reveal('.tl-content', { x: -30 }, 0.1); /* the card, not the rail diamond */
 
   /* ---------- paper parallax ----------
@@ -110,17 +124,17 @@
     scrollTrigger: { trigger: hero, start: 'top top', end: '60% top', scrub: true },
   });
 
-  /* ---------- character level: age, birthday 11/28/1996 ---------- */
+  /* ---------- age, from birthday 11/28/1996 ---------- */
   (() => {
-    const el = document.getElementById('char-lvl');
+    const el = document.getElementById('char-age');
     const now = new Date();
-    const lvl = now.getFullYear() - 1996 - (now < new Date(now.getFullYear(), 10, 28) ? 1 : 0);
+    const age = now.getFullYear() - 1996 - (now < new Date(now.getFullYear(), 10, 28) ? 1 : 0);
     const show = (n) => { el.textContent = String(n); };
-    if (!ANIMATE) return show(lvl);
+    if (!ANIMATE) return show(age);
     const counter = { v: 0 };
     show(0);
     gsap.to(counter, {
-      v: lvl, duration: 1.4, ease: 'power2.out', snap: { v: 1 },
+      v: age, duration: 1.4, ease: 'power2.out', snap: { v: 1 },
       onUpdate: () => show(Math.round(counter.v)),
       scrollTrigger: { trigger: el, start: 'top 92%', once: true },
     });

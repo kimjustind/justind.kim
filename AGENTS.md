@@ -39,7 +39,7 @@ site on GitHub Pages, custom domain via `CNAME`.
   components take an `--accent` override rather than introducing new colors.
 - Journey cards: the `.tl-org` text is the dialogue speaker and `data-line` is
   what they say.
-- The Level fact is computed from birthday 11/28/1996 at runtime. Don't hardcode an age.
+- The Age fact is computed from birthday 11/28/1996 at runtime. Don't hardcode an age.
 - Fonts load from the single Google Fonts `<link>` in index.html. No CSS `@import`s.
 - Site copy avoids em dashes. Use a period, comma, or colon instead.
 
