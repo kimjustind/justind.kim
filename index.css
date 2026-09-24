@@ -695,6 +695,21 @@ footer {
 .fine a { display: flex; font-size: 1.1rem; color: var(--text); transition: color 0.2s; }
 .fine a:hover { color: var(--ember); }
 
+/* Clawd sits in the credit line and does a little hop on hover */
+.made-with {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.made-with .icon { font-size: 1.5rem; color: var(--ember); transition: translate 0.3s var(--ease); }
+.made-with:hover { color: var(--text); }
+.made-with:hover .icon { translate: 0 -3px; }
+
 footer .layer { height: var(--scene-h); }
 .f1 { fill: var(--layer-5); }
 .f2 { fill: var(--layer-3); }
@@ -785,5 +800,6 @@ footer .layer { height: var(--scene-h); }
   .paper, .paper::before, .paper::after, .cutout { transition: none; }
   .paper:hover, .paper:focus-visible, .tl-content:hover, .tl-content:focus-visible { transform: none; }
   .tile:hover .cutout { rotate: -6deg; scale: 1; }
+  .made-with:hover .icon { translate: none; }
   .dlg-text .ch { transition: none; }
 }
