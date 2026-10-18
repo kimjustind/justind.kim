@@ -26,7 +26,8 @@ site on GitHub Pages, custom domain via `CNAME`.
 - Everything GSAP-dependent is gated on `HAS_GSAP` so the site works if the CDN fails.
   The intro fade is pure CSS (`animation-fill-mode: backwards` so it never fights GSAP).
 - `.paper` is the shared panel (journey, toolkit, pastime tiles, link cards): grain and
-  shadow on `::after`, a second sheet on `::before` that fans out on hover. Takes `--accent`.
+  shadow on `::after`, a second sheet on `::before` that fans out on hover (only on panels
+  you can act on: links and journey cards). Takes `--accent`.
 - Paper parallax: put `data-depth` on a layer inside a `[data-parallax]` container.
   `data-parallax="away"` (hero) sinks layers as you scroll off, `"settle"` (footer)
   raises them into place, no value drifts them through the viewport.

@@ -74,16 +74,8 @@ section, footer { position: relative; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
   text-align: center;
-}
-
-.eyebrow {
-  font-family: var(--display);
-  font-size: 0.8rem;
-  letter-spacing: 0.4em;
-  color: var(--ember);
 }
 
 .section-title {
@@ -93,8 +85,6 @@ section, footer { position: relative; }
   line-height: 1;
   letter-spacing: -0.01em;
 }
-
-.section-head .orn { margin-top: 0.6rem; }
 
 /* paper panel: the fill lives on ::after and a second sheet peeks out from ::before,
    so a hover lift can fan the sheets without the stack order flipping */
@@ -129,9 +119,10 @@ section, footer { position: relative; }
   transform: translate(4px, 5px) rotate(0.7deg);
 }
 
-.paper:hover, .paper:focus-visible { transform: translateY(-4px); }
-.paper:hover::before, .paper:focus-visible::before { transform: translate(9px, 11px) rotate(1.8deg); }
-.paper:hover::after, .paper:focus-visible::after {
+/* only panels you can act on lift: links and journey cards */
+.paper:is(a, .tl-content):is(:hover, :focus-visible) { transform: translateY(-4px); }
+.paper:is(a, .tl-content):is(:hover, :focus-visible)::before { transform: translate(9px, 11px) rotate(1.8deg); }
+.paper:is(a, .tl-content):is(:hover, :focus-visible)::after {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 3px 4px rgba(4, 2, 12, 0.4), 0 30px 50px -16px rgba(4, 2, 12, 0.8);
 }
 .paper:focus-visible { outline: 1px solid var(--accent-ink); outline-offset: 6px; }
@@ -300,17 +291,7 @@ section, footer { position: relative; }
   text-shadow: 0 2px 24px rgba(11, 9, 22, 0.6);
 }
 
-.ts-kicker {
-  font-family: var(--display);
-  font-size: clamp(0.7rem, 1.6vw, 0.82rem);
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-  color: var(--muted);
-  animation: rise-soft 1s var(--ease) 0.5s backwards;
-}
-
 .ts-title {
-  margin-top: 0.6rem;
   font-family: var(--display);
   font-weight: 500;
   font-size: clamp(2.6rem, 9vw, 6.2rem);
@@ -414,22 +395,7 @@ section, footer { position: relative; }
 
 .about-copy strong { color: var(--text); font-weight: 600; }
 
-.facts {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.1rem 2rem;
-  margin-top: 2rem;
-}
-
-.facts dt {
-  font-family: var(--display);
-  font-size: 0.66rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--ember);
-}
-
-.facts dd { font-family: var(--serif); font-size: 1.3rem; line-height: 1.3; }
+.about-copy > .facts { margin-top: 1.5rem; font-family: var(--serif); font-style: italic; font-size: 1.3rem; color: var(--text); }
 
 /* ============================
    JOURNEY
@@ -476,7 +442,7 @@ section, footer { position: relative; }
   transition: transform 0.4s var(--ease), opacity 0.3s;
 }
 
-.tl-content:hover, .tl-content:focus-visible { transform: translateX(6px) translateY(-3px); }
+.paper.tl-content:is(:hover, :focus-visible) { transform: translateX(6px) translateY(-3px); }
 
 /* the rest of the journey steps back while one card is hovered */
 .timeline:has(.tl-content:hover) .tl-item:not(:hover) .tl-content,
@@ -484,15 +450,12 @@ section, footer { position: relative; }
 
 .tl-badge {
   display: inline-block;
-  margin-bottom: 0.7rem;
-  font-family: var(--display);
-  font-size: 0.66rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--muted);
+  margin-bottom: 0.5rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--accent);
 }
-
-.badge-accent { color: var(--accent); }
 
 .tl-content h3 {
   margin-bottom: 0.2rem;
@@ -505,7 +468,7 @@ section, footer { position: relative; }
 
 .tl-org { margin-bottom: 0.7rem; font-size: 0.85rem; font-weight: 600; color: var(--accent); }
 
-.tl-content p { font-size: 0.93rem; color: var(--muted); }
+.tl-content p { max-width: 65ch; font-size: 0.93rem; color: var(--muted); }
 
 /* ============================
    DIVIDER: torn paper strip
@@ -532,7 +495,7 @@ section, footer { position: relative; }
 .d3 { fill: var(--layer-1); }
 
 /* past the strip the page sits one paper layer up */
-#toolkit, #pastimes, #elsewhere { background: var(--layer-1); }
+#toolkit, #pastimes, #links { background: var(--layer-1); }
 
 .divider::after {
   content: '';
@@ -547,37 +510,26 @@ section, footer { position: relative; }
 /* ============================
    TOOLKIT
 ============================ */
-.kit-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.5rem; }
+/* a plain list, not more cards: the group name on the left, the tools as one line of type */
+.kit-list { max-width: 820px; margin: 0 auto; }
 
-.kit { grid-column: span 2; display: flex; flex-direction: column; gap: 0.4rem; padding: 1.75rem; }
-.kit:nth-child(-n+2) { grid-column: span 3; }
-
-@media (max-width: 860px) {
-  .kit-grid { grid-template-columns: repeat(2, 1fr); }
-  .kit, .kit:nth-child(-n+2) { grid-column: span 1; }
-  .kit:last-child { grid-column: span 2; }
+.kit {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0.25rem 2.5rem;
+  align-items: baseline;
+  padding: 1.6rem 0;
 }
 
-@media (max-width: 560px) {
-  .kit-grid { grid-template-columns: 1fr; }
-  .kit:last-child { grid-column: span 1; }
-}
+.kit + .kit { border-top: 1px solid var(--line); }
 
-.kit h3 { font-family: var(--serif); font-weight: 600; font-size: 1.7rem; line-height: 1.1; color: var(--accent); }
+@media (max-width: 640px) { .kit { grid-template-columns: 1fr; } }
 
-.kit p { margin-bottom: 0.9rem; font-size: 0.9rem; color: var(--muted); }
+.kit dt { font-family: var(--serif); font-weight: 600; font-size: 1.7rem; line-height: 1.1; color: var(--bright); }
 
-.chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: auto; list-style: none; }
+.kit-tools { font-family: var(--serif); font-size: 1.35rem; line-height: 1.35; color: var(--text); }
 
-.chips li {
-  padding: 0.25rem 0.7rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text);
-  background: color-mix(in srgb, var(--accent) 12%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-  border-radius: 99px;
-}
+.kit-note { margin-top: 0.3rem; font-size: 0.9rem; color: var(--muted); }
 
 /* ============================
    PASTIMES
@@ -606,12 +558,9 @@ section, footer { position: relative; }
   fill: var(--accent);
   filter: drop-shadow(2px 3px 0 color-mix(in srgb, var(--accent) 35%, var(--void))) drop-shadow(0 10px 10px rgba(4, 2, 12, 0.5));
   rotate: -6deg;
-  transition: rotate 0.4s var(--ease), scale 0.4s var(--ease);
 }
 
 .t-gaming .cutout { width: clamp(88px, 12vw, 130px); height: clamp(88px, 12vw, 130px); margin-bottom: auto; }
-
-.tile:hover .cutout { rotate: 5deg; scale: 1.08; }
 
 .tile h3 { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; line-height: 1.1; }
 .t-gaming h3 { font-size: clamp(2rem, 4vw, 2.6rem); }
@@ -619,15 +568,13 @@ section, footer { position: relative; }
 .tile p { font-size: 0.9rem; color: var(--muted); }
 
 /* ============================
-   ELSEWHERE
+   LINKS
 ============================ */
 .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
 
-.link-card { display: flex; flex-direction: column; gap: 0.35rem; padding: 1.75rem; text-decoration: none; }
+.link-card { --accent: var(--ember); display: flex; flex-direction: column; gap: 0.35rem; padding: 1.75rem; text-decoration: none; }
 
 .lc-icon { width: 2.2rem; height: 2.2rem; margin-bottom: 0.9rem; color: var(--accent); }
-
-.lc-tag { font-family: var(--display); font-size: 0.66rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
 
 .link-card h3 { font-family: var(--serif); font-weight: 600; font-size: 1.7rem; line-height: 1.1; color: var(--bright); }
 
@@ -780,13 +727,12 @@ footer .layer { height: var(--scene-h); }
 ============================ */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .sky, .layer, .ts-kicker, .ts-title, .ts-orn, .menu-item,
+  .sky, .layer, .ts-title, .ts-orn, .menu-item,
   .menu-item.is-active .mi-orn, #dialogue-box.is-done .dlg-orn-b { animation: none; }
   #site-header, #site-header.show { translate: 0 0; }
   #dialogue-box, #dialogue-box.show { translate: -50% 0; }
-  .paper, .paper::before, .paper::after, .cutout { transition: none; }
-  .paper:hover, .paper:focus-visible, .tl-content:hover, .tl-content:focus-visible { transform: none; }
-  .tile:hover .cutout { rotate: -6deg; scale: 1; }
+  .paper, .paper::before, .paper::after { transition: none; }
+  .paper:is(a, .tl-content):is(:hover, :focus-visible) { transform: none; }
   .made-with:hover .icon { translate: none; }
   .dlg-text .ch { transition: none; }
 }

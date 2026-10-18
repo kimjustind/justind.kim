@@ -81,8 +81,8 @@
     }));
   }
 
-  reveal('.section-head, .about-copy > *, .kit, .link-card, .fin', { y: 28 });
-  reveal('.portrait', {});
+  /* motion is kept for the title screen and the two sequences that mean something:
+     the journey timeline and the pastimes set. Everything else is simply there. */
 
   /* pastimes come in together, in reading order: tiles entering on the same frame
      form one batch and stagger left to right, top to bottom */
