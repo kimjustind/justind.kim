@@ -25,6 +25,10 @@ site on GitHub Pages, custom domain via `CNAME`.
 - All animation respects `prefers-reduced-motion` (the `REDUCED` const in game.js).
 - Everything GSAP-dependent is gated on `HAS_GSAP` so the site works if the CDN fails.
   The intro fade is pure CSS (`animation-fill-mode: backwards` so it never fights GSAP).
+- No CSS `scroll-behavior: smooth`: it animates ScrollTrigger's measuring jump and breaks
+  every trigger after a refresh. In-page links glide via the click handler in game.js.
+- Scrubbed tweens use `gsap.fromTo()` with explicit starts, never `.to()`, so a refresh
+  while scrolled down can't capture a mid-scroll value as the resting state.
 - `.paper` is the shared panel (journey, toolkit, pastime tiles, link cards): grain and
   shadow on `::after`, a second sheet on `::before` that fans out on hover (only on panels
   you can act on: links and journey cards). Takes `--accent`.

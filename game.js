@@ -110,7 +110,10 @@
     const mode = box.dataset.parallax;
     const st = { trigger: box, scrub: true, invalidateOnRefresh: true };
     if (mode === 'away') {
-      gsap.to(el, { y: () => d * box.offsetHeight * 0.6, ease: 'none', scrollTrigger: { ...st, start: 'top top', end: 'bottom top' } });
+      /* fromTo, not to: with invalidateOnRefresh a .to() re-reads its start on every refresh
+         (load, resize, phone URL bar), and a refresh while scrolled down would make the
+         sunk position the new resting place, so the title never came back */
+      gsap.fromTo(el, { y: 0 }, { y: () => d * box.offsetHeight * 0.6, ease: 'none', scrollTrigger: { ...st, start: 'top top', end: 'bottom top' } });
     } else if (mode === 'settle') {
       gsap.fromTo(el, { y: d * 140 }, { y: 0, ease: 'none', scrollTrigger: { ...st, start: 'top bottom', end: 'bottom bottom' } });
     } else {
@@ -119,7 +122,7 @@
   });
 
   /* the title fades as it lifts away */
-  if (ANIMATE) gsap.to('.hero-content', {
+  if (ANIMATE) gsap.fromTo('.hero-content', { opacity: 1 }, {
     opacity: 0, ease: 'none',
     scrollTrigger: { trigger: hero, start: 'top top', end: '60% top', scrub: true },
   });
@@ -172,11 +175,17 @@
       header.classList.toggle('show', heroGone);
     }, { threshold: 0.4 }).observe(hero);
 
-    /* back to the title screen */
-    document.querySelectorAll('a[href="#hero"]').forEach((a) => a.addEventListener('click', (e) => {
+    /* in-page links glide here rather than through CSS scroll-behavior: smooth, which turns
+       ScrollTrigger's measuring jump into an animation, so a refresh while scrolled down
+       mismeasured the hero and the title screen never came back */
+    document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
       e.preventDefault();
-      e.stopPropagation();
-      window.scrollTo({ top: 0, behavior: REDUCED ? 'instant' : 'smooth' });
+      const top = id === 'hero' ? 0 : target.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: REDUCED ? 'instant' : 'smooth' });
+      history.replaceState(null, '', id === 'hero' ? location.pathname + location.search : '#' + id);
     }));
 
     /* mark the section in the middle of the screen */

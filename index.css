@@ -39,8 +39,6 @@
   --ease:    cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-html { scroll-behavior: smooth; }
-
 body {
   background: var(--bg);
   color: var(--text);
@@ -726,7 +724,6 @@ footer .layer { height: var(--scene-h); }
    REDUCED MOTION
 ============================ */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   .sky, .layer, .ts-title, .ts-orn, .menu-item,
   .menu-item.is-active .mi-orn, #dialogue-box.is-done .dlg-orn-b { animation: none; }
   #site-header, #site-header.show { translate: 0 0; }
