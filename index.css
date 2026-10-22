@@ -4,26 +4,24 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* dusk paper: night at the top, layers of plum and indigo, warm light at the horizon */
-  --void:    #0b0916;
-  --bg:      #15112a;
-  --layer-1: #1d1736;
-  --layer-2: #2a2150;
-  --layer-3: #3a2658;
-  --layer-4: #53305f;
-  --layer-5: #74405f;
-  --paper:   #1f1938;
+  /* moonlit paper: near-black sky, blue-grey layers that lighten with distance,
+     and one cool blue for anything that needs to stand out */
+  --void:    #05070b;
+  --bg:      #0a0e15;
+  --layer-1: #0f141d;
+  --layer-2: #151c28;
+  --layer-3: #1d2738;
+  --layer-4: #263349;
+  --layer-5: #34465f;
+  --paper:   #111723;
 
-  --text:   #ece6f2;
+  --text:   #e6ebf2;
   --bright: #fff;
-  --muted:  #a79dbf;
-  --dim:    #6f668a;
+  --muted:  #98a3b5;
+  --dim:    #5b6779;
 
-  --ember: #ffb38a;
-  --rose:  #f28bb0;
-  --lilac: #b9a2ff;
-  --teal:  #7fd6c2;
-  --gold:  #f5cf7a;
+  --blue: #8fb3e6;
+  --ice:  #d6e2f2;
 
   --line:        color-mix(in srgb, var(--text) 12%, transparent);
   --line-strong: color-mix(in srgb, var(--text) 26%, transparent);
@@ -31,7 +29,7 @@
   /* paper fibers: fractal noise with alpha keyed off one channel so it reads as speckle */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.32 -0.13'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   /* one paper sheet sitting on another: tight contact shadow + soft falloff */
-  --lift: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 2px 3px rgba(4, 2, 12, 0.4), 0 18px 40px -14px rgba(4, 2, 12, 0.7);
+  --lift: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 2px 3px rgba(0, 0, 0, 0.45), 0 18px 40px -14px rgba(0, 0, 0, 0.75);
 
   --display: 'Cinzel', 'Trajan Pro', Georgia, serif;
   --serif:   'Cormorant Garamond', Georgia, serif;
@@ -49,11 +47,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-::selection { background: var(--ember); color: var(--void); }
+::selection { background: var(--blue); color: var(--void); }
 
 a { color: inherit; }
 
-:focus-visible { outline: 1px solid var(--ember); outline-offset: 4px; }
+:focus-visible { outline: 1px solid var(--blue); outline-offset: 4px; }
 
 /* inline Phosphor sprite, sized to the surrounding text */
 .icon { width: 1em; height: 1em; fill: currentColor; vertical-align: -0.125em; }
@@ -87,7 +85,7 @@ section, footer { position: relative; }
 /* paper panel: the fill lives on ::after and a second sheet peeks out from ::before,
    so a hover lift can fan the sheets without the stack order flipping */
 .paper {
-  --accent-ink: var(--accent, var(--ember));
+  --accent-ink: var(--accent, var(--blue));
   position: relative;
   isolation: isolate;
   border-radius: 3px;
@@ -113,7 +111,7 @@ section, footer { position: relative; }
   z-index: -2;
   background: var(--grain), color-mix(in srgb, var(--accent-ink) 32%, var(--layer-2));
   background-size: 180px, auto;
-  box-shadow: 0 6px 18px -8px rgba(4, 2, 12, 0.8);
+  box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.8);
   transform: translate(4px, 5px) rotate(0.7deg);
 }
 
@@ -121,7 +119,7 @@ section, footer { position: relative; }
 .paper:is(a, .tl-content):is(:hover, :focus-visible) { transform: translateY(-4px); }
 .paper:is(a, .tl-content):is(:hover, :focus-visible)::before { transform: translate(9px, 11px) rotate(1.8deg); }
 .paper:is(a, .tl-content):is(:hover, :focus-visible)::after {
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 3px 4px rgba(4, 2, 12, 0.4), 0 30px 50px -16px rgba(4, 2, 12, 0.8);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 3px 4px rgba(0, 0, 0, 0.4), 0 30px 50px -16px rgba(0, 0, 0, 0.8);
 }
 .paper:focus-visible { outline: 1px solid var(--accent-ink); outline-offset: 6px; }
 
@@ -189,8 +187,8 @@ section, footer { position: relative; }
   position: absolute;
   left: 50%; bottom: -3px;
   width: 5px; height: 5px;
-  background: var(--ember);
-  box-shadow: 0 0 8px var(--ember);
+  background: var(--blue);
+  box-shadow: 0 0 8px var(--blue);
   transform: translateX(-50%) rotate(45deg) scale(0);
   transition: transform 0.3s var(--ease);
 }
@@ -202,7 +200,7 @@ section, footer { position: relative; }
   left: 0; bottom: -1px;
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, var(--ember), var(--rose), var(--lilac));
+  background: var(--blue);
   transform: scaleX(var(--progress, 0));
   transform-origin: left;
 }
@@ -229,8 +227,8 @@ section, footer { position: relative; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 45% at 50% 100%, rgba(255, 179, 138, 0.55), transparent 70%),
-    linear-gradient(to bottom, var(--void) 0%, #171236 35%, #3a2459 62%, #8a4a6c 82%, #e0907c 100%);
+    radial-gradient(ellipse 70% 40% at 50% 100%, rgba(170, 195, 230, 0.18), transparent 70%),
+    linear-gradient(to bottom, var(--void) 0%, #080c14 40%, #111b2b 70%, #22324a 100%);
   animation: fade-in 1.4s ease-out backwards;
 }
 
@@ -240,8 +238,8 @@ section, footer { position: relative; }
   width: clamp(44px, 5.5vw, 78px);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle at 38% 36%, #fff7ec, #ffd9b0 60%, #f2b48f);
-  box-shadow: 0 0 40px 8px rgba(255, 217, 176, 0.35), 0 0 140px 50px rgba(255, 179, 138, 0.14);
+  background: radial-gradient(circle at 38% 36%, #fff, #e8eef7 60%, #c9d6e8);
+  box-shadow: 0 0 36px 6px rgba(214, 226, 242, 0.25), 0 0 140px 50px rgba(143, 179, 230, 0.08);
 }
 
 @media (max-width: 600px) { .moon { top: 4.5%; left: 78%; } }
@@ -257,14 +255,14 @@ section, footer { position: relative; }
   height: max(38.9vw, 50vh);
   will-change: transform;
   /* each sheet casts its shadow up onto the one behind, with a thin lit paper edge */
-  filter: drop-shadow(0 -1px 0 rgba(255, 214, 190, 0.16)) drop-shadow(0 -10px 14px rgba(8, 5, 20, 0.45));
+  filter: drop-shadow(0 -1px 0 rgba(214, 226, 242, 0.12)) drop-shadow(0 -10px 14px rgba(0, 0, 0, 0.45));
 }
 
 .l1 { fill: var(--layer-5); animation: rise 1.2s var(--ease) 0.1s backwards; }
 .l2 { fill: var(--layer-4); animation: rise 1.2s var(--ease) 0.2s backwards; }
 .l3 { fill: var(--layer-3); animation: rise 1.2s var(--ease) 0.3s backwards; }
 .l4 { fill: var(--layer-1); animation: rise 1.2s var(--ease) 0.4s backwards; }
-.l5 { fill: var(--bg); filter: drop-shadow(0 -10px 14px rgba(8, 5, 20, 0.5)); }
+.l5 { fill: var(--bg); filter: drop-shadow(0 -10px 14px rgba(0, 0, 0, 0.5)); }
 
 /* paper fibers across the whole scene */
 #hero::after {
@@ -286,7 +284,7 @@ section, footer { position: relative; }
   align-items: center;
   padding: max(13vh, 5rem) 1rem 0;
   text-align: center;
-  text-shadow: 0 2px 24px rgba(11, 9, 22, 0.6);
+  text-shadow: 0 2px 24px rgba(5, 7, 11, 0.6);
 }
 
 .ts-title {
@@ -297,11 +295,11 @@ section, footer { position: relative; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--bright);
-  text-shadow: 0 0 30px rgba(255, 217, 176, 0.35), 0 2px 24px rgba(11, 9, 22, 0.6);
+  text-shadow: 0 0 30px rgba(214, 226, 242, 0.15), 0 2px 24px rgba(5, 7, 11, 0.6);
   animation: unblur 1.6s var(--ease) 0.35s backwards;
 }
 
-.ts-orn { width: clamp(180px, 30vw, 280px); height: 26px; margin-top: 1.1rem; color: var(--ember); opacity: 0.85; animation: fade-in 1s ease-out 0.9s backwards; }
+.ts-orn { width: clamp(180px, 30vw, 280px); height: 26px; margin-top: 1.1rem; color: var(--blue); opacity: 0.85; animation: fade-in 1s ease-out 0.9s backwards; }
 
 .title-menu { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; margin-top: clamp(1.75rem, 5vh, 3rem); }
 
@@ -330,11 +328,11 @@ section, footer { position: relative; }
 
 .menu-item:focus-visible { outline: none; }
 
-.menu-item.is-active { color: var(--bright); text-shadow: 0 0 18px rgba(255, 179, 138, 0.75); }
+.menu-item.is-active { color: var(--bright); text-shadow: 0 0 16px rgba(143, 179, 230, 0.5); }
 
 .mi-orn {
   width: 7px; height: 7px;
-  fill: var(--ember);
+  fill: var(--blue);
   opacity: 0;
   transform: scale(0.3);
   transition: opacity 0.2s, transform 0.3s var(--ease);
@@ -369,7 +367,7 @@ section, footer { position: relative; }
   z-index: 1;
   object-fit: cover;
   background: var(--layer-2);
-  border: 8px solid #ede4d8;
+  border: 8px solid #e8ecf1;
   box-shadow: var(--lift);
   rotate: -2deg;
 }
@@ -405,18 +403,15 @@ section, footer { position: relative; }
   position: absolute;
   left: 10px; top: 0; bottom: 0;
   width: 1px;
-  background: linear-gradient(to bottom, var(--ember), var(--gold), var(--rose), var(--lilac));
-  box-shadow: 0 0 10px rgba(255, 179, 138, 0.35);
+  background: var(--line-strong);
   /* fade the rail out at both ends */
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
   mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
 }
 
-.tl-item { --accent: var(--ember); position: relative; padding-left: 3.8rem; }
+.tl-item { --accent: var(--blue); position: relative; padding-left: 3.8rem; }
+.tl-item:first-child { --accent: var(--ice); }
 .tl-item + .tl-item { margin-top: 2.5rem; }
-.tl-item:nth-child(2) { --accent: var(--gold); }
-.tl-item:nth-child(3) { --accent: var(--rose); }
-.tl-item:nth-child(4) { --accent: var(--lilac); }
 
 @media (max-width: 600px) { .tl-item { padding-left: 2.6rem; } }
 
@@ -482,7 +477,7 @@ section, footer { position: relative; }
   inset: 0;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 -6px 10px rgba(4, 2, 12, 0.45));
+  filter: drop-shadow(0 -6px 10px rgba(0, 0, 0, 0.45));
 }
 
 .d1 { fill: var(--layer-5); }
@@ -534,7 +529,7 @@ section, footer { position: relative; }
 ============================ */
 .bento { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
 
-.tile { display: flex; flex-direction: column; gap: 0.35rem; padding: 1.6rem; }
+.tile { --accent: var(--blue); display: flex; flex-direction: column; gap: 0.35rem; padding: 1.6rem; }
 .t-gaming { grid-column: span 2; grid-row: span 2; justify-content: flex-end; }
 .t-wide { grid-column: span 2; }
 
@@ -554,7 +549,7 @@ section, footer { position: relative; }
   width: 48px; height: 48px;
   margin-bottom: 1rem;
   fill: var(--accent);
-  filter: drop-shadow(2px 3px 0 color-mix(in srgb, var(--accent) 35%, var(--void))) drop-shadow(0 10px 10px rgba(4, 2, 12, 0.5));
+  filter: drop-shadow(2px 3px 0 color-mix(in srgb, var(--accent) 35%, var(--void))) drop-shadow(0 10px 10px rgba(0, 0, 0, 0.5));
   rotate: -6deg;
 }
 
@@ -570,7 +565,7 @@ section, footer { position: relative; }
 ============================ */
 .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
 
-.link-card { --accent: var(--ember); display: flex; flex-direction: column; gap: 0.35rem; padding: 1.75rem; text-decoration: none; }
+.link-card { --accent: var(--blue); display: flex; flex-direction: column; gap: 0.35rem; padding: 1.75rem; text-decoration: none; }
 
 .lc-icon { width: 2.2rem; height: 2.2rem; margin-bottom: 0.9rem; color: var(--accent); }
 
@@ -600,8 +595,8 @@ footer {
   padding: clamp(3rem, 6vw, 5rem) 1.5rem calc(var(--scene-h) * 0.85);
   text-align: center;
   background:
-    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(255, 179, 138, 0.4), transparent 70%),
-    linear-gradient(to bottom, var(--layer-1) 0%, #24184a 40%, #5b3162 75%, #c7737a 100%);
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(170, 195, 230, 0.14), transparent 70%),
+    linear-gradient(to bottom, var(--layer-1) 0%, #0d1420 45%, #172338 80%, #22324a 100%);
 }
 
 .footer-copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
@@ -614,18 +609,18 @@ footer {
   letter-spacing: 0.3em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--ember);
+  color: var(--blue);
   padding: 0.5rem 1rem;
-  border: 1px solid color-mix(in srgb, var(--ember) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--blue) 40%, transparent);
   border-radius: 2px;
   transition: background 0.25s, color 0.25s;
 }
 
-.to-title:hover { background: var(--ember); color: var(--void); }
+.to-title:hover { background: var(--blue); color: var(--void); }
 
 .fine { display: flex; align-items: center; gap: 0.75rem; font-size: 0.8rem; color: var(--muted); }
 .fine a { display: flex; font-size: 1.1rem; color: var(--text); transition: color 0.2s; }
-.fine a:hover { color: var(--ember); }
+.fine a:hover { color: var(--blue); }
 
 /* Clawd sits in the credit line and does a little hop on hover */
 .made-with {
@@ -638,7 +633,7 @@ footer {
   transition: color 0.2s;
 }
 
-.made-with .icon { font-size: 1.5rem; color: var(--ember); transition: translate 0.3s var(--ease); }
+.made-with .icon { font-size: 1.5rem; color: var(--blue); transition: translate 0.3s var(--ease); }
 .made-with:hover { color: var(--text); }
 .made-with:hover .icon { translate: 0 -3px; }
 
@@ -663,8 +658,8 @@ footer .layer { height: var(--scene-h); }
   padding: 0.9rem 1.75rem 0.8rem;
   text-align: center;
   /* a dark pane with feathered edges instead of a frame */
-  background: rgba(6, 4, 14, 0.9);
-  box-shadow: 0 0 36px 22px rgba(6, 4, 14, 0.9);
+  background: rgba(3, 5, 9, 0.92);
+  box-shadow: 0 0 36px 22px rgba(3, 5, 9, 0.92);
   border-radius: 40px;
   cursor: pointer;
   visibility: hidden;
@@ -680,10 +675,10 @@ footer .layer { height: var(--scene-h); }
   font-size: 0.7rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--ember);
+  color: var(--blue);
 }
 
-.dlg-orn { width: min(260px, 70%); height: 24px; margin: 0.35rem 0 0.6rem; color: #d8cfe6; }
+.dlg-orn { width: min(260px, 70%); height: 24px; margin: 0.35rem 0 0.6rem; color: var(--ice); }
 .dlg-orn-b { margin: 0.6rem 0 0; transform: scaleY(-1); opacity: 0.55; }
 
 /* once the line is fully out, the lower ornament breathes like a "next" prompt */

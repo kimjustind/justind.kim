@@ -12,7 +12,7 @@
 
   const hero = document.getElementById('hero');
 
-  /* ---------- motes: warm dust drifting up through the title screen ---------- */
+  /* ---------- motes: pale dust drifting up through the title screen ---------- */
   (() => {
     const canvas = document.getElementById('motes');
     const ctx = canvas.getContext('2d');
@@ -46,8 +46,8 @@
         const x = m.x + Math.sin(t * 0.0006 + m.sway) * 12;
         ctx.beginPath();
         ctx.arc(x, m.y, m.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 210, 170, ${m.a * (0.6 + 0.4 * Math.sin(t * 0.002 + m.sway))})`;
-        ctx.shadowColor = 'rgba(255, 179, 138, 0.9)';
+        ctx.fillStyle = `rgba(220, 230, 245, ${m.a * (0.6 + 0.4 * Math.sin(t * 0.002 + m.sway))})`;
+        ctx.shadowColor = 'rgba(143, 179, 230, 0.7)';
         ctx.shadowBlur = 6;
         ctx.fill();
       }
