@@ -12,7 +12,7 @@
 
   const hero = document.getElementById('hero');
 
-  /* ---------- motes: warm dust drifting up through the title screen ---------- */
+  /* ---------- motes: pale dust drifting up through the title screen ---------- */
   (() => {
     const canvas = document.getElementById('motes');
     const ctx = canvas.getContext('2d');
@@ -46,8 +46,8 @@
         const x = m.x + Math.sin(t * 0.0006 + m.sway) * 12;
         ctx.beginPath();
         ctx.arc(x, m.y, m.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 210, 170, ${m.a * (0.6 + 0.4 * Math.sin(t * 0.002 + m.sway))})`;
-        ctx.shadowColor = 'rgba(255, 179, 138, 0.9)';
+        ctx.fillStyle = `rgba(220, 230, 245, ${m.a * (0.6 + 0.4 * Math.sin(t * 0.002 + m.sway))})`;
+        ctx.shadowColor = 'rgba(143, 179, 230, 0.7)';
         ctx.shadowBlur = 6;
         ctx.fill();
       }
@@ -127,20 +127,11 @@
     scrollTrigger: { trigger: hero, start: 'top top', end: '60% top', scrub: true },
   });
 
-  /* ---------- age, from birthday 11/28/1996 ---------- */
+  /* ---------- age, from birthday 11/28/1996, written into the About sentence ---------- */
   (() => {
-    const el = document.getElementById('char-age');
     const now = new Date();
     const age = now.getFullYear() - 1996 - (now < new Date(now.getFullYear(), 10, 28) ? 1 : 0);
-    const show = (n) => { el.textContent = String(n); };
-    if (!ANIMATE) return show(age);
-    const counter = { v: 0 };
-    show(0);
-    gsap.to(counter, {
-      v: age, duration: 1.4, ease: 'power2.out', snap: { v: 1 },
-      onUpdate: () => show(Math.round(counter.v)),
-      scrollTrigger: { trigger: el, start: 'top 92%', once: true },
-    });
+    document.getElementById('char-age').textContent = String(age);
   })();
 
   /* ---------- title menu, header, journey rail ---------- */

@@ -1,7 +1,7 @@
 # justind.kim
 
 Personal portfolio site for Justin D. Kim. Styled like a refined indie game
-(think Hollow Knight or Celeste menus): a dusk title screen built from layered
+(think Hollow Knight or Celeste menus): a moonlit title screen built from layered
 paper silhouettes, a menu, chapters, and a Hollow Knight style text box. Static
 site on GitHub Pages, custom domain via `CNAME`.
 
@@ -38,13 +38,15 @@ site on GitHub Pages, custom domain via `CNAME`.
 - Paper silhouettes are hand-placed inline SVG paths (`viewBox` 1440 wide,
   `preserveAspectRatio="xMidYMax slice"`). The frontmost layer matches the color
   of the section it hands off to so the seam disappears.
-- Color tokens: `--text` is body text, `--bright` is pure white, `--muted`/`--dim` for
-  secondary text, hairlines are `--line` / `--line-strong`. Paper layers step
-  `--layer-1..5` from indigo to plum. Accents are `--ember/--rose/--lilac/--teal/--gold`;
-  components take an `--accent` override rather than introducing new colors.
+- Palette is black, white, and blue. `--text` is body text, `--bright` is pure white,
+  `--muted`/`--dim` for secondary text, hairlines are `--line` / `--line-strong`. Paper
+  layers step `--layer-1..5` from near-black to blue-grey (farther = lighter). The only
+  accents are `--blue` and `--ice`; components take an `--accent` override rather than
+  introducing new colors. Keep gradients low-contrast and cool, no warm hues.
 - Journey cards: the `.tl-org` text is the dialogue speaker and `data-line` is
   what they say.
-- The Age fact is computed from birthday 11/28/1996 at runtime. Don't hardcode an age.
+- The age in the About sentence (`#char-age`) is computed from birthday 11/28/1996 at
+  runtime; the HTML fallback is "twenty-something". Don't hardcode an age.
 - Fonts load from the single Google Fonts `<link>` in index.html. No CSS `@import`s.
 - Site copy avoids em dashes. Use a period, comma, or colon instead.
 
