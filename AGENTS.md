@@ -45,7 +45,8 @@ site on GitHub Pages, custom domain via `CNAME`.
   introducing new colors. Keep gradients low-contrast and cool, no warm hues.
 - Journey cards: the `.tl-org` text is the dialogue speaker and `data-line` is
   what they say.
-- The Age fact is computed from birthday 11/28/1996 at runtime. Don't hardcode an age.
+- The age in the About sentence (`#char-age`) is computed from birthday 11/28/1996 at
+  runtime; the HTML fallback is "twenty-something". Don't hardcode an age.
 - Fonts load from the single Google Fonts `<link>` in index.html. No CSS `@import`s.
 - Site copy avoids em dashes. Use a period, comma, or colon instead.
 

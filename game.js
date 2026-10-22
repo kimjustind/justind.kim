@@ -127,20 +127,11 @@
     scrollTrigger: { trigger: hero, start: 'top top', end: '60% top', scrub: true },
   });
 
-  /* ---------- age, from birthday 11/28/1996 ---------- */
+  /* ---------- age, from birthday 11/28/1996, written into the About sentence ---------- */
   (() => {
-    const el = document.getElementById('char-age');
     const now = new Date();
     const age = now.getFullYear() - 1996 - (now < new Date(now.getFullYear(), 10, 28) ? 1 : 0);
-    const show = (n) => { el.textContent = String(n); };
-    if (!ANIMATE) return show(age);
-    const counter = { v: 0 };
-    show(0);
-    gsap.to(counter, {
-      v: age, duration: 1.4, ease: 'power2.out', snap: { v: 1 },
-      onUpdate: () => show(Math.round(counter.v)),
-      scrollTrigger: { trigger: el, start: 'top 92%', once: true },
-    });
+    document.getElementById('char-age').textContent = String(age);
   })();
 
   /* ---------- title menu, header, journey rail ---------- */

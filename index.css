@@ -391,8 +391,6 @@ section, footer { position: relative; }
 
 .about-copy strong { color: var(--text); font-weight: 600; }
 
-.about-copy > .facts { margin-top: 1.5rem; font-family: var(--serif); font-style: italic; font-size: 1.3rem; color: var(--text); }
-
 /* ============================
    JOURNEY
 ============================ */
