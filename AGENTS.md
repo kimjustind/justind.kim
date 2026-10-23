@@ -54,3 +54,8 @@ site on GitHub Pages, custom domain via `CNAME`.
 
 Push to `main` and GitHub Pages publishes. Nothing else to run. To preview
 locally, open index.html or serve the directory with any static server.
+
+## Style guide
+
+The full design, motion, voice, and code style guide is the `site-style` skill in
+`.claude/skills/site-style/`. Load it before changing the site.
